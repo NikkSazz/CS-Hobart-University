@@ -47,7 +47,9 @@ public class flip {
 			
 			//game starts
 			while(p1.size() > 0 && p2.size() > 0) {
-				System.out.println("\n\nNext turn..\nHands:");
+				System.out.println("\n"
+						+ "-------------------------------------------------------------------------------"
+						+ "\nNext turn..\nHands:");
 				printHand(oneName, p1);
 				printHand(twoName, p2);
 				printHand("The Middle", middle);
@@ -80,6 +82,8 @@ public class flip {
 					System.out.println(playerName + " has chosen to Play! ");
 					var val = p1Go ? p2.remove(inputVal) : p1.remove(inputVal);
 					middle.add(val);
+					
+					play(middle, p1Go ? p2 : p1, val, p1Go ? twoName : oneName);
 				} // play
 				else { // flip
 					System.out.println(playerName + " has chosen to Flip! ");
@@ -99,17 +103,20 @@ public class flip {
 			} // while has dice
 			
 
+			// who won
+			String winner = p2.size() == 0 ? oneName : twoName;
+			System.out.println(winner + " has won the round");
+			// how many points to add
 			int sum = 0;
-			System.out.println(p2.size() == 0 ? oneName : twoName + " has won the round");
-			sum = listSum(p1);
-			sum += listSum(p2); // doesnt matter, i dont want to do logic
-			System.out.println(sum + " points have been added");
+			sum = listSum(p2.size() == 0 ? p1 : p2);
+			System.out.println(sum + " points have been added to " + winner);
 			if(p2.size() == 0)
 				onePts += sum;
 			else
 				twoPts += sum;
 			
-
+			
+			// print points
 			System.out.println(oneName + " has " + onePts + " points");
 			System.out.println(twoName + " has " + twoPts + " points\n");
 			
@@ -120,6 +127,75 @@ public class flip {
 		System.out.println("\t" + winner + " HAS WON!!");
 		
 	} // main
+	
+	private static void play(ArrayList<Integer> m, ArrayList<Integer> p, int val, String name) {
+		System.out.println("\n\t" + name + " can take from the middle, please select the index of the dice you want to take"
+				+ "\nSelect one dice at a time, you can take more after, value of the taken dies should not exceed '"
+				+ val + "'");
+		
+		// does middle have a possible dice to take
+		while(val > 0) {
+			int midMin = minFromMiddle(m);
+			if(val <= midMin) {
+				System.out.println("\n\tNo avaliable dice to take from middle\n");
+				break;
+			}
+			
+			System.out.println("please select the index of the dice you want to take\n"
+					+ "\nSelect one dice at a time, you can take more after, value of the taken dice should not exceed"
+					+ " '" + val + "'\t You can also press 'c' to continue without taking dice");
+			
+			printHand("middle", m);
+			// Get input and validate
+			String input = s.nextLine();
+			while(!properTakeFromMiddle(input, m.size())) {
+				System.out.println("Please type correctly, an index between 1-" + m.size());
+				input = s.nextLine();
+			}
+			
+			if(input.equals("c")) {
+				break;
+			}
+			
+			char[] c = input.toCharArray();
+			var midIndex = Character.getNumericValue(c[0]);
+			var v = m.remove(midIndex - 1);
+			p.add(v);
+			
+			System.out.println(v + " has been added to " + name + "'s Hand");
+			
+		}//while val > 0
+		
+	} // play
+	
+	private static Boolean properTakeFromMiddle(String s, int mSize) {
+		char[] c = s.toCharArray();
+		if(c.length != 1) {
+			System.out.println("Input must be one key");
+			return false;
+		}
+		
+		if(c[0] == 'c') {
+			return true;
+		}
+		
+		if(Character.isDigit(c[0])) {
+			int n = Character.getNumericValue(c[0]);
+			if(n > mSize || n < 0) {
+				System.out.println("Input must be within 1-" + mSize);
+				return false;
+			}
+		}
+		return true;
+	} // properTakeFromMiddle
+	
+	private static int minFromMiddle(ArrayList<Integer> m) {
+		int min = Integer.MAX_VALUE;
+		for(var i : m) {
+			min = Math.min(min, i);
+		}
+		return min;
+	}
 	
 	private static int listSum(ArrayList<Integer> l) {
 		int sum = 0;
