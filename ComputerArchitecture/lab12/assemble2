@@ -1,0 +1,8 @@
+ldfiles=""
+
+for file in $* ; do
+	./nasm -f elf64 -o $file.o $file.asm
+	ldfiles="$ldfiles $file.o"
+done
+
+ld -o $1 $ldfiles -lc --dynamic-linker /lib/x86_64-linux-gnu/ld-linux-x86-64.so.2

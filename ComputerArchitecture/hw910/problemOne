@@ -1,0 +1,48 @@
+global _start
+extern printf
+
+section .data
+
+	byteFormat: db 'byte adress #%d: %d', 10, 0
+	wordFormat: db 'word address #%d: %d', 10, 0
+ 	doubleFormat: db 'double address #%d: %d', 10, 0
+ 	quadFormat: db 'quad address #%d: %d', 10, 0
+byte db 4
+bytee db 7
+word dw 18
+wordd dw 400
+double dd 420
+doublee dd 489
+quad dq 523
+quadd dq 9412
+ 	 	
+section.text
+
+	mov rdi, byteFormat   ; printf format
+  	mov rsi, [byte] ; Value to be printed
+    	call printf       ; Print
+  	mov rsi, [bytee] ; Value to be printed
+    	call printf       ; Print
+    	
+	mov rdi, wordFormat   ; printf format
+  	mov rsi, [word] ; Value to be printed
+    	call printf       ; Print
+  	mov rsi, [wordd] ; Value to be printed
+    	call printf       ; Print
+    	
+    	mov rdi, doubleFormat   ; printf format
+  	mov rsi, [double] ; Value to be printed
+    	call printf       ; Print
+  	mov rsi, [doublee] ; Value to be printed
+    	call printf       ; Print
+    	
+    	mov rdi, quadFormat   ; printf format
+  	mov rsi, [quad] ; Value to be printed
+    	call printf       ; Print
+  	mov rsi, [quadd] ; Value to be printed
+    	call printf       ; Print
+    	
+    	; Exit
+    	mov rax, 60  ; Prepare to exit...
+  	mov rdi, 0   ; ...with no errors
+   	syscall      ; Execute exit

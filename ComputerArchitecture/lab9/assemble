@@ -1,0 +1,2 @@
+./nasm -f elf64 -o $1.o $1.asm
+ld -o $1 $1.o -lc --dynamic-linker /lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
