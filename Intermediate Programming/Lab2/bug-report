@@ -1,0 +1,163 @@
+Nikolai Sazonov	Cayden Hill
+
+Sort3, Failed when having two and only two of the same numbers.
+Time Formatting, AM and PM are switched.
+Rock Paper Scissors, 
+	Failed when Inputs of a Round are the same, expected -1, got 1
+	Failed when rounds are Identical for Game
+
+Sort3 TestCases:
+ -- demo
+        got: 10 20 30
+   expected: 10 20 30
+
+ -- Switch B - C 
+        got: 2 4 8
+   expected: 2 4 8
+
+ -- Switch A - C 
+        got: 2 7 9
+   expected: 2 7 9
+
+ -- Switch A - B 
+        got: 8 9 10
+   expected: 8 9 10
+
+ -- All Equal 
+        got: 2 2 2
+   expected: 2 2 2
+
+ -- All Negative 
+        got: -8 -4 -2
+   expected: -8 -4 -2
+
+ -- All Equal and Negative 
+        got: -2 -2 -2
+   expected: -2 -2 -2
+
+FAILED
+ -- NAN -0, 0, 1
+        got: 1 0 0
+   expected: 0 0 1
+
+FAILED
+ -- Two Zeros
+        got: 1 0 0
+   expected: 0 0 1
+
+FAILED
+ -- Two Ones
+        got: 1 1 0
+   expected: 0 1 1
+
+ -- NAN 2 
+        got: -1 0 8
+   expected: -1 0 8
+
+ -- With Zero 
+        got: 0 2 6
+   expected: 0 2 6
+
+ -- Negative Zero Positive 
+        got: -1 0 1
+   expected: -1 0 1
+
+
+		
+
+
+
+Time Formatting TestCases:
+
+FAILED
+ -- demo
+ got: 4:15 PM (EDT) / expected: 4:15 AM (EDT) ... failed!
+
+FAILED
+ -- Wrong Time Zone
+ got: 1:15 PM (MSK) / expected: 11:15 AM (MSK) ... failed!
+
+FAILED
+ -- 12 AM v 12 PM
+ got: 12:00 AM (EST) / expected: 12:00 PM (EST) ... failed!
+
+FAILED
+ -- Standard Test
+ got: 4:00 PM (EST) / expected: 4:00 AM (EST) ... failed!
+
+FAILED
+ -- CDT Test
+ got: 2:00 AM (CDT) / expected: 2:00 PM (CDT) ... failed!
+ 
+ 
+ 
+Rock Paper Scissors TestCases:
+
+ -- R v R Round
+        got: 1
+   expected: -1
+Failed
+
+-- R v P Round
+        got: 2
+   expected: 2
+Passed
+-- R v S Round
+        got: 1
+   expected: 1
+Passed
+-- P v P Round
+        got: 1
+   expected: -1
+Failed
+
+-- P v R Round
+        got: 1
+   expected: 1
+Passed
+-- P v S Round
+        got: 2
+   expected: 2
+Passed
+-- S v S Round
+        got: 1
+   expected: -1
+Failed
+
+-- S v R Round
+        got: 2
+   expected: 2
+Passed
+-- S v P Round
+        got: 1
+   expected: 1
+Passed
+
+
+
+
+-- Standard Round
+how many wins needed? 2
+        got: 2
+   expected: 2
+Passed
+
+-- Not Equal Length Round
+how many wins needed? 2
+        got: 2
+   expected: 2
+Passed
+
+-- Identical Round
+how many wins needed? 2
+        got: 1
+   expected: -1
+Failed
+
+-- wins > rounds Round
+how many wins needed? 3
+        got: -1
+   expected: -1
+Passed
+
+
