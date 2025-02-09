@@ -1,93 +1,188 @@
 package cs225;
+
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
-/*
- * @author Nikolai Sazonov
- */
-
-class ooflip {
-    private static final Scanner s = new Scanner(System.in);
+// Main class
+public class ooflip {
     public static void main(String[] args) {
-        System.out.println("\nWelcome from OOFlip!");
-
-        player[] players = new player[2];
-
-        System.out.println("Please Enter Player One's Name: ");
-		players[0] = new player(s.nextLine());
-		System.out.println("\nPlease Enter Player Two's Name: ");
-		players[1] = new player(s.nextLine());
-        @SuppressWarnings("unused")
-        var m = new player("Middle");
-
-        while(players[0].points <= 50 && players[1].points <= 50){
-            setupRound();
-            playRound();
-        } // While players.points <= 50 
-        
-        
-        if(players[0].points <= 50) {
-            System.out.println("Player One Wins");
-        } // if player 1 wins
-        else {
-            System.out.println("Player Two Wins");
-        } // if player 2 wins
-
-    } // main
-
-    private static void playRound() {
-        System.out.println("playRound");
-    } // playRound
-
-    private static void setupRound() {
-        m.clearHand();
+        var game = new Game();
+        game.start();
     }
-} // class ooflip
+}
 
-class player {
+// Game class to manage the overall game logic
+class Game {
+    private Scanner scanner = new Scanner(System.in);
+    private Player player1;
+    private Player player2;
+    private ArrayList<Integer> middle = new ArrayList<>();
 
-    String name;
-    @SuppressWarnings("FieldMayBeFinal")
-    private ArrayList<Integer> hand;
-    public int points;
-
-    public player(String n) {
-        name = n;
-        points = 0;
-        hand = new ArrayList<>();
+    public Game() {
+        System.out.print("Please Enter Player One's Name: ");
+        String p1Name = scanner.nextLine();
+        System.out.print("Please Enter Player Two's Name: ");
+        String p2Name = scanner.nextLine();
+        player1 = new Player(p1Name);
+        player2 = new Player(p2Name);
     }
 
-    public void randomizeHand() {
-        hand.clear();
-        var r = new Random();
-        for(int i = 0; i < 5; i++){
-            hand.add(r.nextInt(6) + 1);
+    public void start() {
+        while (player1.getPoints() < 50 && player2.getPoints() < 50) {
+            player1.initializeHand();
+            player2.initializeHand();
+            middle.clear();
+
+            boolean isPlayer1Turn = player1.getHandSum() <= player2.getHandSum();
+            System.out.println((isPlayer1Turn ? player1.getName() : player2.getName()) + " goes first!\n");
+
+            while (player1.hasDice() && player2.hasDice()) {
+
+                printGameState();
+                var currentPlayer = isPlayer1Turn ? player1 : player2;
+                var opponent = isPlayer1Turn ? player2 : player1;
+
+                System.out.println(currentPlayer.getName() + "'s turn.");
+                String input = currentPlayer.getInput(scanner, opponent.getHand());
+
+                if (input.startsWith("p")) {
+                    currentPlayer.play(input, opponent, middle);
+                } else if (input.startsWith("f")) {
+                    currentPlayer.flip(input);
+                }
+
+                isPlayer1Turn = !!!isPlayer1Turn;
+            } // while both have dice
+
+            handleRoundEnd();
         }
-    } // randomize Hand
+
+        declareWinner();
+    }
+
+    private void printGameState() {
+        System.out.println("\n-------------------------------------------------------------------------------");
+        player1.printHand();
+        player2.printHand();
+        printMiddle();
+    }
+
+    private void printMiddle() {
+        System.out.print("The Middle:\t");
+        for (int die : middle) {
+            System.out.print(die + " ");
+        }
+        System.out.println();
+    }
+
+    private void handleRoundEnd() {
+        Player winner = player1.hasDice() ? player2 : player1;
+        Player loser = player1.hasDice() ? player1 : player2;
+        int points = loser.getHandSum();
+        winner.addPoints(points);
+
+        System.out.println(winner.getName() + " has won the round!");
+        System.out.println(points + " points have been added to " + winner.getName() + "\n");
+        System.out.println(player1.getName() + " has " + player1.getPoints() + " points");
+        System.out.println(player2.getName() + " has " + player2.getPoints() + " points\n");
+    }
+
+    private void declareWinner() {
+        Player winner = player1.getPoints() >= 50 ? player1 : player2;
+        System.out.println("\t" + winner.getName() + " HAS WON!!");
+    }
+}
+
+// Player class to manage player-specific data and actions
+class Player {
+    private final String name;
+    private final ArrayList<Integer> hand = new ArrayList<>();
+    private int points = 0;
+    private String lastFlipCommand = "f0";
+
+    public Player(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public ArrayList<Integer> getHand() {
+        return hand;
+    }
+
+    public int getPoints() {
+        return points;
+    }
+
+    public void addPoints(int points) {
+        this.points += points;
+    }
+
+    public void initializeHand() {
+        hand.clear();
+        Random random = new Random();
+        for (int i = 0; i < 5; i++) {
+            hand.add(random.nextInt(6) + 1);
+        }
+    }
+
+    public boolean hasDice() {
+        return !hand.isEmpty();
+    }
+
+    public int getHandSum() {
+        return hand.stream().mapToInt(Integer::intValue).sum();
+    }
 
     public void printHand() {
-        System.out.println(name + "'s hand:\n");
-        for(var i : hand){
-            System.out.print("\t" + i);
+        System.out.print(name + ":\t");
+        for (int die : hand) {
+            System.out.print(die + " ");
         }
-        System.out.println("\n");
+        System.out.println();
     }
 
-    public void addToHand(int val) {
-        hand.add(val);
+    public String getInput(Scanner scanner, ArrayList<Integer> opponentHand) {
+        System.out.println("Please choose to either:");
+        System.out.println("\tFlip (f) one of your dice (ex: f2), or");
+        System.out.println("\tPlay (p) put one of the opponent's dice to the middle (ex: p4)");
+
+        String input = scanner.nextLine();
+        while (!isValidInput(input, opponentHand)) {
+            System.out.println("Invalid input. Try again:");
+            input = scanner.nextLine();
+        }
+        return input;
     }
 
-    public void clearHand() {
-        hand.clear();
+    private boolean isValidInput(String input, ArrayList<Integer> opponentHand) {
+        if (input.length() != 2) return false;
+
+        char action = input.charAt(0);
+        int index = Character.getNumericValue(input.charAt(1)) - 1;
+
+        if (action == 'f' && index >= 0 && index < hand.size()) return true;
+        if (action == 'p' && index >= 0 && index < opponentHand.size()) return true;
+
+        return false;
     }
 
-    public void wins(int points) {
-        points += this.points;
-        System.out.println(name + "'s points have been increased to " + points + "!");
-    } // wins
+    public void play(String input, Player opponent, ArrayList<Integer> middle) {
+        int index = Character.getNumericValue(input.charAt(1)) - 1;
+        int die = opponent.hand.remove(index);
+        middle.add(die);
 
-    public String name() {
-        return name;
+        System.out.println(name + " played " + die + " to the middle.");
+    }
+
+    public void flip(String input) {
+        int index = Character.getNumericValue(input.charAt(1)) - 1;
+        int flippedValue = 7 - hand.get(index);
+        hand.set(index, flippedValue);
+
+        System.out.println(name + " flipped a die to " + flippedValue + ".");
     }
 }
