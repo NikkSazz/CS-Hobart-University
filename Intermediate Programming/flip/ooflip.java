@@ -1,188 +1,225 @@
-package cs225;
+package flip;
 
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
-// Main class
-public class ooflip {
-    public static void main(String[] args) {
-        var game = new Game();
-        game.start();
-    }
+/**
+ * @author Nikolai Sazonov
+ */
+public class ooFlip {
+
+	private static Scanner scanner = new Scanner(System.in);
+	private static player player1;
+	private static player player2;
+	private static ArrayList<Integer> middle = new ArrayList<>();
+
+	public static void main ( String[] args ) {
+
+		System.out.print("Please Enter Player One's Name: ");
+		String p1Name = scanner.nextLine();
+		System.out.print("Please Enter Player Two's Name: ");
+		String p2Name = scanner.nextLine();
+		player1 = new player(1,p1Name);
+		player2 = new player(2,p2Name);
+
+		while ( player1.getScore() < 50 && player2.getScore() < 50 ) {
+			player1.dice.resetToFlippable();
+			player2.dice.resetToFlippable();
+			middle.clear();
+
+			boolean isPlayer1Turn =
+			    player1.dice.diceCount() <= player2.dice.diceCount();
+			System.out.println((isPlayer1Turn ? player1.name : player2.name)
+			    + " goes first!\n");
+
+			while ( player1.dice.diceCount() > 0 && player2.dice.diceCount() > 0 ) {
+				printGameState();
+				var currentPlayer = isPlayer1Turn ? player1 : player2;
+				var opponent = isPlayer1Turn ? player2 : player1;
+
+				System.out.println(currentPlayer.name + "'s turn.");
+				String input = currentPlayer.getInput(scanner);
+
+				if ( input.startsWith("p") ) {
+					currentPlayer.play(input,opponent,middle);
+				} else if ( input.startsWith("f") ) {
+					currentPlayer.flip(input);
+				}
+
+				isPlayer1Turn = !isPlayer1Turn;
+			}
+
+			handleRoundEnd();
+		}
+
+		declareWinner();
+	}
+
+	private static void printGameState () {
+		System.out
+		    .println("\n-------------------------------------------------------------------------------");
+		player1.printDice();
+		player2.printDice();
+		printMiddle();
+	}
+
+	private static void printMiddle () {
+		System.out.print("The Middle:\t");
+		for ( int die : middle ) {
+			System.out.print(die + " ");
+		}
+		System.out.println();
+	}
+
+	private static void handleRoundEnd () {
+		player winner = player1.dice.diceCount() > 0 ? player2 : player1;
+		player loser = player1.dice.diceCount() > 0 ? player1 : player2;
+		int points = loser.dice.diceCount();
+
+		winner.addPoints(points);
+
+		System.out.println(winner.name + " has won the round!");
+		System.out
+		    .println(points + " points have been added to " + winner.name + "\n");
+		System.out.println(player1.name + " has " + player1.getScore() + " points");
+		System.out
+		    .println(player2.name + " has " + player2.getScore() + " points\n");
+	}
+
+	private static void declareWinner () {
+		player winner = player1.getScore() >= 50 ? player1 : player2;
+		System.out.println("\t" + winner.name + " HAS WON!!");
+	}
 }
 
-// Game class to manage the overall game logic
-class Game {
-    private Scanner scanner = new Scanner(System.in);
-    private Player player1;
-    private Player player2;
-    private ArrayList<Integer> middle = new ArrayList<>();
+// Required Class from the document
 
-    public Game() {
-        System.out.print("Please Enter Player One's Name: ");
-        String p1Name = scanner.nextLine();
-        System.out.print("Please Enter Player Two's Name: ");
-        String p2Name = scanner.nextLine();
-        player1 = new Player(p1Name);
-        player2 = new Player(p2Name);
-    }
+class player {
+	dice dice;
+	int id;
+	public String name;
+	int score;
 
-    public void start() {
-        while (player1.getPoints() < 50 && player2.getPoints() < 50) {
-            player1.initializeHand();
-            player2.initializeHand();
-            middle.clear();
+	public player ( int id, String name ) {
+		this.name = name;
 
-            boolean isPlayer1Turn = player1.getHandSum() <= player2.getHandSum();
-            System.out.println((isPlayer1Turn ? player1.getName() : player2.getName()) + " goes first!\n");
+		score = 0;
+		this.id = id;
+		this.dice = new dice();
+	} // player Constructor
 
-            while (player1.hasDice() && player2.hasDice()) {
+	public int getId () {
+		return id;
+	}
 
-                printGameState();
-                var currentPlayer = isPlayer1Turn ? player1 : player2;
-                var opponent = isPlayer1Turn ? player2 : player1;
+	public String getInput ( Scanner scanner ) {
+		System.out.println("Please choose to either:");
+		System.out.println("\tFlip (f) one of your dice (ex: f2), or");
+		System.out
+		    .println("\tPlay (p) one of the opponent's dice to the middle (ex: p4)");
 
-                System.out.println(currentPlayer.getName() + "'s turn.");
-                String input = currentPlayer.getInput(scanner, opponent.getHand());
+		String input = scanner.nextLine();
+		while ( !isValidInput(input) ) {
+			System.out.println("Invalid input. Try again:");
+			input = scanner.nextLine();
+		}
+		return input;
+	}
 
-                if (input.startsWith("p")) {
-                    currentPlayer.play(input, opponent, middle);
-                } else if (input.startsWith("f")) {
-                    currentPlayer.flip(input);
-                }
+	private boolean isValidInput ( String input ) {
+		if ( input.length() != 2 ) return false;
 
-                isPlayer1Turn = !!!isPlayer1Turn;
-            } // while both have dice
+		char action = input.charAt(0);
+		int index = Character.getNumericValue(input.charAt(1)) - 1;
 
-            handleRoundEnd();
-        }
+		if ( action == 'f' && index >= 0 && index < dice.diceCount() ) return true;
+		if ( action == 'p' && index >= 0 && index < dice.diceCount() ) return true;
 
-        declareWinner();
-    }
+		return false;
+	}
 
-    private void printGameState() {
-        System.out.println("\n-------------------------------------------------------------------------------");
-        player1.printHand();
-        player2.printHand();
-        printMiddle();
-    }
+	public void printDice () {
+		System.out.print(name + ":\t");
+		for ( int die : dice.dice ) {
+			System.out.print(die + " ");
+		}
+		System.out.println();
+	}
 
-    private void printMiddle() {
-        System.out.print("The Middle:\t");
-        for (int die : middle) {
-            System.out.print(die + " ");
-        }
-        System.out.println();
-    }
+	public int getScore () {
+		return score;
+	} // getScore()
 
-    private void handleRoundEnd() {
-        Player winner = player1.hasDice() ? player2 : player1;
-        Player loser = player1.hasDice() ? player1 : player2;
-        int points = loser.getHandSum();
-        winner.addPoints(points);
+	public void addPoints ( int points ) {
+		System.out
+		    .println(points + " points have been added to " + name + "'s points");
+		score += points;
+	} // addPoints()
 
-        System.out.println(winner.getName() + " has won the round!");
-        System.out.println(points + " points have been added to " + winner.getName() + "\n");
-        System.out.println(player1.getName() + " has " + player1.getPoints() + " points");
-        System.out.println(player2.getName() + " has " + player2.getPoints() + " points\n");
-    }
+} // class player
 
-    private void declareWinner() {
-        Player winner = player1.getPoints() >= 50 ? player1 : player2;
-        System.out.println("\t" + winner.getName() + " HAS WON!!");
-    }
-}
+class dice {
+	ArrayList<Integer> dice;
+	ArrayList<Boolean> flippable;
 
-// Player class to manage player-specific data and actions
-class Player {
-    private final String name;
-    private final ArrayList<Integer> hand = new ArrayList<>();
-    private int points = 0;
-    private String lastFlipCommand = "f0";
+	public dice () {
+		dice = new ArrayList<Integer>();
+		for ( int i = 0 ; i < 5 ; i++ ) {
+			dice.add(rollDice());
+			flippable.add(false);
+		} // for i 1 - 5
 
-    public Player(String name) {
-        this.name = name;
-    }
+	}// dice constructor
 
-    public String getName() {
-        return name;
-    }
+	private int rollDice () {
+		var r = new Random();
+		return r.nextInt(6) + 1;
+	}
 
-    public ArrayList<Integer> getHand() {
-        return hand;
-    }
+	public void flipDiceAt ( int i ) {
+		var newVal = Math.abs(dice.get(i) - 7);
+		dice.set(i,newVal);
+		flippable.set(i,true);
+	} // flipDiceAt
 
-    public int getPoints() {
-        return points;
-    }
+	public Boolean isFlippable ( int i ) {
+		return !flippable.get(i);
+	}
 
-    public void addPoints(int points) {
-        this.points += points;
-    }
+	public void resetToFlippable () {
+		for ( int i = 0 ; i < flippable.size() ; i++ ) {
+			flippable.set(i,false);
+		}
+	}
 
-    public void initializeHand() {
-        hand.clear();
-        Random random = new Random();
-        for (int i = 0; i < 5; i++) {
-            hand.add(random.nextInt(6) + 1);
-        }
-    }
+	public void addDice ( int dice ) {
+		this.dice.add(dice);
+	}
 
-    public boolean hasDice() {
-        return !hand.isEmpty();
-    }
+	public void addDice ( ArrayList<Integer> arr ) {
+		for ( var i : arr ) {
+			dice.add(i);
+		}
+	} // addDice with list
 
-    public int getHandSum() {
-        return hand.stream().mapToInt(Integer::intValue).sum();
-    }
+	public void removeDice ( int index ) {
+		dice.remove(index);
+	}
 
-    public void printHand() {
-        System.out.print(name + ":\t");
-        for (int die : hand) {
-            System.out.print(die + " ");
-        }
-        System.out.println();
-    }
+	public void removeDice ( ArrayList<Integer> indexes ) {
+		dice.removeAll(indexes);
+	}
 
-    public String getInput(Scanner scanner, ArrayList<Integer> opponentHand) {
-        System.out.println("Please choose to either:");
-        System.out.println("\tFlip (f) one of your dice (ex: f2), or");
-        System.out.println("\tPlay (p) put one of the opponent's dice to the middle (ex: p4)");
+	public int diceCount () {
+		return dice.size();
+	}
 
-        String input = scanner.nextLine();
-        while (!isValidInput(input, opponentHand)) {
-            System.out.println("Invalid input. Try again:");
-            input = scanner.nextLine();
-        }
-        return input;
-    }
+	public void print () {
+		System.out.print("Dice:");
+		for ( var i : dice ) {
+			System.out.println("\t" + i);
+		}
+	}
 
-    private boolean isValidInput(String input, ArrayList<Integer> opponentHand) {
-        if (input.length() != 2) return false;
-
-        char action = input.charAt(0);
-        int index = Character.getNumericValue(input.charAt(1)) - 1;
-
-        if (action == 'f' && index >= 0 && index < hand.size()) return true;
-        if (action == 'p' && index >= 0 && index < opponentHand.size()) return true;
-
-        return false;
-    }
-
-    public void play(String input, Player opponent, ArrayList<Integer> middle) {
-        int index = Character.getNumericValue(input.charAt(1)) - 1;
-        int die = opponent.hand.remove(index);
-        middle.add(die);
-
-        System.out.println(name + " played " + die + " to the middle.");
-    }
-
-    public void flip(String input) {
-        int index = Character.getNumericValue(input.charAt(1)) - 1;
-        int flippedValue = 7 - hand.get(index);
-        hand.set(index, flippedValue);
-
-        System.out.println(name + " flipped a die to " + flippedValue + ".");
-    }
-}
+} // class dice
