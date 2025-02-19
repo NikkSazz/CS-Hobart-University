@@ -1,0 +1,61 @@
+code-review
+	Nikolai Sazonov	CS225	Feb 2025
+
+	Code Review
+
+    Review your flip code according to the defensive programming and clean code naming 
+    guidelines discussed in class and listed below. For each, evaluate how well 
+    your code adheres to the principle: 
+    fully (no exceptions), 
+    satisfactory (in most cases), 
+    unsatisfactory (often or mostly not), 
+    not applicable. 
+    
+    Also write a paragraph or two explaining 
+    your evaluation for each — how your code demonstrates each principle or where it doesn't and how 
+    you would fix the issues. Put your answers in the code-review file. 
+
+Criteria to address:
+
+    Always use {} for loop and conditional bodies. (Not applicable if you don't have any with only 
+    one statement in the body.)
+Satisfactory, using more than four while loops, for things like taking dice, getting proper input, playing unti
+50 points
+
+    Don't rely on default values.
+Fully. There are no default values, from player name to dice random. i make users redo their input if something is 
+wrong, instead of provide a default value
+
+    Don't rely on pass through behavior in conditionals.
+Sorry I dont understand this criteria. 
+
+    Don't trust outside data.
+Fully, while I am not sure what this means, I do not use any outside data other than scanner and random.
+
+    Names should reveal intent.
+Satisfactory, while some things have very basic one letter names, they are used in private methods for which the name
+of the method itself reveals the variables purpose.
+
+    Names should be informative so comments describing what the variable is for should generally not be necessary.
+Fully, My coding theory is that using comments to explain things such as variables or method names, generally imply
+improper naming eticate.
+
+    Avoid short variable names and long function names in large scopes.
+Unsatisfactory, For short methods, which have a very understandable method names and parameter names,
+so because of that I can afford to make generic variable names, as people will assume that everything is 
+correct. However, in longer methods, such as void main, or game class, using short named variables
+is bad practice.
+
+    Reduce vertical scope.
+Unsatisfactory, My code has relatively large amount of verticality, more lines of code than other people's
+however, I use alot of methods, which will make the code alot more readable. Still, the main method is quite long
+and some other methods are quite difficult to understand quickly
+
+    Avoid disinformation.
+Fully, I could not find an example from my code that could be seen as disinformation
+
+    Make meaningful distinctions and pick one word per concept.
+Unsatisfactory, Aside from flip itself, I am making a SwiftUI IOS app as my personal project.
+And I have an observable object and class, which is named very poorly. Everyhing has very similar names such as char and character
+and Character. alot of very similar and difficult to understand concepts. however, everuything works, so I doubt I will ever change it :)
+	
