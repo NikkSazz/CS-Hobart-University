@@ -1,0 +1,15 @@
+Nikolai Sazonov
+debug-log
+
+StringSetTester - intersection()
+fails an ArrayIndexOutOfBoundsException
+
+This is because i1, which is used for this.elements_, is out of bounds.
+I believe it is because of the || statements instead of &&
+So that could be a possible error.
+however the actual error is from the For loop
+the i++ at the end, should not iterate for every loop,
+since i is used as an index for the new elements in the new array, 
+it should only go up, as you insert new elements.
+i is also used as a size for the StringSet constructor, used for the 
+size_ variable.
