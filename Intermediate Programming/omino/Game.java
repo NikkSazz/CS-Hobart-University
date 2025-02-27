@@ -1,7 +1,7 @@
 /**
  * Game logic for Omino!.
  * 
- * @author your name here
+ * @author Nikolai Sazonov
  */
 public class Game extends OminoSubject {
 

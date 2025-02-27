@@ -1,6 +1,6 @@
 
 /**
- * 
+ * @author Nikolai Sazonov
  */
 public class Block {
 
