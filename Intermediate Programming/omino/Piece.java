@@ -1,40 +1,30 @@
-import javafx.scene.paint.Color;
 
 /**
+ * orientation of a particular polyomino
+ * immutable
+ * rotating a piece results in a new piece 
+ *  rather than changing the orientation of the current piece.
+ *  
  * @author Nikolai Sazonov
  */
 public class Piece {
-	String[] orientation;
-	Color color;
+	/*
+	Polyomino polyomino;
+	int width;
+	int height;
 	
-	public Piece(String[] o, Color c) {
-		this.orientation = o;
-		this.color = c;
+	public Piece(Polyomino p, int w, int h) {
+		this.polyomino = p;
+		this.width = w;
+		this.height = h;
 	}
 	
-	public Block[] getBlocks(String str) {
-		String[] coords = str.split(" +");
-		var b = new Block[coords.length];
-		
-		for( int i = 0; i < coords.length ; i += 2 ) {
-			b[i / 2] = new Block(
-			                    Integer.parseInt(coords[i]),
-			                    Integer.parseInt(coords[i + 1]));
-		}
-		
-		return b;
+	private int computeWidth(Block[] b) {
+		return b.length;
 	}
 	
-	public int getNumRotations() {
-		return orientation.length;
+	private int computeHeight(Block[] b) {
+		return b.length;
 	}
-	
-	public int getNextRotation(int i) {
-		return i + 1;
-	}
-	
-	public Color getColor() {
-		return color;
-	}
-	
+	*/
 }

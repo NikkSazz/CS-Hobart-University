@@ -6,7 +6,7 @@ import javafx.application.Platform;
 /**
  * Provides support for the Observer pattern for Omino!.
  * 
- * @author Stina Bridgeman
+ * @author Nikolai Sazonov
  */
 public class OminoSubject {
 

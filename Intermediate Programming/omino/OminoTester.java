@@ -2,7 +2,7 @@
 /**
  * Tester for Omino methods.
  * 
- * @author your name here
+ * @author Nikolai Sazonov
  */
 public class OminoTester {
 
@@ -20,6 +20,9 @@ public class OminoTester {
 
 		// -- add test cases below --------------------------------------------
 		
+		// Polymino Testers
+		
+		var p = new Polymino();
 	}
 
 }
