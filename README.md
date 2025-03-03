@@ -1,14 +1,15 @@
-# School Work Repository - Hobart University
+# School Work - Hobart University
 
-Welcome to my GitHub repository, where I document and share my coursework from Hobart University. This repository includes projects, assignments, and notes from the computer science courses I have taken so far. Below is an overview of the courses completed, along with their descriptions.
+I document and share my coursework from Hobart University. 
+This repository includes projects, assignments, and notes from the computer science courses I have taken so far. 
+Below is an overview of the courses completed, along with their descriptions.
 
 ---
 
 ## Courses Completed
 
 ### ✅ CPSC 225: Intermediate Programming
-**Description:**
-This course expands on programming fundamentals introduced in **CPSC 124**, focusing on more advanced topics such as:
+
 - Basic data structures (lists, stacks, queues, binary trees, hash tables)
 - Recursion
 - Common algorithms (searching and sorting)
