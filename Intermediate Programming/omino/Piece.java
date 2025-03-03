@@ -1,3 +1,4 @@
+import java.awt.Color;
 
 /**
  * orientation of a particular polyomino
@@ -8,7 +9,7 @@
  * @author Nikolai Sazonov
  */
 public class Piece {
-	/*
+	
 	Polyomino polyomino;
 	int width;
 	int height;
@@ -19,6 +20,36 @@ public class Piece {
 		this.height = h;
 	}
 	
+	public Piece getNextRotation() {
+
+		int thiz = polyomino.getNumRotations();
+		int next = polyomino.getNextRotation(thiz);
+		
+		Block[] b = polyomino.getBlocks(next);
+		
+		int nW = computeWidth(b);
+		int nH = computeHeight(b);
+		
+		return new Piece(polyomino, nW, nH);
+		
+	}
+		
+//	public String[] getBody() {
+//		return polyomino.
+//	}
+
+	public Color getColor() {
+		return polyomino.getColor();
+	}
+	
+	public int getWidth() {
+		return width;
+	}
+	
+	public int getHeight() {
+		return height;
+	}
+	
 	private int computeWidth(Block[] b) {
 		return b.length;
 	}
@@ -26,5 +57,5 @@ public class Piece {
 	private int computeHeight(Block[] b) {
 		return b.length;
 	}
-	*/
+	
 }
