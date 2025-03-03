@@ -16,7 +16,7 @@ Below is an overview of the courses completed, along with their descriptions.
 - Generic programming
 - Object-oriented programming with class hierarchies
 
-The course is taught in **Java**, with a required lab component for hands-on coding experience. This course is essential for the computer science major and minor.
+**Java**
 
 ---
 
@@ -30,8 +30,6 @@ This course introduces the mathematical and theoretical foundations of computer 
 - Grammars
 - Turing machines
 
-This course demonstrates the intersection of theory and practical computing and is a requirement for the computer science major. 
-
 ---
 
 ### ✅ CPSC 220: Introduction to Computer Architecture
@@ -41,7 +39,7 @@ This course explores how hardware executes software. Key topics include:
 - Developing programs in assembly and machine languages
 - Analyzing central processing unit (CPU) operations during program execution
 
-A required lab component reinforced theoretical concepts with practical application. This course builds directly on knowledge from **CPSC 124** and is a requirement for the computer science major.
+**x86 Assembly**
 
 ---
 
@@ -54,7 +52,7 @@ An introductory course on the theory and practice of computer programming, with 
 - Simple data structures
 - Basic concepts of software development
 
-The programming language used in this course is **Java**. A required lab component provided hands-on experience. This course is foundational for the computer science major and minor.
+**Java**
 
 ---
 
@@ -62,15 +60,3 @@ The programming language used in this course is **Java**. A required lab compone
 - Each course has its own directory.
 - Subdirectories organize assignments, projects, notes, and lab exercises.
 - Files are clearly named for easy navigation.
-
-## How to Use
-Feel free to explore the contents of this repository to gain insights into my journey through computer science coursework. Contributions or suggestions for improvement are always welcome!
-
----
-
-## Contact
-If you have any questions or would like to discuss the coursework, feel free to reach out to me via [GitHub](https://github.com/your-username) or email.
-
----
-
-Thank you for visiting my repository!
