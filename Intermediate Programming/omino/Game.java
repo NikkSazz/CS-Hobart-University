@@ -43,6 +43,13 @@ public class Game extends OminoSubject {
 	boolean gameInProgress;
 	boolean gameOver;
 	
+	/*
+	firePropertyChange(BOARD_PROPERTY);     // if there's a change to board contents
+  firePropertyChange(CURPIECE_PROPERTY);  // if there's a change to the current piece (piece and/or position)
+  firePropertyChange(SCORE_PROPERTY);     // if there's a change to the score
+  firePropertyChange(NUMPIECES_PROPERTY); // if there's a change to the number of pieces played
+  firePropertyChange(NUMROWS_PROPERTY);   // if there's a change to the number of rows cleared
+	 */
 	
 	public Game() {
 		board = new Board(width, height);
@@ -65,7 +72,13 @@ public class Game extends OminoSubject {
 		// TODO this
 		
 	}
-	 
+	
+	private void startNewPiece() {
+
+		// TODO this
+		
+	}
+	
 	public void start() {
 		gameInProgress = true;
 		
