@@ -1,9 +1,11 @@
+import java.awt.Color;
 
 /**
  * Tester for Omino methods.
  * 
  * @author Nikolai Sazonov
  */
+@SuppressWarnings("unused")
 public class OminoTester {
 
 	public static void main ( String[] args ) {
@@ -20,9 +22,21 @@ public class OminoTester {
 
 		// -- add test cases below --------------------------------------------
 		
-		// Polymino Testers
+		// Polymino Testers ???
 		
-		var p = new Polymino();
+		// get next rotation
+		
+		// get blocks
+	}
+	
+
+	@SuppressWarnings("unused")
+	private String blocksToString(Block[] b) {
+		String s = "";
+		for( var i : b ) {
+			s += i.row + " " + i.column + " ";
+		}
+		return s;
 	}
 
 }

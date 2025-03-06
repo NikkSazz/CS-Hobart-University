@@ -14,29 +14,30 @@ public class Piece {
 	int width;
 	int height;
 	
-	public Piece(Polyomino p, int w, int h) {
+	public Piece(Polyomino p, int rotation) {
 		this.polyomino = p;
-		this.width = w;
-		this.height = h;
+		
+		Block[] blocks = p.getBlocks(rotation);
+		
+		this.width = computeWidth(blocks);
+		this.height = computeHeight(blocks);
 	}
 	
+	/*
+	 * returns a new Piece representing the next rotation of this piece
+	 */
 	public Piece getNextRotation() {
 
-		int thiz = polyomino.getNumRotations();
-		int next = polyomino.getNextRotation(thiz);
+		int currentRotation = polyomino.getNumRotations();
+		int next = polyomino.getNextRotation(currentRotation);
 		
-		Block[] b = polyomino.getBlocks(next);
-		
-		int nW = computeWidth(b);
-		int nH = computeHeight(b);
-		
-		return new Piece(polyomino, nW, nH);
+		return new Piece(polyomino, next);
 		
 	}
 		
-//	public String[] getBody() {
-//		return polyomino.
-//	}
+	public Block[] getBody() {
+		return polyomino.getBlocks(0);
+	}
 
 	public Color getColor() {
 		return polyomino.getColor();

@@ -22,7 +22,7 @@ import javafx.stage.Stage;
  * Game controls: 'j'/'l' to move left/right, 'k' to rotate', spacebar to drop
  * piece.
  * 
- * @author Nikolai Sazonov
+ * @author put your name here
  */
 public class Omino extends Application implements PropertyChangeListener {
 
