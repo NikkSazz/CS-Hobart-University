@@ -133,8 +133,9 @@ public class Game extends OminoSubject {
 	private void startNewPiece() {
 		Random rand = new Random();
 		
-		currPiece = polyominoes[rand.nextInt(polyominoes.length)].createPiece();
-    currPieceRow = -currPiece.getHeight();
+		Polyomino selectedPolyomino = polyominoes[rand.nextInt(polyominoes.length)];
+		currPiece = new Piece(selectedPolyomino, 0);
+		currPieceRow = -currPiece.getHeight();
     currPieceCol = (width - currPiece.getWidth()) / 2;
     numberOfPiecesPlayed++;
     firePropertyChange(CURPIECE_PROPERTY);

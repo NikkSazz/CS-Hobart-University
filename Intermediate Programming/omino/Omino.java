@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 /**
@@ -22,7 +23,7 @@ import javafx.stage.Stage;
  * Game controls: 'j'/'l' to move left/right, 'k' to rotate', spacebar to drop
  * piece.
  * 
- * @author put your name here
+ * @author Nikolai Sazonov
  */
 public class Omino extends Application implements PropertyChangeListener {
 
@@ -45,15 +46,19 @@ public class Omino extends Application implements PropertyChangeListener {
 	private void handleKey ( char ch ) {
 		if ( ch == 'j' ) { // left
 			// TODO move piece left
+			game_.movePiece(Action.LEFT);
 
 		} else if ( ch == 'l' ) { // right
 			// TODO move piece right
+			game_.movePiece(Action.RIGHT);
 
 		} else if ( ch == ' ' ) { // drop
 			// TODO move piece drop
+			game_.movePiece(Action.DROP);
 
 		} else if ( ch == 'k' ) { // rotate
 			// TODO move piece rotate
+			game_.movePiece(Action.ROTATE);
 
 		} else if ( ch == 'p' ) { // pause
 			if ( timer_ == null ) {
@@ -67,7 +72,8 @@ public class Omino extends Application implements PropertyChangeListener {
 
 		} else if ( ch == 'n' ) { // new game
 			// TODO reset and start game
-
+			game_.reset();
+			game_.start();
 			startTimer();
 		}
 	}
@@ -75,8 +81,17 @@ public class Omino extends Application implements PropertyChangeListener {
 	class MoveTask extends TimerTask {
 		@Override
 		public void run () {
-			// TODO move piece down, stopping the timer if moving the piece results in
-			// the game being over
+			/* TODO move piece down, stopping the timer 
+			 if moving the piece results in
+			 the game being over
+			 */
+
+			game_.movePiece(Action.DOWN);
+
+			if(game_.isGameOver()) {
+				stopTimer();
+			}
+
 		}
 	}
 
@@ -88,6 +103,19 @@ public class Omino extends Application implements PropertyChangeListener {
 	 */
 	private void drawBoard ( GraphicsContext g ) {
 		// TODO draw the contents of the game board
+		
+		Board board = game_.board; // this may not work, code says to get board from game
+			  for ( int row = board.getHeight() - 1, y = 0 ; row >= 0 ; row--, y += BLOCK_SIZE ) {
+			    for ( int col = 0, x = 0 ; col < board.getWidth() ; col++, x += BLOCK_SIZE ) {
+			      if ( board.canPlace(row, col) ) {
+			        g.setFill(board.colorAt(row,col));
+			        g.fillRect(x,y,BLOCK_SIZE,BLOCK_SIZE);
+			        g.setStroke(Color.BLACK);
+			        g.strokeRect(x,y,BLOCK_SIZE,BLOCK_SIZE);
+			      }
+			    }
+			  }
+		
 	}
 
 	/**
@@ -98,6 +126,29 @@ public class Omino extends Application implements PropertyChangeListener {
 	 */
 	public void drawCurrentPiece ( GraphicsContext g ) {
 		// TODO draw the current piece
+		Piece piece = game_.getCurrPiece();
+		if ( piece == null ) {
+			return;
+		}
+
+		int row = game_.getCurrPieceRow();
+		int col = game_.getCurrPieceCol();
+		
+		int boardHeight = game_.getBoardHeight();
+		
+		for ( Block b : piece.getBody() ) {
+
+			int r = row + b.getRow(), c = col + b.getColumn();
+			g.setFill(piece.getColor());
+			g.fillRect(c * BLOCK_SIZE,
+			           (boardHeight - r - 1) * BLOCK_SIZE,
+			           BLOCK_SIZE,BLOCK_SIZE);
+			g.setStroke(Color.BLACK);
+			g.strokeRect(c * BLOCK_SIZE,
+			             (boardHeight - r - 1) * BLOCK_SIZE,
+			             BLOCK_SIZE,BLOCK_SIZE);
+		}
+
 	}
 
 	/**
@@ -107,7 +158,7 @@ public class Omino extends Application implements PropertyChangeListener {
 	 */
 	private int getScore () {
 		// TODO return the current score
-		return -1;
+		return game_.getScore();
 	}
 
 	/**
@@ -117,7 +168,7 @@ public class Omino extends Application implements PropertyChangeListener {
 	 */
 	private int getNumRowsCleared () {
 		// TODO return the number of rows cleared
-		return -1;
+		return game_.getRowsCleared();
 	}
 
 	/**
@@ -164,7 +215,7 @@ public class Omino extends Application implements PropertyChangeListener {
 		boardcanvas_.heightProperty().bind(piececanvas_.heightProperty());
 		StackPane stack = new StackPane(boardcanvas_,piececanvas_);
 		stack
-		    .setStyle("-fx-border-style: solid; -fx-border-color: white; -fx-border-width: 2");
+		.setStyle("-fx-border-style: solid; -fx-border-color: white; -fx-border-width: 2");
 		root.setCenter(stack);
 		BorderPane.setMargin(stack,new Insets(3,3,3,3));
 
@@ -185,7 +236,7 @@ public class Omino extends Application implements PropertyChangeListener {
 		piececanvas_.setFocusTraversable(true);
 		// set up key listener
 		root.setOnKeyTyped(e -> handleKey(e.getCharacter().toLowerCase()
-		    .charAt(0)));
+		                                  .charAt(0)));
 
 		stage.show();
 	}
@@ -224,7 +275,7 @@ public class Omino extends Application implements PropertyChangeListener {
 	 */
 	private Label setupLabel ( Label label ) {
 		label
-		    .setStyle("-fx-font: normal 20 sans-serif; -fx-padding: 5; -fx-text-fill: white");
+		.setStyle("-fx-font: normal 20 sans-serif; -fx-padding: 5; -fx-text-fill: white");
 		return label;
 	}
 

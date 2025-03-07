@@ -14,6 +14,7 @@ public class Board {
 	public Board(int width, int height) {
 		this.width = width;
 		this.height = height;
+		this.board = new Piece[height][width];
 	}
 	
 	/*
