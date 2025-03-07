@@ -1,4 +1,6 @@
-import java.awt.Color;
+import java.util.Random;
+
+import javafx.scene.paint.Color;
 
 /**
  * Game logic for Omino!
@@ -17,15 +19,16 @@ public class Game extends OminoSubject {
 	
 	private final int[] pointsFromCleared = { 1, 3, 5, 8 };
 	
-	 private static final String[][] POLYOMINOES =
-	    { { "0 0  1 0  2 0", "0 0  0 1  0 2" },
-	      { "0 0  1 0  0 1", "0 0  0 1  1 1", "1 0  0 1  1 1", "0 0  1 0  1 1" } };
-	 
+	private static final String[][] POLYOMINOESSTRING = {
+	  {"0 0  1 0  2 0", "0 0  0 1  0 2"}, // I
+	  {"0 0  1 0  0 1", "0 0  0 1  1 1", "1 0  0 1  1 1", "0 0  1 0  1 1"}, // L
+	  {"0 0  1 0  1 1  2 1"},             // S
+	  {"1 0  2 0  0 1  1 1"}              // Z
+	};
 	 
 	private final Color[] colors = 
-		{ Color.cyan, Color.orange, Color.blue, Color.yellow, Color.red, Color.green, Color.pink };
-	
-	
+		{ Color.BLUE, Color.RED, Color.GREEN, Color.YELLOW }; 
+	// TODO: set final Colors colors
 	
 	
 	
@@ -53,43 +56,108 @@ public class Game extends OminoSubject {
 	
 	public Game() {
 		board = new Board(width, height);
-		
-		score = 0;
-		numberOfPiecesPlayed = 0;
-		rowsCleared = 0;
-		
-		currPiece = null;
-		
-		currPieceRow = -1;
-		currPieceCol = -1;
-		
-		gameInProgress = false;
-		gameOver = false;
+		polyominoes = createPolyominoes(); // polyomino[]
+		reset();
 	}
+	
+	private Polyomino[] createPolyominoes() {
+		Polyomino[] p = new Polyomino[POLYOMINOESSTRING.length];
+    for (int i = 0; i < POLYOMINOESSTRING.length; i++) {
+        p[i] = new Polyomino(POLYOMINOESSTRING[i], colors[i]);
+    }
+    return p;
+	}
+	
 	
 	public void movePiece(Action action) {
 
 		// TODO this
+		if(!gameInProgress) return;
+		
+		if(currPiece == null) return;
+		
+		int newRow = currPieceRow;
+		int newCol = currPieceCol;
+		Piece newP = currPiece;
+		
+		switch (action) {
+		case LEFT:
+			newCol--;
+		case RIGHT:
+			newCol++;
+		case DOWN:
+			newRow++;
+		case DROP:
+			while( board.canPlace(newRow + 1,currPieceCol)) {
+				newRow++;
+			}
+		case ROTATE:
+			newP = currPiece.getNextRotation();
+			newRow += (currPiece.getHeight() - newP.getHeight())/2;
+			newCol +=(currPiece.getWidth() - newP.getWidth())/2;
+			
+		} // switch
+		
+		if (board.canPlace(newRow,newCol)) {
+			currPiece = newP;
+			currPieceRow = newRow;
+      currPieceCol = newCol;
+      firePropertyChange(CURPIECE_PROPERTY);
+		}
+		else if (action == Action.DOWN || action == Action.DROP) {
+      handleLanding();
+		}
 		
 	}
 	
-	private void startNewPiece() {
+	private void handleLanding() {
+		board.addPiece(currPieceRow,currPieceCol,currPiece);
+		
+		firePropertyChange(SCORE_PROPERTY);
+    firePropertyChange(BOARD_PROPERTY);
 
-		// TODO this
+    if (currPieceRow < 0) {
+        gameOver = true;
+        firePropertyChange("GAMEOVER_PROPERTY");
+        return;
+    } // game over, reached top
+    
+    int cleared = board.clearRows();
+    rowsCleared += cleared;
+    score += pointsFromCleared[cleared];
+    firePropertyChange(NUMROWS_PROPERTY);
+
+    if (!gameOver) startNewPiece();
+	}
+	
+	private void startNewPiece() {
+		Random rand = new Random();
+		
+		currPiece = polyominoes[rand.nextInt(polyominoes.length)].createPiece();
+    currPieceRow = -currPiece.getHeight();
+    currPieceCol = (width - currPiece.getWidth()) / 2;
+    numberOfPiecesPlayed++;
+    firePropertyChange(CURPIECE_PROPERTY);
+    firePropertyChange(NUMPIECES_PROPERTY);
+
+    if (!board.canPlace(currPieceRow, currPieceCol)) {
+        gameOver = true;
+        firePropertyChange("GAMEOVER_PROPERTY");
+    }
 		
 	}
 	
 	public void start() {
 		gameInProgress = true;
-		
-		// TODO Start a new piece at the board
-	
+		gameOver = false;
+    firePropertyChange("GAMEINPROGRESS_PROPERTY");
+    startNewPiece();
 	}
 
 	public void reset() {
 
-		board = new Board(width, height);
-		
+		//board = new Board(width, height);
+		board.clear();
 		score = 0;
 		numberOfPiecesPlayed = 0;
 		rowsCleared = 0;
@@ -101,6 +169,11 @@ public class Game extends OminoSubject {
 		
 		gameInProgress = false;
 		gameOver = false;
+		
+		firePropertyChange(BOARD_PROPERTY);
+    firePropertyChange(SCORE_PROPERTY);
+    firePropertyChange(NUMPIECES_PROPERTY);
+    firePropertyChange(NUMROWS_PROPERTY);
 	
 	}
 	
@@ -139,12 +212,11 @@ public class Game extends OminoSubject {
 	}
 
 	public int getBoardWidth () {
-		return width;
+		return board.getWidth();
 	}
 
 	public int getBoardHeight () {
-		return height;
-		//not desired way
+		return board.getHeight();
 	}
 
 }

@@ -1,4 +1,4 @@
-import java.awt.Color;
+import javafx.scene.paint.Color;
 
 /**
  * captures the notion of a particular configuration of 

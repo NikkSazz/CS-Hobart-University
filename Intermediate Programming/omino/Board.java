@@ -1,5 +1,5 @@
-import java.awt.Color;
 import java.util.Arrays;
+import javafx.scene.paint.Color;
 
 /**
  * Main Playing are where the pieces land. it is a grid of squares 
