@@ -1,62 +1,54 @@
 import javafx.scene.paint.Color;
 
 /**
- * orientation of a particular polyomino
- * immutable
- * rotating a piece results in a new piece 
- *  rather than changing the orientation of the current piece.
- *  
- * @author Nikolai Sazonov
+ * Piece class represents a specific orientation of a polyomino.
  */
 public class Piece {
-	
-	Polyomino polyomino;
-	int width;
-	int height;
-	
-	public Piece(Polyomino p, int rotation) {
-		this.polyomino = p;
-		
-		Block[] blocks = p.getBlocks(rotation);
-		
-		this.width = computeWidth(blocks);
-		this.height = computeHeight(blocks);
-	}
-	
-	/*
-	 * returns a new Piece representing the next rotation of this piece
-	 */
-	public Piece getNextRotation() {
-
-		int currentRotation = polyomino.getNumRotations();
-		int next = polyomino.getNextRotation(currentRotation);
-		
-		return new Piece(polyomino, next);
-		
-	}
-		
-	public Block[] getBody() {
-		return polyomino.getBlocks(0);
-	}
-
-	public Color getColor() {
-		return polyomino.getColor();
-	}
-	
-	public int getWidth() {
-		return width;
-	}
-	
-	public int getHeight() {
-		return height;
-	}
-	
-	private int computeWidth(Block[] b) {
-		return b.length;
-	}
-	
-	private int computeHeight(Block[] b) {
-		return b.length;
-	}
-	
+    private final Polyomino polyomino;
+    private final int width, height, rotation;
+    
+    public Piece(Polyomino polyomino, int rotation) {
+        if (polyomino == null) {
+            throw new IllegalArgumentException("Polyomino cannot be null");
+        }
+        if (rotation < 0 || rotation >= polyomino.getNumRotations()) {
+            throw new IllegalArgumentException("Invalid rotation index: " + rotation);
+        }
+        this.polyomino = polyomino;
+        this.rotation = rotation;
+        Block[] blocks = polyomino.getBlocks(rotation);
+        this.width = computeWidth(blocks);
+        this.height = computeHeight(blocks);
+    }
+    
+    public Piece getNextRotation() {
+        return new Piece(polyomino, polyomino.getNextRotation(rotation));
+    }
+    
+    public Block[] getBody() {
+        Block[] original = polyomino.getBlocks(rotation);
+        return original.clone(); // Defensive copy to prevent external modification
+    }
+    
+    public Color getColor() { return polyomino.getColor(); }
+    public int getWidth() { return width; }
+    public int getHeight() { return height; }
+    
+    private int computeWidth(Block[] blocks) {
+        int min = Integer.MAX_VALUE, max = Integer.MIN_VALUE;
+        for (Block b : blocks) {
+            min = Math.min(min, b.getColumn());
+            max = Math.max(max, b.getColumn());
+        }
+        return (max - min) + 1;
+    }
+    
+    private int computeHeight(Block[] blocks) {
+        int min = Integer.MAX_VALUE, max = Integer.MIN_VALUE;
+        for (Block b : blocks) {
+            min = Math.min(min, b.getRow());
+            max = Math.max(max, b.getRow());
+        }
+        return (max - min) + 1;
+    }
 }
