@@ -96,16 +96,10 @@ public class Board {
 	 * returns the row where the piece would land if it was dropped from its current position
 	 */
 	public int getDropRow(int row, int col, Piece p) {
-		// why do we need row parameter?
-		int h = row /* height - 1 ?why not this? */; 
-		while(h > 0) {
-			if(!canPlace(h, col)) {
-				return h + 1;
-			}
-			h--;
+		while (row > 0 && canPlace(row - 1, col)) {
+			row--;
 		}
-		return h;
-		// idk if this works
+		return row;
 	}
 	
 	public void addPiece(int row, int col, Piece p) {

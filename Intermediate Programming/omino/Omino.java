@@ -107,7 +107,8 @@ public class Omino extends Application implements PropertyChangeListener {
 		Board board = game_.board; // this may not work, code says to get board from game
 			  for ( int row = board.getHeight() - 1, y = 0 ; row >= 0 ; row--, y += BLOCK_SIZE ) {
 			    for ( int col = 0, x = 0 ; col < board.getWidth() ; col++, x += BLOCK_SIZE ) {
-			      if ( board.canPlace(row, col) ) {
+//			      if ( board.canPlace(row, col) ) {
+			    	if(board.colorAt(row,col) != null) {
 			        g.setFill(board.colorAt(row,col));
 			        g.fillRect(x,y,BLOCK_SIZE,BLOCK_SIZE);
 			        g.setStroke(Color.BLACK);
@@ -178,7 +179,7 @@ public class Omino extends Application implements PropertyChangeListener {
 	 */
 	private int getNumPiecesPlayed () {
 		// TODO return the number of pieces played
-		return -1;
+		return game_.getNumberOfPiecesPlayed();
 	}
 
 	// ---------- no changes needed beyond this point --------------------------

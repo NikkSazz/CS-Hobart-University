@@ -83,19 +83,23 @@ public class Game extends OminoSubject {
 		switch (action) {
 		case LEFT:
 			newCol--;
+			break;
 		case RIGHT:
 			newCol++;
+			break;
 		case DOWN:
 			newRow++;
+			break;
 		case DROP:
 			while( board.canPlace(newRow + 1,currPieceCol)) {
 				newRow++;
 			}
+			break;
 		case ROTATE:
 			newP = currPiece.getNextRotation();
 			newRow += (currPiece.getHeight() - newP.getHeight())/2;
 			newCol +=(currPiece.getWidth() - newP.getWidth())/2;
-			
+			break;
 		} // switch
 		
 		if (board.canPlace(newRow,newCol)) {
@@ -124,7 +128,7 @@ public class Game extends OminoSubject {
     
     int cleared = board.clearRows();
     rowsCleared += cleared;
-    score += pointsFromCleared[cleared];
+    score += pointsFromCleared[Math.min(cleared - 1,pointsFromCleared.length)]; // in case cleared rows are greater than my allocated points values
     firePropertyChange(NUMROWS_PROPERTY);
 
     if (!gameOver) startNewPiece();
