@@ -1,5 +1,4 @@
 import java.util.Random;
-
 import javafx.scene.paint.Color;
 
 /**
@@ -58,6 +57,13 @@ public class Game extends OminoSubject {
 		board = new Board(width, height);
 		polyominoes = createPolyominoes(); // polyomino[]
 		reset();
+	}
+	
+	public void start() {
+		gameInProgress = true;
+		gameOver = false;
+    firePropertyChange("GAMEINPROGRESS_PROPERTY");
+    startNewPiece();
 	}
 	
 	private Polyomino[] createPolyominoes() {
@@ -139,7 +145,7 @@ public class Game extends OminoSubject {
 		
 		Polyomino selectedPolyomino = polyominoes[rand.nextInt(polyominoes.length)];
 		currPiece = new Piece(selectedPolyomino, 0);
-		currPieceRow = -currPiece.getHeight();
+		currPieceRow = currPiece.getHeight();
     currPieceCol = (width - currPiece.getWidth()) / 2;
     numberOfPiecesPlayed++;
     firePropertyChange(CURPIECE_PROPERTY);
@@ -150,13 +156,6 @@ public class Game extends OminoSubject {
         firePropertyChange("GAMEOVER_PROPERTY");
     }
 		
-	}
-	
-	public void start() {
-		gameInProgress = true;
-		gameOver = false;
-    firePropertyChange("GAMEINPROGRESS_PROPERTY");
-    startNewPiece();
 	}
 
 	public void reset() {
