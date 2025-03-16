@@ -1,38 +1,55 @@
-.model small
-.stack 100h
+section .data
+    prompt db 'Who is the salt to my tomato? <3 ', 0
+    response db 'I love you  <3 !', 0
+    spacer db 10, 0  ; Spacer for newlines (newline character)
 
-.data
-    prompt db 'Who is the salt to my tomato? <3 $'
-    input_buffer db 10, 0, 10 dup('$')  ; Reserve space for 10 characters and a null terminator
-    response db 'I love you  ^ <3 ^ !$'
+section .bss
+    input resb 10
 
-.code
-main:
-    ; Initialize data segment
-    mov ax, @data
-    mov ds, ax
+section .text
+    global _start
 
-    ; Display the prompt message
-    mov ah, 09h      ; DOS function to display string
-    lea dx, prompt   ; Load address of the prompt string
-    int 21h          ; Call DOS interrupt
+_start:
+    ; Display prompt message
+    mov rax, 1          ; sys_write
+    mov rdi, 1          ; file descriptor 1 (stdout)
+    mov rsi, prompt     ; address of prompt
+    mov rdx, 31         ; length of prompt
+    syscall
 
-    ; Get user input (string)
-    lea dx, input_buffer ; Load address of input buffer
-    mov ah, 0Ah      ; DOS function to get input string (buffered input)
-    int 21h          ; Call DOS interrupt
+    ; Read user input (maximum 10 characters)
+    mov rax, 0          ; sys_read
+    mov rdi, 0          ; file descriptor 0 (stdin)
+    lea rsi, [input]    ; address of input buffer
+    mov rdx, 12         ; maximum bytes to read (10 characters + metadata)
+    syscall
+
+    ; Skip first two bytes of metadata (maximum size and bytes read)
+    lea rsi, [input]  ; rsi points to the actual input (skip metadata)
+    
+    ; Display the input
+    mov rdi, 1          ; file descriptor 1 (stdout)
+    mov rdx, rax        ; length of input string (bytes read)
+    mov rax, 1          ; sys_write
+    syscall
+
+    ; Display "I love you" message
+    mov rax, 1          ; sys_write
+    mov rdi, 1          ; file descriptor 1 (stdout)
+    mov rsi, response   ; address of response
+    mov rdx, 19         ; length of response
+    syscall
+    
+      ; Add a newline after the first input display
+    mov rax, 1          ; sys_write
+    mov rdi, 1          ; file descriptor 1 (stdout)
+    lea rsi, [spacer]   ; address of newline
+    mov rdx, 1          ; newline length
+    syscall
 
 
-    xor dx, dx      ; Clear
-    lea dx, response
-    mov ah, 09h      ; DOS function to display string
-    int 21h
 
-    lea dx, input_buffer + 2 ; skip first 2 bytes
-    int 21h          ; Call DOS interrupt
-
-    ; Exit the program
-    mov ah, 4Ch      ; DOS function to terminate the program
-    int 21h          ; Call DOS interrupt
-
-end main
+    ; Exit program
+    mov rax, 60         ; sys_exit
+    xor rdi, rdi        ; exit status 0
+    syscall
