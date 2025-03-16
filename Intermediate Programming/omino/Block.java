@@ -26,7 +26,7 @@ public class Block {
 	}
 
 	// returns column
-	public int getColumn() {
+	public int getCol() {
 		return column;
 	}
 }

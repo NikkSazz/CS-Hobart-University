@@ -2,138 +2,97 @@ import java.util.Arrays;
 import javafx.scene.paint.Color;
 
 /**
- * Main Playing are where the pieces land. it is a grid of squares 
- * with (0, 0) on the lower left corner.
+ * Main Playing are where the pieces land. it is a grid of squares with (0, 0)
+ * on the lower left corner.
+ * 
  * @author Nikolai Sazonov
  */
 public class Board {
-	int width;
-	int height;
-	Piece[][] board;
-	
-	public Board(int width, int height) {
+	private int width;
+	private int height;
+	private Color[][] grid;
+
+	public Board ( int width, int height ) {
 		this.width = width;
 		this.height = height;
-		this.board = new Piece[height][width];
+		this.grid = new Color[height][width];
 	}
-	
-	/*
-	 * the highest row on the board containing a block
-	 */
-	private int highestRowWithBlock() {
-		for(int i = 0; i < height; i++) {
-			for(var b : board[i]) {
-				if(b != null)
-					return i;
-			}
-			
-		}
-		return -1;
-	}
-	
+
 	/*
 	 * clears all full rows
 	 * @returns number of rows cleared *for score?
 	 */
-	public int clearRows() {
+	public int clearRows () {
 		int cleared = 0;
-		for(int r = 0; r < height; r++) {
-			if(rowFull(r)) {
-				clearRow(r); // cleared row at r, moved all rows above one down
+		for ( int r = height - 1 ; r >= 0 ; r-- ) {
+			if ( isRowFull(r) ) {
+				clearRow(r);
 				cleared++;
-				r--; // row deleted, must check that same index again
+				r++;
 			}
 		}
 		return cleared;
 	}
-	
-	/*
-	 * clears at r and moves the rows above one down
-	 * all rows after the method, should have filledBlocks < width
-	 */
-	private void clearRow(int r) {
-		
-		while(r > height) {
-			for(int c = 0; c < width; c++) {
-				board[r][c] = board[r + 1][c];
-			}
-			r++;
+
+	private boolean isRowFull ( int row ) {
+		for ( Color color : grid[row] ) {
+			if ( color == null ) return false;
 		}
-		
-		if(r == height) {
-			for(int c = 0; c < width; c++) {
-				board[r][c] = null;
-			}
-		}
-		
+		return true;
 	}
-	
-	private boolean rowFull(int row) {
-		for(var b : board[row]) {
-			if (b == null) {
+
+	private void clearRow ( int row ) {
+		for ( int r = row ; r > 0 ; r-- ) {
+			System.arraycopy(grid[r - 1],0,grid[r],0,width);
+		}
+		Arrays.fill(grid[0],null);
+	}
+
+	public void addPiece ( Piece piece, int row, int col ) {
+		for ( Block block : piece.getBlocks() ) {
+			int r = row + block.getRow();
+			int c = col + block.getCol();
+			if ( r >= 0 && r < height && c >= 0 && c < width ) {
+				grid[r][c] = piece.getColor();
+			}
+		}
+	}
+
+	public Color getColor ( int row, int col ) {
+		return grid[row][col];
+	}
+
+	public boolean canPlace ( Piece piece, int row, int col ) {
+		for ( Block block : piece.getBlocks() ) {
+			int r = row + block.getRow();
+			int c = col + block.getCol();
+			if ( r < 0 || r >= height || c < 0 || c >= width || grid[r][c] != null ) {
 				return false;
 			}
 		}
-		
 		return true;
 	}
-	
-	/*
-	 * the number of filled blocks in a particular row
-	 */
-	private int filledBlocksAtRow(int row) {
-		int count = 0;
-		for(var p : board[row]) {
-			if(p != null) {
-				count++;
+
+	public boolean isGameOver () {
+		for ( int c = 0 ; c < width ; c++ ) {
+			if ( grid[0][c] != null ) {
+				return true;
 			}
 		}
-		
-		return count;
+		return false;
 	}
-	
-	/*
-	 * returns the row where the piece would land if it was dropped from its current position
-	 */
-	public int getDropRow(int row, int col, Piece p) {
-		while (row > 0 && canPlace(row - 1, col)) {
-			row--;
-		}
-		return row;
-	}
-	
-	public void addPiece(int row, int col, Piece p) {
-		if(row > height) { // ignore if extends past top
-			return;
-		}
-		board[row][col] = p;
-	}
-	
-	public Color colorAt(int row, int col) {
-		return board[row][col].getColor();
-	}
-	
-	public boolean canPlace(int row, int col) {
-		return board[row][col] != null;
-	}
-	
-	public void clear() {
-		for(int i = 0; i < board.length; i++) {
-			Arrays.fill(board[i], null);
+
+	public void clear () {
+		for ( int r = 0 ; r < height ; r++ ) {
+			Arrays.fill(grid[r],null);
 		}
 	}
-	
-	/*
-	public boolean containsBlockAt(int row, int col) {	
-		return board[row][col] != null;
-	}
-	*/
-	
-	public int getWidth() {
+
+	public int getWidth () {
 		return width;
 	}
-	
-	public int getHeight() {
+
+	public int getHeight () {
 		return height;
 	}
 }

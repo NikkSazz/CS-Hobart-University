@@ -22,59 +22,71 @@ public class OminoTester {
 		System.out.println();
 
 		// -- add test cases below --------------------------------------------
-		testPolyomino();
-		testPiece();
-		testBoard();
-		// need to test game also
+		testPolyominoGetBlocks();
+		testPolyominoGetNextRotation();
+		testPieceDimensions();
+		testBoardPlacementAndClearing();
 
 		System.out.println("Tests have been conducted and passed!");
 	}
 
-	private static void testPolyomino() {
-		String[] shapes = { "0 0  1 0", "0 0  0 1" };
-		Polyomino p = new Polyomino(shapes, Color.BLUE);
-
-		// Test getBlocks
-		Block[] expected = { new Block(0, 0), new Block(1, 0) };
-		assert p.getBlocks(0).equals(expected);
-
-		// Test rotation
-		assert p.getNextRotation(0) == 1;
-		assert p.getNextRotation(1) == 0;
+	private static void testPolyominoGetBlocks () {
+		Polyomino p = new Polyomino(new String[] { "0 0 1 0 2 0" },
+		                            javafx.scene.paint.Color.RED);
+		Block[] blocks = p.getBlocks(0);
+		String result = blocksToString(blocks);
+		assert result.equals("0 0 1 0 2 0") : "Polyomino getBlocks failed: "
+		    + result;
 	}
 
-	private static void testPiece() {
-		String[] shapes = { "0 0  1 0", "0 0  0 1" };
-		Polyomino poly = new Polyomino(shapes, Color.RED);
-		Piece piece = new Piece(poly, 0);
-
-		// Test width and height
-		assert piece.getWidth() == 2;
-		assert piece.getHeight() == 1;
-
-		// Test rotation
-		Piece rotated = piece.getNextRotation();
-		assert rotated.getWidth() == 1;
-		assert rotated.getHeight() == 2;
+	private static void testPolyominoGetNextRotation () {
+		Polyomino p = new Polyomino(new String[] { "0 0 1 0 0 1", "0 0 0 1 1 1" },
+		                            javafx.scene.paint.Color.BLUE);
+		assert p.getNextRotation(0) == 1 : "getNextRotation(0) should be 1";
+		assert p
+		    .getNextRotation(1) == 0 : "getNextRotation(1) should wrap around to 0";
 	}
 
-	private static void testBoard() {
-		Board board = new Board(5, 5);
-		Polyomino poly = new Polyomino(new String[]{"0 0  1 0"}, Color.GREEN);
-		Piece piece = new Piece(poly, 0);
+	private static void testPieceDimensions () {
+		Polyomino p = new Polyomino(new String[] { "0 0 1 0 0 1" },
+		                            javafx.scene.paint.Color.GREEN);
+		Piece piece = new Piece(p,0);
+		assert piece.getWidth() == 2 : "Expected width=2, got " + piece.getWidth();
+		assert piece.getHeight() == 2 : "Expected height=2, got "
+		    + piece.getHeight();
+	}
 
-		// Test empty board state
-		assert board.canPlace(2, 2);
+	private static void testBoardPlacementAndClearing () {
+		Board board = new Board(5,5);
+		Polyomino p = new Polyomino(new String[] { "0 0 1 0 2 0" },
+		                            javafx.scene.paint.Color.RED);
+		Piece piece = new Piece(p,0);
 
-		board.addPiece(2, 2, piece);
-		assert !board.canPlace(2, 2);
+		assert board.canPlace(piece,2,1) : "Should be able to place piece at (2,1)";
+		board.addPiece(piece,2,1);
 
-		assert board.getDropRow(4, 2, piece) == 0;
-
-		for (int i = 0; i < 5; i++) {
-			board.addPiece(0, i, piece);
+		// Force a row to fill
+		Polyomino filler =
+		    new Polyomino(new String[] { "0 0" },javafx.scene.paint.Color.BLUE);
+		Piece fillerPiece = new Piece(filler,0);
+		for ( int c = 0 ; c < 5 ; c++ ) {
+			if ( board.canPlace(fillerPiece,4,c) ) {
+				board.addPiece(fillerPiece,4,c);
+			}
 		}
-		assert board.clearRows() == 1;
+		int cleared = board.clearRows();
+		assert cleared == 1 : "One row should have been cleared, got " + cleared;
+	}
+
+	private static String blocksToString ( Block[] blocks ) {
+		StringBuilder sb = new StringBuilder();
+		for ( int i = 0 ; i < blocks.length ; i++ ) {
+			sb.append(blocks[i].getRow()).append(" ").append(blocks[i].getCol());
+			if ( i < blocks.length - 1 ) {
+				sb.append(" ");
+			}
+		}
+		return sb.toString();
 	}
 
 }

@@ -12,17 +12,17 @@ public class Game extends OminoSubject {
 	 * Create a new Omino! game. The game must be started in order to play.
 	 */
 	
-	private final int width = 10;
+	public static final int board_width = 10;
 	
-	private final int height = 25;
+	public static final int board_height = 20;
 	
-	private final int[] pointsFromCleared = { 1, 3, 5, 8 };
+	private final int[] score_table = { 0, 100, 300, 500, 800 };
 	
 	private static final String[][] POLYOMINOESSTRING = {
 	  {"0 0  1 0  2 0", "0 0  0 1  0 2"}, // I
 	  {"0 0  1 0  0 1", "0 0  0 1  1 1", "1 0  0 1  1 1", "0 0  1 0  1 1"}, // L
-	  {"0 0  1 0  1 1  2 1"},             // S
-	  {"1 0  2 0  0 1  1 1"}              // Z
+	  {"0 0  1 0  1 1  2 1", "1 0  1 1  0 1  0 2"},             // S
+	  {"1 0  2 0  0 1  1 1", "0 0  0 1  1 1  1 2"}              // Z
 	};
 	 
 	private final Color[] colors = 
@@ -54,16 +54,9 @@ public class Game extends OminoSubject {
 	 */
 	
 	public Game() {
-		board = new Board(width, height);
+		board = new Board(board_width, board_height);
 		polyominoes = createPolyominoes(); // polyomino[]
 		reset();
-	}
-	
-	public void start() {
-		gameInProgress = true;
-		gameOver = false;
-    firePropertyChange("GAMEINPROGRESS_PROPERTY");
-    startNewPiece();
 	}
 	
 	private Polyomino[] createPolyominoes() {
@@ -72,92 +65,8 @@ public class Game extends OminoSubject {
         p[i] = new Polyomino(POLYOMINOESSTRING[i], colors[i]);
     }
     return p;
-	}
+	}	
 	
-	
-	public void movePiece(Action action) {
-
-		// TODO this
-		if(!gameInProgress) return;
-		
-		if(currPiece == null) return;
-		
-		int newRow = currPieceRow;
-		int newCol = currPieceCol;
-		Piece newP = currPiece;
-		
-		switch (action) {
-		case LEFT:
-			newCol--;
-			break;
-		case RIGHT:
-			newCol++;
-			break;
-		case DOWN:
-			newRow++;
-			break;
-		case DROP:
-			while( board.canPlace(newRow + 1,currPieceCol)) {
-				newRow++;
-			}
-			break;
-		case ROTATE:
-			newP = currPiece.getNextRotation();
-			newRow += (currPiece.getHeight() - newP.getHeight())/2;
-			newCol +=(currPiece.getWidth() - newP.getWidth())/2;
-			break;
-		} // switch
-		
-		if (board.canPlace(newRow,newCol)) {
-			currPiece = newP;
-			currPieceRow = newRow;
-      currPieceCol = newCol;
-      firePropertyChange(CURPIECE_PROPERTY);
-		}
-		else if (action == Action.DOWN || action == Action.DROP) {
-      handleLanding();
-		}
-		
-	}
-	
-	private void handleLanding() {
-		board.addPiece(currPieceRow,currPieceCol,currPiece);
-		
-		firePropertyChange(SCORE_PROPERTY);
-    firePropertyChange(BOARD_PROPERTY);
-
-    if (currPieceRow < 0) {
-        gameOver = true;
-        firePropertyChange("GAMEOVER_PROPERTY");
-        return;
-    } // game over, reached top
-    
-    int cleared = board.clearRows();
-    rowsCleared += cleared;
-    score += pointsFromCleared[Math.min(cleared - 1,pointsFromCleared.length)]; // in case cleared rows are greater than my allocated points values
-    firePropertyChange(NUMROWS_PROPERTY);
-
-    if (!gameOver) startNewPiece();
-	}
-	
-	private void startNewPiece() {
-		Random rand = new Random();
-		
-		Polyomino selectedPolyomino = polyominoes[rand.nextInt(polyominoes.length)];
-		currPiece = new Piece(selectedPolyomino, 0);
-		currPieceRow = currPiece.getHeight();
-    currPieceCol = (width - currPiece.getWidth()) / 2;
-    numberOfPiecesPlayed++;
-    firePropertyChange(CURPIECE_PROPERTY);
-    firePropertyChange(NUMPIECES_PROPERTY);
-
-    if (!board.canPlace(currPieceRow, currPieceCol)) {
-        gameOver = true;
-        firePropertyChange("GAMEOVER_PROPERTY");
-    }
-		
-	}
-
 	public void reset() {
 
 		//board = new Board(width, height);
@@ -181,6 +90,100 @@ public class Game extends OminoSubject {
 	
 	}
 	
+	public void start() {
+		gameInProgress = true;
+		gameOver = false;
+		firePropertyChange("GAMEINPROGRESS_PROPERTY");
+		startNewPiece();
+	}
+	
+	private void startNewPiece() {
+		Random rand = new Random();
+		
+		Polyomino selectedPolyomino = polyominoes[rand.nextInt(polyominoes.length)];
+		currPiece = new Piece(selectedPolyomino, rand.nextInt(selectedPolyomino.getNumRotations()));
+		currPieceRow = 0;
+    currPieceCol = (board_width - currPiece.getWidth()) / 2;
+    numberOfPiecesPlayed++;
+    firePropertyChange(CURPIECE_PROPERTY);
+    firePropertyChange(NUMPIECES_PROPERTY);
+    /*
+    if (!board.canPlace(currPieceRow, currPieceCol)) {
+        gameOver = true;
+        firePropertyChange("GAMEOVER_PROPERTY");
+    }
+		*/
+	}
+	
+	public void movePiece(Action action) {
+
+		// doneTODO this
+		if (gameOver) { return; }
+		if(!gameInProgress) { return; }		
+		
+		//if(currPiece == null) { return; }
+		
+		int newRow = currPieceRow;
+		int newCol = currPieceCol;
+		Piece newP = currPiece;
+		
+		switch (action) {
+		case LEFT:
+			newCol--;
+			break;
+		case RIGHT:
+			newCol++;
+			break;
+		case DOWN:
+			newRow++;
+			break;
+		case DROP:
+			while( board.canPlace(newP, newRow + 1,newCol)) {
+				newRow++;
+			}
+			break;
+		case ROTATE:
+			newP = currPiece.getNextRotation();
+			newRow += (currPiece.getHeight() - newP.getHeight())/2;
+			newCol +=(currPiece.getWidth() - newP.getWidth())/2;
+			break;
+		} // switch
+		
+		if (board.canPlace(newP, newRow,newCol)) {
+			currPiece = newP;
+			currPieceRow = newRow;
+      currPieceCol = newCol;
+      firePropertyChange(CURPIECE_PROPERTY);
+		}
+		else if (action == Action.DOWN || action == Action.DROP) {
+      placePiece();
+		}
+		
+	}
+	
+	private void placePiece() { 
+    board.addPiece(currPiece, currPieceRow, currPieceCol);
+    
+    int cleared = board.clearRows();
+    if(cleared < 0 || cleared > score_table.length) {
+    	System.out.println("cleared > score_table.length");
+    	return;
+    }
+    score += score_table[cleared];
+    
+    rowsCleared += cleared;
+    firePropertyChange(BOARD_PROPERTY);
+    firePropertyChange(SCORE_PROPERTY);
+    firePropertyChange(NUMROWS_PROPERTY);
+    
+    if (board.isGameOver()) {
+        gameOver = true;
+        firePropertyChange(BOARD_PROPERTY);
+    } else {
+        startNewPiece();
+    }
+}
+	
 	// Getters
 	
 	public int getScore () {
@@ -193,6 +196,10 @@ public class Game extends OminoSubject {
 
 	public int getRowsCleared () {
 		return rowsCleared;
+	}
+	
+	public Board getBoard() {
+    return board;
 	}
 
 	public Piece getCurrPiece () {

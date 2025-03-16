@@ -46,8 +46,8 @@ public class Polyomino {
 		return orientation.length;
 	}
 	// index of an orientation and returns the index of next orientation in the rotation order 
-	public int getNextRotation(int i) {
-		return (i + 1) % orientation.length;
+	public int getNextRotation(int curr) {
+		return (curr + 1) % orientation.length;
 	}
 	
 	public Color getColor() {
