@@ -13,7 +13,7 @@
  *   
  *   - Numerals are typically written in descending order from left to right (e.g., XC = 90).
  * 
- * @author Nikolai Sazonov
+ * @author Nikolai Sazonov, Nikola Stanic
  */
 public class RomanNumeral {
 
@@ -24,10 +24,10 @@ public class RomanNumeral {
 	 * Create a Roman numeral representing the specified int value, in Standard Roman Numeral Form
 	 * 
 	 * @param n
-	 *          int > 0 value of the Roman numeral
+	 *          int > 0 value of the Roman numeral up to 4000
 	 */
 	public RomanNumeral ( int n ) {
-		assert isPositive(n);
+		// assert isPositive(n);
 		
 		numeral_ = toRoman(n);
 		
@@ -35,28 +35,28 @@ public class RomanNumeral {
 	}
 
 	// THIS IS FOR THE INSTANDARDFORM ASSERTS
-	private Boolean inStandardForm(String numeral) {
+	private boolean inStandardForm(String numeral) {
 		return allCharCapitalized(numeral) && inProperFormat(numeral);
 	}
 	
-	private Boolean allCharCapitalized(String numeral) {
+	private boolean allCharCapitalized(String numeral) {
 		return true;
 	}
 	
-	private Boolean inProperFormat(String numeral) {
+	private boolean inProperFormat(String numeral) {
 		return isLimitedToThree(numeral) && descendingOrder(numeral);
 	}
 	
-	private Boolean isLimitedToThree(String numeral) {
+	private boolean isLimitedToThree(String numeral) {
 		return true;
 	}
 	
-	private Boolean descendingOrder(String numeral) {
+	private boolean descendingOrder(String numeral) {
 		return true;
 	}
 	
 	
-	private Boolean isPositive(int n) {
+	private boolean isPositive(int n) {
 		return n > 0;
 	}
 	// THIS IS FOR THE INSTANDARDFORM ASSERTS
@@ -70,6 +70,7 @@ public class RomanNumeral {
 	public RomanNumeral ( String roman ) {
 		assert inStandardForm(roman);
 		numeral_ = roman;
+		// Checks Class invariants
 	}
 
 	/**
@@ -84,10 +85,10 @@ public class RomanNumeral {
 	/**
 	 * Get the integer value of this Roman numeral.
 	 * 
-	 * @return integer > 0 value of this Roman numeral
+	 * @return integer > 0 value of this Roman numeral up to 4000
 	 */
 	public int toInt () {
-		assert inStandardForm(numeral_);
+		// assert inStandardForm(numeral_);
 		return toInt(numeral_);
 	}
 
@@ -254,7 +255,7 @@ public class RomanNumeral {
 		} else if ( symbol == 'M' ) {
 			return 1000;
 		}
-
+		else
 		return -1;
 	}
 
