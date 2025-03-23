@@ -2,7 +2,7 @@
 /**
  * A set of strings.
  * 
- * @author your name here
+ * @author Nikolai Sazonov, Nikola Stanic
  */
 public class StringSet {
 
