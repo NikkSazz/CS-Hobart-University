@@ -23,16 +23,18 @@ public class Grep {
 			while(true) {
 				
 				String line = r.readLine();
+				
 				if(line == null) { break; }
-
+				
 				if(line.contains(pattern)) {
 					w.write(line);
 					w.newLine();
 				}
 				
+				w.flush();	
 			} // while true
-
-			w.flush();
+			System.out.println("Finished grep() void");
+			
 		} catch ( IOException e ) {
 			// catch exception if couldnt readline
 		}
@@ -46,7 +48,7 @@ public class Grep {
 	 */
 	public static void main ( String[] args ) {
 		// TODO Auto-generated method stub
-		
+		System.out.println("Grep Main");
 		try {
 			String pattern = args[0];
 			String src = args[1];
