@@ -75,17 +75,100 @@ public class SolitaireDeck {
 		head_.setPrev(curr);
 	}
 	
+	/*
+	 * example
+	 * "1 23 25 27B 2 22 10 11 12 13 14 15 16 17 18 19 20 21 7 5 9 27A 26 8 3 24 6 4"
+	 */
 	public String toString() {
 		// TODO: Impliment
 		return "";
 	}
 	
-	public void swapJokerB() {
-		// TODO: Impliment
-	}
-	
 	public void swapJokerA() {
 		// TODO: Impliment
+		
+		DoubleListNode jokerA = null;
+		
+		
+		if(head_.getCard().isJokerA()) {
+			jokerA = head_;
+		}
+		else {
+			
+			var card = head_.getNext();
+			while(jokerA == null) {
+				if(card.getCard().isJokerA()) {
+					jokerA = card;
+					break;
+				}
+				card = card.getNext();
+			}
+			
+		}
+		
+		// prev is the card before jokerA before the operation.
+		//  and is the card before swap after.
+		DoubleListNode prev = head_.getPrev();
+		// Swap is the next card before the operation
+		DoubleListNode swap = jokerA.getNext();
+		// Next is the card after jokerA after the operation
+		DoubleListNode next = swap.getNext();
+				
+		
+		prev.setNext(swap);
+		swap.setPrev(prev);
+
+		swap.setNext(jokerA);
+		jokerA.setPrev(swap);
+		
+		jokerA.setNext(next);
+		next.setPrev(jokerA);
+		
+		
+		// if jokerA is first, the top card of the deck DOES change
+		if(head_.getCard().isJokerA()) {
+			head_ = swap;
+		}
+	}
+	
+	public void swapJokerB() {
+		// TODO: Impliment
+		
+		DoubleListNode jokerB = null;
+		
+		// init jokerB, or find jokerB
+		if(head_.getCard().isJokerB()) {
+			jokerB = head_;
+			// move head_ 2 to the right
+			head_ = head_.getNext().getNext();
+		}
+		else {
+			// find jokerB
+			var card = head_.getNext();
+			while(jokerB == null) {
+				if(card.getCard().isJokerA()) {
+					jokerB = card;
+					break;
+				}
+				card = card.getNext();
+			}
+			
+		}
+		
+		DoubleListNode left = jokerB.getPrev();
+		DoubleListNode first = jokerB.getNext();
+		DoubleListNode second = first.getNext();
+		DoubleListNode right = second.getNext();
+
+		left.setNext(first);
+		first.setPrev(left);
+
+		jokerB.setNext(right);
+		right.setPrev(jokerB);
+
+		second.setNext(right);
+		right.setPrev(second);
+		
 	}
 	
 	public void countCut() {
