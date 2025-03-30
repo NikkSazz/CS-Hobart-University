@@ -85,7 +85,6 @@ public class SolitaireDeck {
 	}
 	
 	public void swapJokerA() {
-		// TODO: Impliment
 		
 		DoubleListNode jokerA = null;
 		
@@ -132,7 +131,6 @@ public class SolitaireDeck {
 	}
 	
 	public void swapJokerB() {
-		// TODO: Impliment
 		
 		DoubleListNode jokerB = null;
 		
@@ -171,13 +169,62 @@ public class SolitaireDeck {
 		
 	}
 	
+	/*
+	 * the cards above the first joker 
+	 *  (the one closest to the top of the deck) 
+	 *  are exchanged with the cards below the second joker. 
+	 *  For this step, it doesn't matter which joker is A or B.
+	 *  
+	 *  before: 1 23 25 2 22 27B . . . 27A 8 3 24 6 4
+	 *	  after:  8 3 24 6 4 27B . . . 27A 1 23 25 2 22
+	 *  
+	 */
+	public void tripleCut() {
+		
+		// = null in case they were not modified, it should not affect anything
+		DoubleListNode firstLeft = head_;
+		DoubleListNode firstRight = null;
+		DoubleListNode firstJoker = null;
+		
+		DoubleListNode secondLeft = null;
+		DoubleListNode secondRight = head_.getPrev();
+		DoubleListNode secondJoker = null;
+		
+		var card = head_.getNext();
+		for(int i = 1; i < deckSize_; i++) {
+			
+			if(card.getCard().isJoker()) {
+				if(firstJoker == null) {
+					firstJoker = card;
+					firstRight = card.getPrev();
+				}
+				else {
+					secondJoker = card;
+					secondLeft = card.getNext();
+					
+					// found both jokers
+					break;
+				}
+			}
+			card = card.getNext();
+		}
+		
+		firstLeft.setPrev(secondJoker);
+		secondJoker.setNext(firstLeft);
+		
+		firstRight.setNext(secondLeft);
+		secondLeft.setPrev(firstRight);
+		
+		secondRight.setNext(firstJoker);
+		firstJoker.setPrev(secondRight);
+		
+		head_ = secondLeft;
+	}
+	
 	public void countCut() {
 		// TODO: Impliment
 	}
 	
-	public void tripleCut() {
-		// TODO: Impliment
-	}
 	
 	public SolitaireCard getBottomCard() {
 		var card = head_;
