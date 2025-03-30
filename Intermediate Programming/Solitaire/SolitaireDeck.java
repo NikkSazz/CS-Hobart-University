@@ -1,5 +1,7 @@
 // package solitaire;
 
+import java.util.ArrayList;
+
 /**
  * represents the deck of cards used to generate
  * keystream values. Stores cards and supports
@@ -80,8 +82,15 @@ public class SolitaireDeck {
 	 * "1 23 25 27B 2 22 10 11 12 13 14 15 16 17 18 19 20 21 7 5 9 27A 26 8 3 24 6 4"
 	 */
 	public String toString() {
-		// TODO: Impliment
-		return "";
+		ArrayList<String> list = new ArrayList<>();
+
+		var curr = head_;
+		for(int i = 1; i <= deckSize_; i++) {
+			list.add(curr.getCard().toString());
+		}
+		
+		return String.join(" ", list);
+		// using an arrayList is slightly more efficient than str+="..", as Strings are immutable in Java
 	}
 	
 	public void swapJokerA() {
@@ -221,17 +230,46 @@ public class SolitaireDeck {
 		head_ = secondLeft;
 	}
 	
-	public void countCut() {
-		// TODO: Impliment
+	public void countCut(int n) {
+		
+		if (n < 1) { return; }
+		
+		// remove bottom card from the deck
+		var poppedCard = head_.getPrev().getCard();
+		head_.setPrev(head_.getPrev().getPrev());
+		
+		// Count down a specified number of cards from the top of the deck
+		var card = head_;
+		for(int i = 1; i <= n; i++) {
+			card = card.getNext();
+		}
+		
+		var countedLeft = head_;
+		var countedRight = card;
+		var otherLeft = card.getNext();
+		var otherRight = head_.getPrev();
+		
+		otherLeft.setPrev(countedRight);
+		countedRight.setNext(otherLeft);
+		
+		otherRight.setNext(countedLeft);
+		countedLeft.setPrev(otherRight);
+		
+		head_ = otherLeft;
+		
+		// add poppedCard to bottom of the deck
+
+import java.util.ArrayList;
+
+import java.util.ArrayList;
+
+var pushed = new DoubleListNode(poppedCard, head_.getPrev(), head_);
+		head_.setPrev(pushed);
 	}
 	
 	
 	public SolitaireCard getBottomCard() {
-		var card = head_;
-		for(int i = 0; i < deckSize_ / 2; i++) {
-			card = card.getNext();
-		}
-		return card.getCard();
+		return head_.getPrev().getCard();
 	}
 	
 	public SolitaireCard getNthCard(int n) {
