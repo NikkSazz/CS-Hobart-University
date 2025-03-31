@@ -5,7 +5,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 /**
- *  @author Nikolai Sazonov
+ * @author Nikolai Sazonov
  */
 public class ooFlip {
 
