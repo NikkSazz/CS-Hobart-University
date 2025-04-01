@@ -16,6 +16,7 @@ public class SolitaireDeck {
 	
 	
 	public SolitaireDeck(int deckSize) {
+		// System.out.println("DeckSize = " + deckSize);
 		deckSize_ = deckSize;
 		
 		// if(deckSize <= 2) { throw new Exception(""); }
@@ -23,28 +24,38 @@ public class SolitaireDeck {
 		head_ = new DoubleListNode(new SolitaireCard(1));
 		DoubleListNode curr = head_;
 		DoubleListNode newNode;
-		for (int i = 1; i <= deckSize; i++) {
+
+		// i = 2 because 1 is already init with head_;
+		for (int i = 2; i <= deckSize; i++) {
 			newNode = new DoubleListNode(new SolitaireCard(i));
 			curr.setNext(newNode);
 			newNode.setPrev(curr);
 			curr = newNode;
 		}
+
+		System.out.println(this.toString());
 		
 		// Jokers aswell
-		newNode = new DoubleListNode(new SolitaireCard(deckSize + 1, 'A'));
-		curr.setNext(newNode);
-		newNode.setPrev(curr);
-		curr = newNode;
-		
-		newNode = new DoubleListNode(new SolitaireCard(deckSize + 1, 'B'));
-		curr.setNext(newNode);
-		newNode.setPrev(curr);
-		curr = newNode;
+	    DoubleListNode jokerA = new DoubleListNode(new SolitaireCard(deckSize + 1, 'A'));
+	    curr.setNext(jokerA);
+	    jokerA.setPrev(curr);
+	    curr = jokerA;
+
+	    DoubleListNode jokerB = new DoubleListNode(new SolitaireCard(deckSize + 1, 'B'));
+	    curr.setNext(jokerB);
+	    jokerB.setPrev(curr);
+	    curr = jokerB;
 		
 		// Finish circle
 		curr.setNext(head_);
 		head_.setPrev(curr);
 		
+
+		System.out.println(this.toString());
+		
+		assert checkStructure();
+		System.out.println(this.toString());
+		assert checkContents();
 	}
 	
 	/*
@@ -65,7 +76,8 @@ public class SolitaireDeck {
 		DoubleListNode curr = head_;
 		DoubleListNode newNode;
 		
-		for(int i = 1; i < cards.length; i++) {
+		// i = 2 because 1 is already init with head_;
+		for(int i = 2; i < cards.length; i++) {
 			newNode = new DoubleListNode(new SolitaireCard(cards[i]));
 			curr.setNext(newNode);
 			newNode.setPrev(curr);
@@ -75,6 +87,9 @@ public class SolitaireDeck {
 		// Finish circle
 		curr.setNext(head_);
 		head_.setPrev(curr);
+
+		assert checkStructure();
+		assert checkContents();
 	}
 	
 	/*
@@ -82,10 +97,17 @@ public class SolitaireDeck {
 	 * "1 23 25 27B 2 22 10 11 12 13 14 15 16 17 18 19 20 21 7 5 9 27A 26 8 3 24 6 4"
 	 */
 	public String toString() {
+
+		assert checkStructure();
+		assert checkContents();
+		
 		ArrayList<String> list = new ArrayList<>();
 
 		var curr = head_;
-		for(int i = 1; i <= deckSize_; i++) {
+		list.add(curr.getCard().toString());
+		curr = curr.getNext();
+		
+		while(curr != head_) {
 			list.add(curr.getCard().toString());
 			curr = curr.getNext();
 		}
@@ -138,6 +160,9 @@ public class SolitaireDeck {
 		if(head_.getCard().isJokerA()) {
 			head_ = swap;
 		}
+
+		assert checkStructure();
+		assert checkContents();
 	}
 	
 	public void swapJokerB() {
@@ -176,6 +201,9 @@ public class SolitaireDeck {
 
 		second.setNext(right);
 		right.setPrev(second);
+		
+		assert checkStructure();
+		assert checkContents();
 		
 	}
 	
@@ -229,6 +257,9 @@ public class SolitaireDeck {
 		firstJoker.setPrev(secondRight);
 		
 		head_ = secondLeft;
+
+		assert checkStructure();
+		assert checkContents();
 	}
 	
 	public void countCut(int n) {
@@ -262,6 +293,9 @@ public class SolitaireDeck {
 
 		var pushed = new DoubleListNode(poppedCard, head_.getPrev(), head_);
 		head_.setPrev(pushed);
+
+		assert checkStructure();
+		assert checkContents();
 	}
 	
 	
@@ -286,14 +320,18 @@ public class SolitaireDeck {
 	}
 	
 	
+	@SuppressWarnings("unused")
 	private boolean checkStructure() {
 		var c = head_;
 		for(int a = 1; a <= deckSize_+2; a++) {
-			
-			if( c.getPrev().getNext() != c) {
-				return false;
-			}
-			if( c.getNext().getPrev() != c) {
+			try {
+				if( c.getPrev().getNext() != c) {
+					return false;
+				}
+				if( c.getNext().getPrev() != c) {
+					return false;
+				}
+			} catch (NullPointerException e) {
 				return false;
 			}
 			
@@ -303,9 +341,10 @@ public class SolitaireDeck {
 		return true;
 	}
 	
+	@SuppressWarnings("unused")
 	private boolean checkContents() {
 		
-		boolean[] bArr = new boolean[deckSize_+1];
+		boolean[] bArr = new boolean[deckSize_+2];
 		
 		var c = head_;
 		for(int a = 1; a <= deckSize_+2; a++) {
@@ -318,14 +357,16 @@ public class SolitaireDeck {
 				}
 				
 				bArr[0] = true;
-				
+				continue;
 			}
 			else if(c.getCard().isJokerB()) {
+				
 				if(bArr[bArr.length-1]) {
 					// Joker B already Exists
 					return false;
 				}
 				bArr[bArr.length-1] = true;
+				continue;
 			}
 			
 			int cardVal = c.getCard().getValue();

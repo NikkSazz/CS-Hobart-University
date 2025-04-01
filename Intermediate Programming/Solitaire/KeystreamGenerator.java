@@ -1,4 +1,4 @@
-package solitaire;
+
 
 /**
  * @author Nikolai Sazonov
