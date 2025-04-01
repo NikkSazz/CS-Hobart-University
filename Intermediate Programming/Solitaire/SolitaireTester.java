@@ -9,8 +9,11 @@ public class SolitaireTester {
 	 * @param args
 	 */
 	public static void main ( String[] args ) {
-		// TODO Auto-generated method stub
+		
 		testSolitaireDeck();
+		
+		// TODO test KeystreamGenerator
+		
 	}
 	
 	private static void testSolitaireDeck() {
