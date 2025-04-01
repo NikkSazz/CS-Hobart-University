@@ -322,6 +322,7 @@ public class SolitaireDeck {
 	
 	@SuppressWarnings("unused")
 	private boolean checkStructure() {
+		// TODO: get checkStructure() to work
 		var c = head_;
 		for(int a = 1; a <= deckSize_+2; a++) {
 			try {

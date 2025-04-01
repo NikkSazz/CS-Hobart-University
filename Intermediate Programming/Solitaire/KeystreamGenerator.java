@@ -33,22 +33,21 @@ public class KeystreamGenerator {
 	}
 	
 	public int nextKeystreamValue() {
-		
-		deck_.swapJokerA();
-		deck_.swapJokerB();
-		deck_.tripleCut();
-		deck_.countCut(deck_.getBottomCard().getValue());
-		
-		int topCardVal = deck_.getTopCard().getValue();
-		
-		var check = deck_.getNthCard(topCardVal);
-		if(check.isJoker()) { 
-			return check.getValue();
-		}
-		
-		// repeat if not joker
-		return nextKeystreamValue();
+	    while (true) {
+	        deck_.swapJokerA();
+	        deck_.swapJokerB();
+	        deck_.tripleCut();
+	        deck_.countCut(deck_.getBottomCard().getValue());
+
+	        int topCardVal = deck_.getTopCard().getValue();
+	        var check = deck_.getNthCard(topCardVal);
+
+	        if (!check.isJoker()) { 
+	            return check.getValue();
+	        }
+	    }
 	}
+
 	
 	String getDeckString() {
 		return deck_.toString();
