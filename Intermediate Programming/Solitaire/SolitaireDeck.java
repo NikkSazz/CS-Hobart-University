@@ -87,6 +87,7 @@ public class SolitaireDeck {
 		var curr = head_;
 		for(int i = 1; i <= deckSize_; i++) {
 			list.add(curr.getCard().toString());
+			curr = curr.getNext();
 		}
 		
 		return String.join(" ", list);
@@ -259,11 +260,7 @@ public class SolitaireDeck {
 		
 		// add poppedCard to bottom of the deck
 
-import java.util.ArrayList;
-
-import java.util.ArrayList;
-
-var pushed = new DoubleListNode(poppedCard, head_.getPrev(), head_);
+		var pushed = new DoubleListNode(poppedCard, head_.getPrev(), head_);
 		head_.setPrev(pushed);
 	}
 	
@@ -286,6 +283,63 @@ var pushed = new DoubleListNode(poppedCard, head_.getPrev(), head_);
 	
 	public int getDeckSize() {
 		return deckSize_;
+	}
+	
+	
+	private boolean checkStructure() {
+		var c = head_;
+		for(int a = 1; a <= deckSize_+2; a++) {
+			
+			if( c.getPrev().getNext() != c) {
+				return false;
+			}
+			if( c.getNext().getPrev() != c) {
+				return false;
+			}
+			
+			c = c.getNext();
+			
+		}
+		return true;
+	}
+	
+	private boolean checkContents() {
+		
+		boolean[] bArr = new boolean[deckSize_+1];
+		
+		var c = head_;
+		for(int a = 1; a <= deckSize_+2; a++) {
+			
+			if(c.getCard().isJokerA()) {
+				
+				if(bArr[0]) {
+					// Joker A already Exists
+					return false;
+				}
+				
+				bArr[0] = true;
+				
+			}
+			else if(c.getCard().isJokerB()) {
+				if(bArr[bArr.length-1]) {
+					// Joker B already Exists
+					return false;
+				}
+				bArr[bArr.length-1] = true;
+			}
+			
+			int cardVal = c.getCard().getValue();
+			if(bArr[cardVal]) {
+				// Card with such value already Exists
+				return false;
+			}
+			bArr[cardVal] = true;
+			
+			c = c.getNext();
+			
+		} // for
+		
+		return true;
 	}
 	
 }
