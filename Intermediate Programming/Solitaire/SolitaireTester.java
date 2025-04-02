@@ -13,6 +13,10 @@ public class SolitaireTester {
 		testSolitaireDeck();
 		
 		// TODO test KeystreamGenerator
+
+		// TODO test decrypt
+
+		// TODO test encrypt
 		
 	}
 	

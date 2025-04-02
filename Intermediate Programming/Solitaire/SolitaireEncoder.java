@@ -27,12 +27,26 @@ public class SolitaireEncoder {
 		return encrypted;
 	}
 	
-	public static void decrypt(String message, String passphrase, int deckSize) {
+	public static String decrypt(String message, String passphrase, int deckSize) {
 		
 		var keystream = new KeystreamGenerator(deckSize, passphrase);
+		StringBuilder decryptedMessage = new StringBuilder();
 		
-		
-		
+		// convert letter to number
+		for(char c : message.toCharArray()) {
+			
+			int letterVal = Character.toUpperCase(c) - 'A' + 1;
+			int keystreamVal = keystream.nextKeystreamValue();
+			
+			int difference = letterVal - keystreamVal;
+			if(difference <= 0) {
+				difference += 26;
+			}
+			
+			char decryptedChar = (char) ('A' + difference + 1);
+			decryptedMessage.append(decryptedChar);
+		}
+		return decryptedMessage.toString();
 	}
 
 }
