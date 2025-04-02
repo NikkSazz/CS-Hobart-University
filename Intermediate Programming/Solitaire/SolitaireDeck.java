@@ -58,9 +58,8 @@ public class SolitaireDeck {
 		// System.out.println(this.toString());
 		
 		assert checkStructure();
-		// System.out.println(this.toString());
 		assert checkContents();
-		System.out.println("Initial Testing has passed");
+		// System.out.println("Initial Testing has passed");
 	}
 	
 	/*
