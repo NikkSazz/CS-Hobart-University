@@ -3,6 +3,10 @@
 import java.util.ArrayList;
 
 /**
+ * Solitaire deck is used to get specialized integer values,
+ * with a complex method of cycling cards. those integer values
+ * are used to modify a string into a completely different set of alphabet
+ * 
  * represents the deck of cards used to generate
  * keystream values. Stores cards and supports
  * deck-manipulation operations.

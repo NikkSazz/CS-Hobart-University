@@ -1,7 +1,9 @@
 
 
 /**
- * handles generating the keystream values
+ * handles generating the keystream values,
+ * used for getting an integer value given from the passphrase, 
+ * so only those using the same passphrase decrypt that message
  * 
  * @author Nikolai Sazonov
  */

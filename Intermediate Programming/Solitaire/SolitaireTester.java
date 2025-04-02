@@ -1,7 +1,7 @@
 
 
 /**
- * @author Nikolai Sazonov
+ *  * @author Nikolai Sazonov
  */
 public class SolitaireTester {
 
