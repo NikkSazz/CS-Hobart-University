@@ -19,7 +19,7 @@ public class SolitaireMain {
             return;
         }
         
-		for( ; ; ) {
+		while(true) {
 			
 			System.out.print("\nencrypt, decrypt, or quit? [e/d/q] ");
             String choice = scanner.nextLine();

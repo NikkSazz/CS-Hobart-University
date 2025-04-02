@@ -33,7 +33,7 @@ public class SolitaireDeck {
 			curr = newNode;
 		}
 
-		System.out.println(this.toString());
+		// System.out.println(this.toString());
 		
 		// Jokers aswell
 	    DoubleListNode jokerA = new DoubleListNode(new SolitaireCard(deckSize + 1, 'A'));
@@ -51,11 +51,12 @@ public class SolitaireDeck {
 		head_.setPrev(curr);
 		
 
-		System.out.println(this.toString());
+		// System.out.println(this.toString());
 		
 		assert checkStructure();
-		System.out.println(this.toString());
+		// System.out.println(this.toString());
 		assert checkContents();
+		System.out.println("Initial Testing has passed");
 	}
 	
 	/*
@@ -90,6 +91,7 @@ public class SolitaireDeck {
 
 		assert checkStructure();
 		assert checkContents();
+		System.out.println("Initial Tests have passed");
 	}
 	
 	/*
@@ -98,7 +100,7 @@ public class SolitaireDeck {
 	 */
 	public String toString() {
 
-		assert checkStructure();
+		assert checkStructure() : "Structure is wrong";
 		assert checkContents();
 		
 		ArrayList<String> list = new ArrayList<>();
@@ -116,6 +118,60 @@ public class SolitaireDeck {
 		// using an arrayList is slightly more efficient than str+="..", as Strings are immutable in Java
 	}
 	
+	public void swapJokerA() {
+        DoubleListNode curr = head_;
+        while (!curr.getCard().isJokerA()) {
+            curr = curr.getNext();
+        }
+        DoubleListNode after = curr.getNext();
+
+        // Remove curr
+        curr.getPrev().setNext(after);
+        after.setPrev(curr.getPrev());
+
+        // Reinsert after next card
+        DoubleListNode newNext = after.getNext();
+        after.setNext(curr);
+        curr.setPrev(after);
+        curr.setNext(newNext);
+        newNext.setPrev(curr);
+
+        if (curr == head_) {
+            head_ = after;
+        }
+
+        assert checkStructure();
+        assert checkContents();
+    }
+
+    public void swapJokerB() {
+        DoubleListNode curr = head_;
+        while (!curr.getCard().isJokerB()) {
+            curr = curr.getNext();
+        }
+        DoubleListNode after = curr.getNext();
+        DoubleListNode second = after.getNext();
+
+        // Remove curr
+        curr.getPrev().setNext(after);
+        after.setPrev(curr.getPrev());
+
+        // Reinsert after second card
+        DoubleListNode newNext = second.getNext();
+        second.setNext(curr);
+        curr.setPrev(second);
+        curr.setNext(newNext);
+        newNext.setPrev(curr);
+
+        if (curr == head_) {
+            head_ = after;
+        }
+
+        assert checkStructure();
+        assert checkContents();
+    }
+    
+	/*
 	public void swapJokerA() {
 		
 		DoubleListNode jokerA = null;
@@ -179,7 +235,7 @@ public class SolitaireDeck {
 			// find jokerB
 			var card = head_.getNext();
 			while(jokerB == null) {
-				if(card.getCard().isJokerA()) {
+				if(card.getCard().isJokerB()) {
 					jokerB = card;
 					break;
 				}
@@ -206,6 +262,71 @@ public class SolitaireDeck {
 		assert checkContents();
 		
 	}
+	*/
+    
+    public void tripleCut() {
+        DoubleListNode first = head_;
+        while (!first.getCard().isJoker()) {
+            first = first.getNext();
+        }
+
+        DoubleListNode second = first.getNext();
+        while (!second.getCard().isJoker()) {
+            second = second.getNext();
+        }
+
+        if (first == head_ || second.getNext() == head_) {
+            head_ = second.getNext();
+        } else {
+            DoubleListNode beforeFirst = first.getPrev();
+            DoubleListNode afterSecond = second.getNext();
+
+            beforeFirst.setNext(afterSecond);
+            afterSecond.setPrev(beforeFirst);
+
+            DoubleListNode tail = head_.getPrev();
+            tail.setNext(first);
+            first.setPrev(tail);
+
+            second.setNext(head_);
+            head_.setPrev(second);
+
+            head_ = afterSecond;
+        }
+
+        assert checkStructure();
+        assert checkContents();
+    }
+
+    public void countCut(int n) {
+        if (n < 1 || n >= deckSize_ + 2) return;
+
+        DoubleListNode cutEnd = head_;
+        for (int i = 1; i < n; i++) {
+            cutEnd = cutEnd.getNext();
+        }
+
+        DoubleListNode cutStart = head_;
+        DoubleListNode afterCut = cutEnd.getNext();
+        DoubleListNode tail = head_.getPrev();
+
+        // Remove segment [cutStart, cutEnd]
+        head_ = afterCut;
+        afterCut.setPrev(tail);
+        tail.setNext(afterCut);
+
+        // Insert before tail
+        DoubleListNode beforeTail = tail.getPrev();
+        beforeTail.setNext(cutStart);
+        cutStart.setPrev(beforeTail);
+
+        cutEnd.setNext(tail);
+        tail.setPrev(cutEnd);
+
+        assert checkStructure();
+        assert checkContents();
+    }
+
 	
 	/*
 	 * the cards above the first joker 
@@ -217,6 +338,7 @@ public class SolitaireDeck {
 	 *	  after:  8 3 24 6 4 27B . . . 27A 1 23 25 2 22
 	 *  
 	 */
+    /*
 	public void tripleCut() {
 		
 		// = null in case they were not modified, it should not affect anything
@@ -292,11 +414,13 @@ public class SolitaireDeck {
 		// add poppedCard to bottom of the deck
 
 		var pushed = new DoubleListNode(poppedCard, head_.getPrev(), head_);
+		pushed.setNext(head_);
 		head_.setPrev(pushed);
 
 		assert checkStructure();
 		assert checkContents();
 	}
+	*/
 	
 	
 	public SolitaireCard getBottomCard() {
@@ -320,28 +444,60 @@ public class SolitaireDeck {
 	}
 	
 	
+	private boolean checkStructure() {
+        DoubleListNode curr = head_;
+        for (int i = 0; i < deckSize_ + 2; i++) {
+            if (curr.getNext().getPrev() != curr || curr.getPrev().getNext() != curr) {
+                return false;
+            }
+            curr = curr.getNext();
+        }
+        return true;
+    }
+	
+	/*
 	@SuppressWarnings("unused")
 	private boolean checkStructure() {
 		// TODO: get checkStructure() to work
 		var c = head_;
-		for(int a = 1; a <= deckSize_+2; a++) {
-			try {
-				if( c.getPrev().getNext() != c) {
-					return false;
-				}
-				if( c.getNext().getPrev() != c) {
-					return false;
-				}
-			} catch (NullPointerException e) {
-				return false;
-			}
+		
+		int count = 0;
+		
+		while (count <= deckSize_ + 2) {
 			
-			c = c.getNext();
+			// something is broken
+			if (c == null || c.getPrev() == null || c.getNext() == null) {
+	            return false; // Found a broken link
+	        }
+
 			
+//			try {
+//				if( c.getPrev().getNext() != c) {
+//					return false;
+//				}
+//				if( c.getNext().getPrev() != c) {
+//					return false;
+//				}
+//			} catch (NullPointerException e) {
+//				return false;
+//			}
+//	        c = c.getNext();
+			
+			if (c.getPrev().getNext() != c || c.getNext().getPrev() != c) {
+	            return false;
+	        }
+			
+	        c = c.getNext();
+	        count++;		
+	        
+	        if (c == head_) { // fully looped
+	            break;
+	        }
+	        
 		}
-		return true;
+		return count == deckSize_ + 2; // visited all possible numbers, plus two jokers??
 	}
-	
+	/*
 	@SuppressWarnings("unused")
 	private boolean checkContents() {
 		
@@ -383,5 +539,32 @@ public class SolitaireDeck {
 		
 		return true;
 	}
-	
+	*/
+	private boolean checkContents() {
+        boolean[] seen = new boolean[deckSize_ + 2 + 1];
+        boolean jokerASeen = false, jokerBSeen = false;
+        int count = 0;
+
+        DoubleListNode curr = head_;
+        while (count == 0 || curr != head_) {
+            SolitaireCard card = curr.getCard();
+            if (card.isJokerA()) {
+                if (jokerASeen) return false;
+                jokerASeen = true;
+            } else if (card.isJokerB()) {
+                if (jokerBSeen) return false;
+                jokerBSeen = true;
+            } else {
+                int val = card.getValue();
+                if (val < 1 || val > deckSize_ || seen[val]) {
+                    return false;
+                }
+                seen[val] = true;
+            }
+            count++;
+            curr = curr.getNext();
+        }
+
+        return jokerASeen && jokerBSeen && count == deckSize_ + 2;
+    }
 }
