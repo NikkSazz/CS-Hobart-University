@@ -1,0 +1,12 @@
+35 11 (5,16) (9,33)
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+x.......x...x...........x...x.....x
+x.x.x.x.xxx.x.x.xxx.x.x.x.x.x.x.x.x
+x...............x.........x.......x
+x.xxxxx.x.x.x.x.x.x.x.x.x.x.x.x.x.x
+x.....x...x.......x.x.............x
+x.x.x.x.x.x.x.x.x.xxx.x.x.x.x.x.x.x
+x...........x.x.........x.....x...x
+xxx.x.xxx.x.x.x.x.x.x.xxx.x.x.xxx.x
+x.............x...x.x.............x
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx

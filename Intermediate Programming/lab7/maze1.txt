@@ -1,0 +1,8 @@
+15 7 (3,7) (5,13)
+xxxxxxxxxxxxxxx
+x...x.......x.x
+x.xxxxxxxxx.x.x
+x.........x...x
+xxx.x.x.x.x.xxx
+x...x.x.x.....x
+xxxxxxxxxxxxxxx
