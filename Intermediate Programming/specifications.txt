@@ -1,0 +1,31 @@
+Commands
+
+Your game must support the following commands:
+
+GO direction, MOVE direction, or just direction, 
+where direction is NORTH, SOUTH, EAST, or WEST — if the player can move in that direction, 
+she should move to the new room and that room's description and contents should displayed 
+(use the long description if the room has not been visited before and the short description if it has); 
+if the player can't move in that direction, an appropriate error message should be displayed
+
+TAKE item, GET item — player picks up the item named
+
+DROP item — player drops the item named
+
+LOOK — display the current room's long description, exit directions, and contents
+
+LOOK item — display the item's description; should 
+only be allowed if the item is in the current room or is being carried by the player 
+(otherwise an appropriate message should be displayed)
+
+INVENTORY — list the names of the items the player is currently carrying
+
+SCORE — print out the player's current score
+
+QUIT — end the game
+
+Commands are shown in all caps for clarity, but your game should not be case-sensitive. 
+Where there are synonyms listed (such as TAKE and GET), your program should support all of the versions listed. 
+Also note that item names may consist of more than one word, but there won't be anything else on the line — 
+i.e. for those commands that involve items, everything after the command can be taken as the item name.
+
