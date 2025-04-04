@@ -15,4 +15,3 @@ series of routes between them. (Simply connecting the first room to the second
 to the third is not very interesting — there should be multiple ways you 
 can navigate through the world.) There must be at least 5 items, which are 
 initially placed in different rooms. (Don't put them all in one place.)
-
