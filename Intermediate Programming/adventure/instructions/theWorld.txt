@@ -1,0 +1,18 @@
+The World
+
+Your world should be the typical Adventure-style world consisting 
+of a collection of interconnected rooms. 
+Each room can have exits to the north, south, east, and west 
+though not every room will have exits in all possible directions. 
+Each room has a unique name/short description which identifies it, 
+as well as a longer description.
+
+Rooms may also contain items, which the player may pick up, carry along, 
+use, and drop. Each item has a name and a description associated with it.
+
+You must have at least 10 different rooms, with an interesting 
+series of routes between them. (Simply connecting the first room to the second 
+to the third is not very interesting — there should be multiple ways you 
+can navigate through the world.) There must be at least 5 items, which are 
+initially placed in different rooms. (Don't put them all in one place.)
+
