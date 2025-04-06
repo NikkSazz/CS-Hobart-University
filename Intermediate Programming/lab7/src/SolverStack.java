@@ -43,6 +43,8 @@ public class SolverStack extends SolverSubject implements Solver {
 		// TODO [#1] initialize the explored rooms collection - initially empty
 		exploredRooms_ = new HashSet<MazePos>();
 
+		/// TODO Remove todo [#1]
+
 		// TODO [#2] initialize the "discovered from" map - initially empty
 
 		// TODO [#1] add the maze start to the discovered rooms collection
