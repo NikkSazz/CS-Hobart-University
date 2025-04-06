@@ -16,6 +16,8 @@ import javafx.stage.Stage;
 
 /**
  * Maze solver main program.
+ * 
+ *  @author Nikolai Sazonov
  */
 public class MazeSolverMain extends Application {
 

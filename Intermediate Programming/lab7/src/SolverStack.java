@@ -4,7 +4,7 @@ import java.util.List;
 /**
  * Solve a maze using a stack to hold the discovered rooms. (depth-first search)
  * 
- * @author Nikolai Sazonov,  Nikola Stanic
+ * @author Nikolai Sazonov
  */
 public class SolverStack extends SolverSubject implements Solver {
 
@@ -12,11 +12,12 @@ public class SolverStack extends SolverSubject implements Solver {
 
 	// TODO [#1] declare the discovered rooms collection - a stack containing
 	// rooms (MazePos)
-	
+	Stack<MazePos> discoveredRooms_;
 	
 	// TODO [#1] declare the explored rooms collection - the primary task is
 	// whether or not a room has been explored, so this should be a set (HashSet)
 	// containing rooms (MazePos)
+	Set<MazePos> exploredRooms_;
 
 	// TODO [#2] declare the "discovered from" map (HashMap) - the key is a room
 	// (MazePos) and the value is the room (MazePos) that the key room was
@@ -37,12 +38,15 @@ public class SolverStack extends SolverSubject implements Solver {
 		solved_ = false;
 
 		// TODO [#1] initialize the discovered rooms collection - initially empty
+		discoveredRooms_ = new Stack<MazePos>();
 
 		// TODO [#1] initialize the explored rooms collection - initially empty
+		exploredRooms_ = new HashSet<MazePos>();
 
 		// TODO [#2] initialize the "discovered from" map - initially empty
 
 		// TODO [#1] add the maze start to the discovered rooms collection
+		discoveredRooms_.push(maze.getStart());
 
 		// TODO [#2] add to the "discovered from" map: the maze start is
 		// discovered from nowhere (null) - the key is the maze start, the value is
@@ -60,7 +64,7 @@ public class SolverStack extends SolverSubject implements Solver {
 		// TODO [#1] the solver is done if solved_ is true (meaning the goal has
 		// been found) or the discovered rooms collection is empty - add the "or the
 		// discovered rooms collection is empty" part to the condition below
-		return (solved_ == true);
+		return solved_ || discoveredRooms_.isEmpty();
 	}
 
 	/**
@@ -73,11 +77,19 @@ public class SolverStack extends SolverSubject implements Solver {
 		// go until an unexplored room is found or we run out of rooms
 		for ( ; true ; ) {
 			// TODO [#1] if the discovered rooms collection is empty, return null
+			if(discoveredRooms_.isEmpty()) { 
+				return null; 
+			}
 
 			// TODO [#1] remove the next room from the discovered rooms collection
+			MazePos poped = discoveredRooms_.pop();
 
 			// TODO [#1] if that next room is not yet explored (i.e. it is not in the
 			// explored rooms collection), return it
+			if(!exploredRooms_.contains(poped)) { 
+				return poped; 
+			}
+
 		}
 	}
 
@@ -100,6 +112,7 @@ public class SolverStack extends SolverSubject implements Solver {
 		int currow = curroom.getRow(), curcol = curroom.getCol();
 
 		// TODO [#1] add the current room (curroom) to the explored collection
+		exploredRooms_.add(curroom);
 
 		if ( maze_.isGoal(currow,curcol) ) {
 			solved_ = true;
@@ -112,6 +125,13 @@ public class SolverStack extends SolverSubject implements Solver {
 		// private isMazeRoom defined below) and is not explored and is not
 		// discovered (i.e. it isn't in either of those collections), then add it to
 		// the discovered collection...
+		for ( MazePos neighbor : currom.getNeighbors() ) {
+			if ( isMazeRoom(neighbor) ) {
+				if ( !exploredRooms_.contains(neighbor) && !discoveredRooms_.contains(neighbor) ) {
+					discoveredRooms_.add(neighbor);
+				}
+			}
+		}
 
 		// TODO [#2] ...and also add that the neighbor is discovered from curroom to
 		// the "discovered from" map
@@ -160,6 +180,7 @@ public class SolverStack extends SolverSubject implements Solver {
 	@Override
 	public int getNumExplored () {
 		// TODO [#1] return the number of things in the explored collection
+		exploredRooms_.count();
 		return -1;
 	}
 
@@ -176,7 +197,7 @@ public class SolverStack extends SolverSubject implements Solver {
 		// TODO [#1] return the sum of the number of things in the discovered
 		// collection (currently discovered) and the number of things in the
 		// explored collection (previously discovered)
-		return -1;
+		return discoveredRooms_.count() + exploredRooms_.count();
 	}
 
 	/**
@@ -195,7 +216,7 @@ public class SolverStack extends SolverSubject implements Solver {
 		}
 
 		// TODO [#1] return whether pos is in the explored collection
-		return false;
+		return exploredRooms_.contains(pos);
 	}
 
 	/**
@@ -215,7 +236,7 @@ public class SolverStack extends SolverSubject implements Solver {
 		}
 
 		// TODO [#1] return whether pos is in the discovered collection
-		return false;
+		return discoveredRooms_.contains(pos);
 	}
 
 	/**
