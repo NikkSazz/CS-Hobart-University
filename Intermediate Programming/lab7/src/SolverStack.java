@@ -16,6 +16,7 @@ public class SolverStack extends SolverSubject implements Solver {
 	// TODO [#2] declare the "discovered from" map (HashMap) - the key is a room
 	// (MazePos) and the value is the room (MazePos) that the key room was
 	// discovered from
+	HashMap<MazePos, MazePos> discoveredFrom_;
 
 	private boolean solved_; // true if the goal has been found, false if solving
 	                         // is in progress or maze is unsolvable
@@ -36,12 +37,15 @@ public class SolverStack extends SolverSubject implements Solver {
 		exploredRooms_ = new HashSet<MazePos>();
 
 		// TODO [#2] initialize the "discovered from" map - initially empty
+		discoveredFrom_ = new HashMap<MazePos, MazePos>();
 
 		discoveredRooms_.push(maze.getStart());
 
 		// TODO [#2] add to the "discovered from" map: the maze start is
 		// discovered from nowhere (null) - the key is the maze start, the value is
 		// null
+		discoveredFrom_.add(maze, null);
+
 	}
 
 	/**
@@ -52,9 +56,6 @@ public class SolverStack extends SolverSubject implements Solver {
 	 */
 	@Override
 	public boolean isDone () {
-		// TODO [#1] the solver is done if solved_ is true (meaning the goal has
-		// been found) or the discovered rooms collection is empty - add the "or the
-		// discovered rooms collection is empty" part to the condition below
 		return solved_ || discoveredRooms_.isEmpty();
 	}
 
