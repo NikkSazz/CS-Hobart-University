@@ -9,7 +9,7 @@ public class SolverQueue extends SolverSubject implements Solver {
 
 	private Maze maze_; // maze to solve
 
-	Stack<MazePos> discoveredRooms_;
+	Queue<MazePos> discoveredRooms_;
 	
 	Set<MazePos> exploredRooms_;
 
@@ -29,14 +29,14 @@ public class SolverQueue extends SolverSubject implements Solver {
 
 		solved_ = false;
 
-		discoveredRooms_ = new Stack<MazePos>();
+		discoveredRooms_ = new LinkedList<MazePos>();
 
 		exploredRooms_ = new HashSet<MazePos>();
 
 		discoveredFrom_ = new HashMap<MazePos, MazePos>();
 
-		discoveredRooms_.push(maze.getStart());
-
+		discoveredRooms_.add(maze.getStart());
+		
 		discoveredFrom_.put(maze.getStart(), null);
 
 	}
@@ -65,7 +65,7 @@ public class SolverQueue extends SolverSubject implements Solver {
 				return null; 
 			}
 
-			MazePos poped = discoveredRooms_.pop();
+			MazePos poped = discoveredRooms_.remove();
 
 			if(!exploredRooms_.contains(poped)) { 
 				return poped; 
