@@ -58,21 +58,16 @@ public class SolverPQ extends SolverSubject implements Solver {
 	 * @return the next unexplored (but discovered) room, or null if there aren't
 	 *         any more discovered rooms
 	 */
-	private MazePos getNextUnexplored () {
-		// go until an unexplored room is found or we run out of rooms
-		for ( ; true ; ) {
-			if(discoveredRooms_.isEmpty()) { 
-				return null; 
+	private MazePos getNextUnexplored() {
+		while (!discoveredRooms_.isEmpty()) {
+			MazePos room = discoveredRooms_.poll(); // remove first item
+			if (!exploredRooms_.contains(room)) {
+				return room;
 			}
-
-			MazePos poped = discoveredRooms_.remove();
-
-			if(!exploredRooms_.contains(poped)) { 
-				return poped; 
-			}
-
 		}
+		return null;
 	}
+	
 
 	/**
 	 * Perform one step of solving the maze. (i.e. processes one discovered room)
@@ -127,19 +122,18 @@ public class SolverPQ extends SolverSubject implements Solver {
 
 		Stack<MazePos> roomsFoundOnPath = new Stack<>();
 
-		// find the rooms on the solution path from the "discovered from"
-		// information
-		for ( MazePos current = maze_.getGoal() ; current != null ;
-			current = discoveredFrom_.get(current)
-		) {
+		// Backtrack from goal to start using discoveredFrom map
+		for (MazePos current = maze_.getGoal(); current != null; current = discoveredFrom_.get(current)) {
 			roomsFoundOnPath.add(current);
 		}
-
-		List<MazePos> path = new ArrayList<MazePos>();
-
-		for(MazePos pop = roomsFoundOnPath.pop(); !roomsFoundOnPath.isEmpty(); pop = roomsFoundOnPath.pop()) {
-			path.add(pop);
+	
+		// Convert stack to list (from start to goal)
+		List<MazePos> path = new ArrayList<>();
+		
+		while (!roomsFoundOnPath.isEmpty()) {
+			path.add(roomsFoundOnPath.pop());
 		}
+	
 		return path;
 	}
 
