@@ -129,7 +129,7 @@ public class SolverQueue extends SolverSubject implements Solver {
 		// find the rooms on the solution path from the "discovered from"
 		// information
 		for ( MazePos current = maze_.getGoal() ; current != null ;
-			current = discoveredFrom_.get(current);
+			current = discoveredFrom_.get(current)
 		) {
 			roomsFoundOnPath.add(current);
 		}
