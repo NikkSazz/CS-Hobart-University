@@ -151,8 +151,7 @@ public class SolverQueue extends SolverSubject implements Solver {
 	 */
 	@Override
 	public int getNumExplored () {
-		exploredRooms_.size();
-		return -1;
+		return exploredRooms_.size();
 	}
 
 	/**

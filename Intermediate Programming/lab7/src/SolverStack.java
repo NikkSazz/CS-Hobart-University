@@ -13,6 +13,9 @@ public class SolverStack extends SolverSubject implements Solver {
 	
 	Set<MazePos> exploredRooms_;
 
+	// TODO [#2] declare the "discovered from" map (HashMap) - the key is a room
+	// (MazePos) and the value is the room (MazePos) that the key room was
+	// discovered from
 	HashMap<MazePos, MazePos> discoveredFrom_;
 
 	private boolean solved_; // true if the goal has been found, false if solving
@@ -33,10 +36,14 @@ public class SolverStack extends SolverSubject implements Solver {
 
 		exploredRooms_ = new HashSet<MazePos>();
 
+		// TODO [#2] initialize the "discovered from" map - initially empty
 		discoveredFrom_ = new HashMap<MazePos, MazePos>();
 
 		discoveredRooms_.push(maze.getStart());
 
+		// TODO [#2] add to the "discovered from" map: the maze start is
+		// discovered from nowhere (null) - the key is the maze start, the value is
+		// null
 		discoveredFrom_.put(maze.getStart(), null);
 
 	}
@@ -104,10 +111,16 @@ public class SolverStack extends SolverSubject implements Solver {
 				if ( !exploredRooms_.contains(neighbor) && !discoveredRooms_.contains(neighbor) ) {
 					discoveredRooms_.add(neighbor);
 
+					// TODO [#2] ...and also add that the neighbor is discovered from curroom to
+					// the "discovered from" map
 					discoveredFrom_.put(neighbor, curroom);
 				}
 			}
 		}
+
+		// // TODO [#2] ...and also add that the neighbor is discovered from curroom to
+		// // the "discovered from" map
+		// discoveredFrom_.add(neighbor, curroom);
 
 		firePropertyChange(SOLVER_PROPERTY);
 	}
@@ -124,22 +137,30 @@ public class SolverStack extends SolverSubject implements Solver {
 			throw new IllegalArgumentException("solver isn't done!");
 		}
 
+		// TODO [#2] create an empty Stack (holding MazePos) to hold the rooms found
+		// on the path
 		Stack<MazePos> roomsFoundOnPath = new Stack<>();
 
 		// find the rooms on the solution path from the "discovered from"
 		// information
 		for ( MazePos current = maze_.getGoal() ; current != null ;
+		// TODO [#2] update current to be the room current was discovered from
 			current = discoveredFrom_.get(current)
 		) {
+			// TODO [#2] add current to the rooms on the path
 			roomsFoundOnPath.add(current);
 		}
 
+		// TODO [#2] create an empty List (holding MazePos) to hold the path
 		List<MazePos> path = new ArrayList<MazePos>();
 
+		// TODO [#2] one-by-one, remove all of the rooms from the stack and add them
+		// to the path list
 		for(MazePos pop = roomsFoundOnPath.pop(); !roomsFoundOnPath.isEmpty(); pop = roomsFoundOnPath.pop()) {
 			path.add(pop);
 		}
 
+		// TODO [#2] return the path
 		return path;
 	}
 
@@ -151,8 +172,7 @@ public class SolverStack extends SolverSubject implements Solver {
 	 */
 	@Override
 	public int getNumExplored () {
-		exploredRooms_.size();
-		return -1;
+		return exploredRooms_.size();
 	}
 
 	/**
