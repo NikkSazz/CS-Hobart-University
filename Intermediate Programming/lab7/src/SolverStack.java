@@ -110,12 +110,17 @@ public class SolverStack extends SolverSubject implements Solver {
 			if ( isMazeRoom(neighbor) ) {
 				if ( !exploredRooms_.contains(neighbor) && !discoveredRooms_.contains(neighbor) ) {
 					discoveredRooms_.add(neighbor);
+
+					// TODO [#2] ...and also add that the neighbor is discovered from curroom to
+					// the "discovered from" map
+					discoveredFrom_.add(neighbor, curroom);
 				}
 			}
 		}
 
-		// TODO [#2] ...and also add that the neighbor is discovered from curroom to
-		// the "discovered from" map
+		// // TODO [#2] ...and also add that the neighbor is discovered from curroom to
+		// // the "discovered from" map
+		// discoveredFrom_.add(neighbor, curroom);
 
 		firePropertyChange(SOLVER_PROPERTY);
 	}
@@ -134,22 +139,29 @@ public class SolverStack extends SolverSubject implements Solver {
 
 		// TODO [#2] create an empty Stack (holding MazePos) to hold the rooms found
 		// on the path
+		Stack<MazePos> roomsFoundOnPath = new Stack<>();
 
 		// find the rooms on the solution path from the "discovered from"
 		// information
 		for ( MazePos current = maze_.getGoal() ; current != null ;
 		// TODO [#2] update current to be the room current was discovered from
+			current = discoveredFrom_.get(current);
 		) {
 			// TODO [#2] add current to the rooms on the path
+			roomsFoundOnPath.add(current);
 		}
 
 		// TODO [#2] create an empty List (holding MazePos) to hold the path
+		List<MazePos> path = new ArrayList<MazePos>();
 
 		// TODO [#2] one-by-one, remove all of the rooms from the stack and add them
 		// to the path list
+		for(MazePos pop = roomsFoundOnPath.pop(); !roomsFoundOnPath.isEmpty(); pop = roomsFoundOnPath.pop()) {
+			path.add(pop);
+		}
 
 		// TODO [#2] return the path
-		return null;
+		return path;
 	}
 
 	/**
