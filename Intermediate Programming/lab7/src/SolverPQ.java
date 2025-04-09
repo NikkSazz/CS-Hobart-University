@@ -29,7 +29,9 @@ public class SolverPQ extends SolverSubject implements Solver {
 
 		solved_ = false;
 
-		discoveredRooms_ = new PriorityQueue<MazePos>();
+		discoveredRooms_ = new PriorityQueue<MazePos>(
+				new ManhattanDistComparator(maze.getGoal())
+				);
 
 		exploredRooms_ = new HashSet<MazePos>();
 

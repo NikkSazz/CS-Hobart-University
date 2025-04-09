@@ -16,8 +16,6 @@ import javafx.stage.Stage;
 
 /**
  * Maze solver main program.
- * 
- *  @author Nikolai Sazonov
  */
 public class MazeSolverMain extends Application {
 
@@ -66,8 +64,8 @@ public class MazeSolverMain extends Application {
 			// TODO uncomment the SolverQueue and SolverPQ constructor calls as those
 			// classes are implemented
 			Solver[] solvers = { new SolverStack(maze)
-					// , new SolverQueue(maze)
-					// , new SolverPQ(maze)
+					 , new SolverQueue(maze)
+					 , new SolverPQ(maze)
 			};
 
 			// create windows
