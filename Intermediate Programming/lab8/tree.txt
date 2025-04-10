@@ -1,0 +1,7 @@
+[Q] does it have fur?
+[Q] does it lay eggs?
+[A] platypus
+[A] cat
+[Q] is it a reptile?
+[A] lizard
+[A] duck
