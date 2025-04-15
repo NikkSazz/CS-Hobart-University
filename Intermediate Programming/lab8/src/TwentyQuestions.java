@@ -1,8 +1,10 @@
-import java.io.IOException;
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
 /**
  * Play the game of 20 questions.
+ * 
+ * @author Nikolai Sazonov, Nikola Stanic
  */
 public class TwentyQuestions {
 
@@ -15,7 +17,55 @@ public class TwentyQuestions {
 	 *          the scanner to read user input from
 	 */
 	public static void play ( TreeNode<String> root, Scanner scanner ) {
-		// TODO: implement this!
+		
+		boolean isQuestion = root.getElement().endsWith("?");
+		String input = "";
+		
+		if(!isQuestion) {
+			while(!input.equals("yes") && !input.equals("no")) {
+				System.out.print("you're thinking of " + root.getElement() + "!"
+						+ "\n\tright? ");
+				input = scanner.nextLine();
+			}
+			
+			if(!input.equals("no")) { return; }
+			
+			System.out.print("what were you thinking of? ");
+			String newAnswer = scanner.nextLine();
+			
+			System.out.println("a question which 'yes' for " 
+			+ newAnswer + " and 'no' for " + root.getElement());
+			String newQuestion = scanner.nextLine();
+			
+			// THIS MAY NOT WORK
+			// Impliment adding to the tree node
+			
+			TreeNode<String> newNode = new TreeNode<>(newAnswer);
+			TreeNode<String> oldNode = new TreeNode<>(root.getElement());
+			root.setElement(newQuestion);
+			root.setLeft(newNode);
+			root.setRight(oldNode);
+
+			newNode.setParent(root);
+			oldNode.setParent(root);
+			// return;
+		}
+		else { // Is question
+
+			while( !(input.equals("yes") || input.equals("no")) ) {
+				System.out.print(root.getElement());
+				input = scanner.nextLine();
+			}
+			
+			if(input.equals("yes")) {
+				play(root.getLeft(), scanner);
+			}
+			else if(input.equals("no")) {
+				play(root.getRight(), scanner);
+			}
+			
+		}
+		
 	}
 
 	/**
@@ -79,7 +129,7 @@ public class TwentyQuestions {
 	 */
 	public static TreeNode<String> load ( String filename ) throws IOException {
 		// TODO: implement this!
-		return null;
+		return new TreeNode<String>("load JJBA PT 7 Is GOATED");
 	}
 
 	/**
@@ -148,6 +198,7 @@ public class TwentyQuestions {
 					String filename = scanner.nextLine();
 					// TODO change this
 					TwentyQOps.save(root,filename);
+					
 				} catch ( IOException e ) {
 					System.out.println("error saving");
 				}
@@ -157,14 +208,15 @@ public class TwentyQuestions {
 					System.out.print("enter filename to load from: ");
 					String filename = scanner.nextLine();
 					// TODO change this
+					//root = load(filename);
 					root = TwentyQOps.load(filename);
 				} catch ( IOException e ) {
 					System.out.println("error loading file");
 				}
 
 			} else if ( choice == 'p' ) { // play game
-				// TODO change this
-				TwentyQOps.play(root,scanner);
+				play(root, scanner);
+				// TwentyQOps.play(root,scanner);
 			}
 
 			System.out.println();
