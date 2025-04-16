@@ -161,9 +161,37 @@ public class TwentyQuestions {
 	 */
 	public static void save ( TreeNode<String> root, String filename )
 	    throws IOException {
-		// TODO: implement this!
+		
+		// Get brand new writer for the txt file, will throw IOExcpetion if something goes wrong
+		BufferedWriter writer = new BufferedWriter(new FileWriter(filename));
+		saveRecursively(writer, root);
 	}
 
+	private static void saveRecursively(BufferedWriter writer, TreeNode<String> node) 
+			// May not be able to write so must throw IOExcpetion just in case
+			throws IOException {
+		
+		if(node == null) {
+			// Recursed from a leaf, no reason to do anything
+			return;
+		}
+		
+		boolean isLeaf = node.getLeft() == null; // assuming it must have both L/R or none
+		
+		if(isLeaf) {
+			writer.write("[A] " + node.getElement());
+		}
+		else {
+			writer.write("[B] " + node.getElement());	
+		}
+		
+		writer.newLine(); // done with this line
+		
+		// using recursion
+		saveRecursively(writer, node.getLeft());
+		saveRecursively(writer, node.getRight());
+	}
+	
 	/**
 	 * Load a subtree from a file.
 	 * 
@@ -244,8 +272,9 @@ public class TwentyQuestions {
 				try {
 					System.out.print("enter filename to save in: ");
 					String filename = scanner.nextLine();
-					// TODO change this
-					TwentyQOps.save(root,filename);
+
+					// TwentyQOps.save(root,filename);
+					save(root, filename);
 					
 				} catch ( IOException e ) {
 					System.out.println("error saving");
