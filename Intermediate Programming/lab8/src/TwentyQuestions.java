@@ -165,6 +165,7 @@ public class TwentyQuestions {
 		// Get brand new writer for the txt file, will throw IOExcpetion if something goes wrong
 		BufferedWriter writer = new BufferedWriter(new FileWriter(filename));
 		saveRecursively(writer, root);
+		writer.close();
 	}
 
 	private static void saveRecursively(BufferedWriter writer, TreeNode<String> node) 
@@ -202,10 +203,42 @@ public class TwentyQuestions {
 	 *           if there is an error opening the file or reading the tree
 	 */
 	public static TreeNode<String> load ( String filename ) throws IOException {
-		// TODO: implement this!
-		return new TreeNode<String>("load JJBA PT 7 Is GOATED");
+		
+		BufferedReader r = new BufferedReader(new FileReader(filename));
+		
+		Queue<String> prompts = new LinkedList<>();
+		
+		for(String line = r.readLine(); line != null; ) {
+			prompts.add(line);
+		}
+		
+		r.close();
+		
+		return treeFromQueue(prompts);
 	}
 
+	public static TreeNode<String> treeFromQueue(Queue<String> q) {
+		
+		
+		// Returns null is q isEmpty
+		String prompt = q.poll();
+		
+		if(prompt == null) {
+			return null;
+		}
+		
+		if(prompt.startsWith("[Q] ")) {
+			TreeNode<String> n = new TreeNode<String>(prompt.substring(4));
+			n.setLeft(treeFromQueue(q));
+			n.setRight(treeFromQueue(q));
+			return n;
+		} 
+		else { // leaf
+			return new TreeNode<String>(prompt.substring(4));
+		}
+		
+	}
+	
 	/**
 	 * Print a subtree.
 	 * 
@@ -284,15 +317,16 @@ public class TwentyQuestions {
 				try {
 					System.out.print("enter filename to load from: ");
 					String filename = scanner.nextLine();
-					// TODO change this
+					
 					root = TwentyQOps.load(filename);
-					//root = load(filename);
+					// root = load(filename);
+					// load() doesnt really work
 					
 				} catch ( IOException e ) {
 					System.out.println("error loading file");
 				}
 
-			} else if ( choice == 'p' ) { // play game
+			} else if (choice == 'p') { // play game
 				play(root, scanner);
 				// TwentyQOps.play(root,scanner);
 			}
