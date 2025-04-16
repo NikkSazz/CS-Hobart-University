@@ -84,27 +84,11 @@ public class TwentyQuestions {
 	 *          the 20 Questions tree
 	 */
 	public static void printQs ( TreeNode<String> leaf ) {
-		// TODO: implement this!
-		/*
-		System.out.print("enter the thing to look for: ");
-		
-		Scanner s = new Scanner(System.in);
-		
-		String lookFor = s.nextLine();
-		s.close();
-		
-		// backtrack to parents to get questions
-		TreeNode<String> found = TwentyQOps.find(leaf, lookFor);
-		
-		if(found == null) {
-			System.out.println(lookFor + " is not a thing in this tree");
-			return;
-		}
-		*/
 		
 		System.out.println("\n" + leaf.getElement() + " --");
-		Stack<String> questions = new Stack<>();
-		Stack<String> qAnswers = new Stack<>();
+		
+		Stack<String> questions = new Stack<>();	// does it have fur?
+		Stack<String> qAnswers = new Stack<>();		// yes no
 		
 		TreeNode<String> child;
 		
@@ -143,7 +127,25 @@ public class TwentyQuestions {
 	 *         thing in the tree
 	 */
 	public static TreeNode<String> find ( TreeNode<String> root, String thing ) {
-		// TODO: implement this!
+		
+		if(root == null) {
+			return null;
+		}
+		
+		if(root.getElement().equals(thing)) {
+			return root;
+		}
+		
+		TreeNode<String> left = find(root.getLeft(), thing);
+		if(left != null) {
+			return left;
+		}
+		
+		TreeNode<String> right = find(root.getRight(), thing);
+		if(right != null) {
+			return right;
+		}
+		
 		return null;
 	}
 
@@ -227,12 +229,13 @@ public class TwentyQuestions {
 				System.out.print("enter the thing to look for: ");
 				String thing = scanner.nextLine();
 				System.out.println();
-				// TODO change this
-				TreeNode<String> node = TwentyQOps.find(root,thing);
+				
+				// TreeNode<String> node = TwentyQOps.find(root,thing);
+				TreeNode<String> node = find(root,thing);
+				
 				if ( node == null ) {
 					System.out.println("  " + thing + " is not a thing in this tree");
 				} else {
-					// TODO change this
 					printQs(node);
 					// TwentyQOps.printQs(node);
 				}
@@ -253,8 +256,9 @@ public class TwentyQuestions {
 					System.out.print("enter filename to load from: ");
 					String filename = scanner.nextLine();
 					// TODO change this
-					//root = load(filename);
 					root = TwentyQOps.load(filename);
+					//root = load(filename);
+					
 				} catch ( IOException e ) {
 					System.out.println("error loading file");
 				}
