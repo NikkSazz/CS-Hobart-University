@@ -85,6 +85,37 @@ public class TwentyQuestions {
 	 */
 	public static void printQs ( TreeNode<String> leaf ) {
 		// TODO: implement this!
+		System.out.print("enter the thing to look for: ");
+		
+		Scanner s = new Scanner(System.in);
+		
+		String lookFor = s.nextLine();
+		s.close();
+		
+		// backtrack to parents to get questions
+		TreeNode<String> found = find(leaf, lookFor);
+		
+		if(found == null) {
+			System.out.println(lookFor + " is not a thing in this tree");
+			return;
+		}
+		
+		System.out.println("\n" + lookFor + " --");
+		Stack<String> questions = new Stack<>();
+		
+		while(found.getParent() != null) {
+
+			found = found.getParent();
+			questions.push(found.getElement());
+			
+			// impliment yes no stuff
+			
+		}
+		
+		while(!questions.isEmpty()) {
+			System.out.println("  " + questions.pop() + "  ");
+		}
+		
 	}
 
 	/**
@@ -189,7 +220,8 @@ public class TwentyQuestions {
 					System.out.println("  " + thing + " is not a thing in this tree");
 				} else {
 					// TODO change this
-					TwentyQOps.printQs(node);
+					printQs(node);
+					// TwentyQOps.printQs(node);
 				}
 
 			} else if ( choice == 's' ) { // save tree
