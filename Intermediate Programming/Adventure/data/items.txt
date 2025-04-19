@@ -1,9 +1,16 @@
 Balalaika
-
+A traditional Russian stringed musical instrument 
+with a distinctive triangular body and three strings.
+It is a popular symbol of Russian culture and folk music.
 END
 Coin
-
+An Imperical Russian Coin. Issued during the Russian Empire,
+under rulers like Peter the Great, Catherine the Great, Nicholas II.
+It could probably let you in the Metros...
 END
 Ice Cream
-
+Russian Plombir: a rich, premium ice cream inspored by French recipes.
+During Soviet times, Plombir became a symbol of quality and luxury.
+Ive Noticed there was a little girl crying over her ice cream which fell,
+she could probably use another one...
 END
