@@ -24,17 +24,20 @@ Romanov Boyar Chambers, -, -, Riverside
 The Floating Bridge stretches over the Moskva River, offering sweeping views of the city. 
 Its sleek design gives the illusion of floating above the water, 
 connecting Zaryadye Park to the opposite bank while providing a unique vantage point of Moscow’s skyline.
+I would love to take a photo here with my Camera...
 END
 Romanov Boyar Chambers
 Revolution Metro, Floating Bridge, Zaryadye Park Underground Ice Cave, -
 The Romanov Boyar Chambers, located near Zaryadye Park, are a historic set of buildings that once served as the residence for the boyars, 
 the Russian nobility. Nearby, the Four Churches stand as architectural landmarks, 
 adding to the area’s rich cultural and religious history.
+There is a candle here, which really reminds me of someone. I should take it to the Big Church by my house...
 END
 Zaryadye Park Underground Ice Cave
 Revolution Metro, Romanov Boyar Chambers, -, -
 A chilly, immersive space designed to mimic the icy landscapes of Russia’s northern regions. 
 With ice-like sculptures and a constant cold temperature, it offers visitors a unique experience of the Arctic indoors.
+*Include something interesting about this location
 END
 GUM South
 GUM North, -, -, St. Basils Cathedral
@@ -47,7 +50,7 @@ Nikolai Street, GUM South, -, Red Square
 GUM (Glavny Universalny Magazin), translates to Leading Universal Store, 
 is a breathtaking Store with several decorative fountains, adding to its elegant atmosphere. 
 Visitors can experience a taste of Soviet-era nostalgia with traditional ice cream and soda stands.
-I would love some Ice Cream right now.
+They are selling Soviet-Style ice cream here...
 END
 Nikolai Street
 Theater Metro, GUM North, Revolution Metro, Red Square
@@ -59,6 +62,7 @@ Theater Metro
 Bolshoi Theater, Nikolai Street, Revolution Metro, Park of Culture Metro
 Popular metro on the 'Zamoskvorestaya' Line. With beatiful Soviet-era design. 
 The interior features marble pylons, sculptures depicting theatrical scenes, and a vaulted ceiling adorned with caissons.
+I should really toss a coin into the fountain here...
 END
 Revolution Metro
 Theater Metro, Romanov Boyar Chambers, Zaryadye Park Underground Ice Cave, Nikolai Street
@@ -83,12 +87,13 @@ Komsomolsky Street, -, Riverside, -
 Frunzenskaya Street is a busy area in Moscow, lined with Soviet-era buildings. It's close to the riverside. 
 The area has a mix of busy traffic and quieter, leafy spaces. 
 My house is also on the Frunzenskaya Naberezhnaya, right next to the Ministry of Defense, Fun!
+Maybe I should pickup my digital Camera so I can take some nice photos...
 END  
 Bolshoi theater
 -, Theater Metro, -, -
 An iconic landmark with neoclassical architecture. One of the worlds most prestigious ballet and opera theaters, 
 hosting famous composers like Tchaikovsky and Shostakovich.
-Theres an interesting show coming on and are begging for a Balalaika to be played
+Theres an interesting show coming on and are begging for a Balalaika to be played...
 END
 Alexander Garden
 Alexander Garden is a historic park that stretches along the western side of the Kremlin. 
@@ -98,12 +103,13 @@ The Lower Garden contains the Borovitskaya Tower, one of the Kremlin's entrances
 Known for its beautiful flowerbeds, statues, and fountains
 the garden is a popular spot for both locals and tourists,
 offering a peaceful place to relax near some of Moscow's most iconic landmarks.
+There is a girl sobbing because she dropped her ice cream. Maybe I can get her some...
 END
 Arbat street
 Arbat Street is one of Moscow's oldest and most iconic pedestrian avenues, 
 Dating back to at least the 15th century, it originally served as a trade route and was
 home to craftsmen and military regiments. 
-A Balalaika glowing with aura is staring at me and waiting for me to buy it....
+A Balalaika glowing with aura is staring at me and waiting for me to buy it...
 END
 Cathedral of Christ the Savior
 The Cathedral of Christ the Savior is a grand symbol of Russian Orthodox faith, 
@@ -111,5 +117,5 @@ Built in 1812 to celebrate Russia’s victory over Napoleon,
 only to be demolished in 1931 during Soviet times. 
 The cathedral that stands today was rebuilt, 
 The Cathedral is an icon of Moscow Beauty. Indoors its even prettier!
-There is a coin on the floor...
+I should place a candle here, for the love of my life...
 END
