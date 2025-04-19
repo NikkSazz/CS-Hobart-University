@@ -1,5 +1,6 @@
 section .data
-    prompt db 'Who is the salt to my tomato? <3 ', 0
+    # prompt db 'Who is the salt to my tomato? <3 ', 0
+    prompt db '*Insert romantic Question here* <3 ', 0
     response db 'I love you  <3 !', 0
     spacer db 10, 0  ; Spacer for newlines (newline character)
 
