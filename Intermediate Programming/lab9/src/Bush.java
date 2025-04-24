@@ -6,7 +6,6 @@ import javafx.scene.canvas.*;
  */
 public class Bush implements Thing{
 
-
 	public Color getColor () {
 		return Color.GREEN;
 	}
