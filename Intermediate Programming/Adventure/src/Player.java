@@ -10,6 +10,10 @@ public class Player {
         return currentRoom_.getName();
     }
 
+    void look() {
+        currentRoom_.printDescription();
+    }
+
     void moveNorth() {
         currentRoom_ = currentRoom_.move(0);
     }
