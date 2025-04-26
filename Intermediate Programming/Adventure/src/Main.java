@@ -35,7 +35,7 @@ public class Main {
                 case QUIT -> {
                     System.out.println("Goodbye! Thanks for playing.");
                     scanner.close();
-                    return;
+                    return; // stop playing
                 }
                 default -> System.out.println("Unknown command.");
             }
