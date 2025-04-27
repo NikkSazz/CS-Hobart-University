@@ -1,10 +1,27 @@
+import java.io.IOException;
 import java.util.ArrayList;
 
-@SuppressWarnings("unused") // ;_:
 public class Player {
     
     private Room currentRoom_;
     private ArrayList<Item> inventory_;
+    private Map map_;
+    
+    public Player(String roomsFilePath, String startingRoom) {
+    	System.out.println("PLAYER is created");
+    	
+    	try {
+			map_ = new Map(roomsFilePath);
+		} 
+    	catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
+    	inventory_ = new ArrayList<Item>();
+    	
+    	currentRoom_ = map_.get(startingRoom);
+    }
     
     String getLocation() {
         return currentRoom_.getName();
@@ -12,6 +29,10 @@ public class Player {
 
     void look() {
         currentRoom_.printDescription();
+    }
+    
+    boolean canMoveTo(int direction) {
+    	return currentRoom_.hasNeighborAt(direction);
     }
 
     void moveNorth() {

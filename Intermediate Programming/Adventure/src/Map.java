@@ -1,6 +1,8 @@
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -17,11 +19,12 @@ public class Map {
      * 
      */
     public Map(String filePath) throws IOException {
-        // filePath = Adventure/data/rooms.txt;
 
         map_ = new HashMap<>();
 
-        BufferedReader reader = new BufferedReader(new FileReader(filePath));
+        BufferedReader reader = new BufferedReader(
+        		new InputStreamReader(
+        				new FileInputStream(filePath), "UTF-8"));
         String line = "";
         String roomName = "", neighbors = "";
         ArrayList<String> description = new ArrayList<>();
@@ -54,6 +57,10 @@ public class Map {
 
     }
 
+    public boolean hasRoom(String name) {
+    	return map_.containsKey(name);
+    }
+    
     public Room get(String roomName) {
         return map_.get(roomName);
     }

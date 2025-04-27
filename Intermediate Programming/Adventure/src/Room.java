@@ -17,6 +17,16 @@ public class Room {
         map_ = map;
 
     }
+    
+    public boolean hasNeighborAt(int direction) {
+    	
+    	if(neighbors_[direction].trim().equals("-")) {
+    		return false;
+    	}
+    	
+    	return map_.hasRoom(neighbors_[direction].trim());
+    	
+    }
 
     public void printDescription() {
         for(String line : description_) {
@@ -33,14 +43,19 @@ public class Room {
 
         if(direction >= neighbors_.length) {
             // throw? should never happen unless the txt file is wrong
+        	System.out.println("**neighbors_.length <= directionIndex**");
             return null;
         }
 
         if(neighbors_[direction].equals("-")) {
             // nothing in that direction
+        	System.out.println("**Nothing in this direction**");
             return null;
         }
-        return map_.get(neighbors_[direction]);
+        
+        Room room = map_.get(neighbors_[direction]);
+        System.out.println(room.getName());
+        return room;
     }
 
 }
