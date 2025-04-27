@@ -1,6 +1,5 @@
 import java.io.BufferedReader;
 import java.io.FileInputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -18,10 +17,12 @@ public class Map {
      * @throws IOException File is not found
      * 
      */
+    
     public Map(String filePath) throws IOException {
 
         map_ = new HashMap<>();
 
+        @SuppressWarnings("ConvertToTryWithResources")
         BufferedReader reader = new BufferedReader(
         		new InputStreamReader(
         				new FileInputStream(filePath), "UTF-8"));
