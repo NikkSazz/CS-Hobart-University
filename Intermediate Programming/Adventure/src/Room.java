@@ -1,9 +1,11 @@
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Room {
 
     private String name_;
+    // private HashMap<String, Room> neighbors_;
     private String[] neighbors_;
     private ArrayList<String> description_;
     private Map map_;
@@ -54,6 +56,12 @@ public class Room {
         }
         
         Room room = map_.get(neighbors_[direction]);
+        
+        if (room == null) {
+            System.out.println("You can't go that way!");
+            return this; // Stay in curr room
+        }
+        
         System.out.println(room.getName());
         return room;
     }

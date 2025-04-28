@@ -48,7 +48,7 @@ public class Main {
                 case TAKE, GET -> System.out.println("Take.");
                 
                 case DROP -> System.out.println("You drop an item from your inventory.");
-                case LOOK -> System.out.println("you looked  around.");
+                case LOOK -> player_.look();
                 case INVENTORY -> System.out.println("You check your inventory.");
                 case HELP -> System.out.println("You asked for help");
                 case COMMANDS -> System.out.println("Commands");
@@ -118,8 +118,6 @@ public class Main {
     			System.out.println("**Default switch for go command, something is wrong**");
     			break;
     	}
-    	
-    	
     }
     
 }

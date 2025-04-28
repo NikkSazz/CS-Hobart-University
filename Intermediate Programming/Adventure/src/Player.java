@@ -1,11 +1,9 @@
 import java.io.IOException;
 import java.util.ArrayList;
 
-@SuppressWarnings("unused")
 public class Player {
     
     private Room currentRoom_;
-    @SuppressWarnings("FieldMayBeFinal")
     private ArrayList<Item> inventory_;
     private Map map_;
     
@@ -16,14 +14,14 @@ public class Player {
 			map_ = new Map(roomsFilePath);
 		} 
     	catch (IOException e) {
-			// ?
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
     	
-    	inventory_ = new ArrayList<>();
+    	inventory_ = new ArrayList<Item>();
     	
     	currentRoom_ = map_.get(startingRoom);
     }
-    
     
     String getLocation() {
         return currentRoom_.getName();
