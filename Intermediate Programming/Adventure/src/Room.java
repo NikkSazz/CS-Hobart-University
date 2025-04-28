@@ -9,6 +9,7 @@ public class Room {
     private String[] neighbors_;
     private ArrayList<String> description_;
     private Map map_;
+    private boolean visited_;
     
     public Room(String name, String neighbors, 
         ArrayList<String> description, Map map) {
@@ -17,6 +18,7 @@ public class Room {
         neighbors_ = neighbors.split(",");
         description_ = description;
         map_ = map;
+        visited_ = false;
 
     }
     
@@ -30,6 +32,10 @@ public class Room {
     	
     }
 
+    public void printName() {
+    	System.out.println("Location: " + name_);
+    }
+    
     public void printDescription() {
         for(String line : description_) {
             System.out.println(line);
@@ -40,9 +46,22 @@ public class Room {
     public String getName() {
         return name_;
     }
+    
+    public void visit() {
+    	if(!visited_) {
+    		printDescription();
+    		visited_ = true;
+    	}
+    }
 
     public Room move(int direction) {
 
+    	/*
+    	for(var s : neighbors_) {
+    		System.out.println("S -> " + s);
+    	}
+    	*/
+    	
         if(direction >= neighbors_.length) {
             // throw? should never happen unless the txt file is wrong
         	System.out.println("**neighbors_.length <= directionIndex**");
@@ -55,7 +74,7 @@ public class Room {
             return null;
         }
         
-        Room room = map_.get(neighbors_[direction]);
+        Room room = map_.get(neighbors_[direction].trim());
         
         if (room == null) {
             System.out.println("You can't go that way!");
@@ -63,6 +82,7 @@ public class Room {
         }
         
         System.out.println(room.getName());
+        room.visit();
         return room;
     }
 

@@ -36,7 +36,7 @@ public class Map {
 
             if("END".equals(line)) {
                 //  create a room
-            	System.out.println("Created " + roomName);
+            	// System.out.println("Created " + roomName);
                 Room room = new Room(roomName, neighbors, description, this);
                 map_.put(roomName, room);
                 
@@ -57,6 +57,12 @@ public class Map {
         } // while read txt file
         reader.close();
 
+    }
+    
+    public void printKeyValues() {
+    	for(var e : map_.entrySet()) {
+    		System.out.println(e.getKey());
+    	}
     }
 
     public boolean hasRoom(String name) {

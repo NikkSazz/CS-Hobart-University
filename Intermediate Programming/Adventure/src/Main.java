@@ -28,6 +28,8 @@ public class Main {
         Command.printCommands();
         Direction.printDirections();
 
+        player_.look();
+        
         while (true) { 
         	
         	System.out.print("Please Write a Command: ");
@@ -83,34 +85,18 @@ public class Main {
     	
     	switch(direction) {
     		case NORTH:
-    				if(!player_.canMoveTo(0)) {
-    					System.out.println("Cannot go this direction");
-    					return;
-    				}
     				player_.moveNorth();
     			break;
     			
     		case SOUTH:
-    				if(!player_.canMoveTo(1)) {
-    					System.out.println("Cannot go this direction");
-    					return;
-    				}
     				player_.moveSouth();
     			break;
     			
     		case EAST:
-				if(!player_.canMoveTo(2)) {
-					System.out.println("Cannot go this direction");
-					return;
-				}
 				player_.moveEast();
 			break;
     			
     		case WEST:
-    				if(!player_.canMoveTo(3)) {
-						System.out.println("Cannot go this direction");
-						return;
-					}
     				player_.moveWest();
     			break;
     			
@@ -118,6 +104,9 @@ public class Main {
     			System.out.println("**Default switch for go command, something is wrong**");
     			break;
     	}
+    	
+    	// print map and all key value pairs
+    	// player_.printMap();
     }
     
 }

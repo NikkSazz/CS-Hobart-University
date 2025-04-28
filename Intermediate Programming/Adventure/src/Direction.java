@@ -33,9 +33,9 @@ enum Direction {
     	
         System.out.println("\nDirections:");
         for(Direction d : Direction.values()) {
-            System.out.println(d.name());
+            System.out.print("\t" + d.name());
         }
-        System.out.println();
+        System.out.println("\n");
         
     }
 	

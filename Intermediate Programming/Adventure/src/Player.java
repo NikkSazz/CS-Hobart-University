@@ -28,13 +28,10 @@ public class Player {
     }
 
     void look() {
+    		currentRoom_.printName();
         currentRoom_.printDescription();
     }
     
-    boolean canMoveTo(int direction) {
-    	return currentRoom_.hasNeighborAt(direction);
-    }
-
     void moveNorth() {
         currentRoom_ = currentRoom_.move(0);
     }
@@ -50,5 +47,8 @@ public class Player {
         currentRoom_ = currentRoom_.move(3);
     }
 
+    public void printMap() {
+    	map_.printKeyValues();
+    }
 
 }
