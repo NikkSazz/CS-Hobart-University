@@ -5,7 +5,7 @@ import java.util.HashMap;
 public class Room {
 
     private String name_;
-    // private HashMap<String, Room> neighbors_;
+    private String neighborString_;
     private String[] neighbors_;
     private ArrayList<String> description_;
     private Map map_;
@@ -15,7 +15,18 @@ public class Room {
         ArrayList<String> description, Map map) {
 
         name_ = name;
+        
+        // System.out.println("Neighbors of " + name + ": " + neighbors);
         neighbors_ = neighbors.split(",");
+        neighborString_ = neighbors;
+        
+        /*
+        for(var v : neighbors_) {
+        	System.out.print("\t" + v);
+        }
+        System.out.println();
+        */
+        
         description_ = description;
         map_ = map;
         visited_ = false;
@@ -37,10 +48,17 @@ public class Room {
     }
     
     public void printDescription() {
+    	// System.out.println(name_);
         for(String line : description_) {
+        	
+        	if(line.trim().equals("END")) {
+        		break;
+        	}
+        	
             System.out.println(line);
         }
         // Print neighbors also? 
+        System.out.println(neighborString_);
     }
 
     public String getName() {
@@ -81,7 +99,7 @@ public class Room {
             return this; // Stay in curr room
         }
         
-        System.out.println(room.getName());
+        System.out.println("Moving from " + name_ + " to " + room.getName());
         room.visit();
         return room;
     }

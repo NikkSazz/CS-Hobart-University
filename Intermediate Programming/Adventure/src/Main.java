@@ -32,7 +32,7 @@ public class Main {
         
         while (true) { 
         	
-        	System.out.print("Please Write a Command: ");
+        	System.out.print("\nPlease Write a Command: ");
             String userInput = scanner.nextLine().toUpperCase();
 
             // the first word is the command
@@ -44,7 +44,10 @@ public class Main {
                 continue;
             }
             
+            System.out.println(); // spacer for the command
+            
             switch (command) {
+            
                 case GO, MOVE -> goCommand(userInput);
                 
                 case TAKE, GET -> System.out.println("Take.");
