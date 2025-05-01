@@ -47,6 +47,7 @@ public class ImageCompression extends Application {
 		}
 
 		void fillRegion ( GraphicsContext g ) {
+
 			if ( color_ == null ) {
 				return;
 			}
@@ -97,9 +98,16 @@ public class ImageCompression extends Application {
 	 * @return root of the quadtree
 	 */
 
-	private QuadTreeNode buildQuadTree ( PixelReader pixels, int x, int y, int w,
-	                                     int h ) {
-		// TODO implement this!
+	private QuadTreeNode buildQuadTree ( PixelReader pixels, 
+	            int x, int y, int w, int h ) {
+		
+		if(isUniformColor(pixels, x, y, w, h, THRESHOLD)) {
+			
+			Color avg = getAverageColor(pixels, x, y, w, h);
+			QuadTreeNode node = new QuadTreeNode(x, y, w, h, avg);
+			
+		}
+		
 		return null;
 	}
 
