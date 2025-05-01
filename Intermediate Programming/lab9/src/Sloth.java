@@ -14,6 +14,10 @@ public class Sloth extends Animal {
 		sleepCounter_ = r.nextInt(20);
 	}
 	
+	public Sloth ( int row, int col ) {
+		// TODO Auto-generated constructor stub
+	}
+
 	public Color getColor () {
 		return Color.GRAY;
 	}

@@ -15,6 +15,11 @@ abstract class Animal extends Creature {
 		setCol(-1);
 	}
 	
+	public void draw ( GraphicsContext g, int x, int y, int width, int height ) {
+		g.setFill(getColor());
+		g.fillOval(x,y,width,height);
+	}
+	
 	public void setPosition(int row, int col) {
 		setRow(row);
 		setCol(col);

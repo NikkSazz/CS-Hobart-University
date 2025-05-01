@@ -62,7 +62,7 @@ public class Field {
 
 	public boolean canMove ( Creature creature, int direction ) {
 		int row = creature.getRow() + rowChange(direction);
-		int col = creature.getColumn() + colChange(direction);
+		int col = creature.getCol() + colChange(direction);
 
 		return (0 <= row && 0 <= col && row < numrows_ && col < numcols_
 		    && field_[row][col] == null);
@@ -79,7 +79,7 @@ public class Field {
 			for ( int col = 0 ; col < getNumCols() ; col++ ) {
 				if ( row == 0 || col == 0 || row == getNumRows() - 1
 				    || col == getNumCols() - 1 ) {
-					field_[row][col] = new Bush();
+					field_[row][col] = new Bush(row, col);
 				} else {
 					field_[row][col] = null;
 				}
@@ -115,7 +115,7 @@ public class Field {
 		try {
 
 			for ( int row = creature.getRow() + drow,
-			    col = creature.getColumn() + dcol ; at(row,col) == null ; row +=
+			    col = creature.getCol() + dcol ; at(row,col) == null ; row +=
 			        drow, col += dcol, distance++ ) {}
 
 		} catch ( ArrayIndexOutOfBoundsException e ) {}
@@ -170,7 +170,7 @@ public class Field {
 		try {
 
 			int row, col;
-			for ( row = creature.getRow() + drow, col = creature.getColumn()
+			for ( row = creature.getRow() + drow, col = creature.getCol()
 			    + dcol ; at(row,col) == null ; row += drow, col += dcol ) {}
 
 			return at(row,col);
@@ -196,9 +196,9 @@ public class Field {
 	public void move ( Creature creature, int direction ) {
 
 		int row = creature.getRow() + rowChange(direction);
-		int col = creature.getColumn() + colChange(direction);
+		int col = creature.getCol() + colChange(direction);
 
-		field_[creature.getRow()][creature.getColumn()] = null;
+		field_[creature.getRow()][creature.getCol()] = null;
 		field_[row][col] = creature;
 		creature.setPosition(row,col);
 	}
@@ -230,7 +230,7 @@ public class Field {
 		int drow = rowChange(direction), dcol = colChange(direction);
 		try {
 
-			return at(creature.getRow() + drow,creature.getColumn() + dcol);
+			return at(creature.getRow() + drow,creature.getCol() + dcol);
 
 		} catch ( ArrayIndexOutOfBoundsException e ) {
 			return null;
