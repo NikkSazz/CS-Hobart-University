@@ -9,15 +9,18 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+/**
+ * @author Nikolai Sazonov, Nikola Stanic
+ */
 public class ImageCompression extends Application {
 
 	// size of displayed image
-	public static final int WIDTH = 800, HEIGHT = 600;
+	public static final int WIDTH = 400, HEIGHT = 300;
 
 	// uniform color threshold (range 0-1) - if the difference in any color
 	// component is less than the threshold, the colors are considered to be
 	// uniform
-	private static final double THRESHOLD = .2;
+	private static final double THRESHOLD = .25;
 
 	// quad tree node
 	private static class QuadTreeNode {
@@ -77,8 +80,7 @@ public class ImageCompression extends Application {
 	 * @return root of the quadtree
 	 */
 	public QuadTreeNode buildQuadTree ( PixelReader pixels, int w, int h ) {
-		// TODO implement this!
-		return null;
+		return buildQuadTree(pixels, 0, 0, w, h);
 	}
 
 	/**
@@ -98,17 +100,25 @@ public class ImageCompression extends Application {
 	 * @return root of the quadtree
 	 */
 
-	private QuadTreeNode buildQuadTree ( PixelReader pixels, 
-	            int x, int y, int w, int h ) {
+	private QuadTreeNode buildQuadTree ( PixelReader pixels, int x, int y, int w, int h ) {
 		
 		if(isUniformColor(pixels, x, y, w, h, THRESHOLD)) {
-			
+		
 			Color avg = getAverageColor(pixels, x, y, w, h);
-			QuadTreeNode node = new QuadTreeNode(x, y, w, h, avg);
-			
+			return new QuadTreeNode(x, y, w, h, avg);
+		
 		}
 		
-		return null;
+		// divide region into four quadrants
+		QuadTreeNode[] children = 
+			{
+			 	buildQuadTree(pixels, x, y, w/2, h/2), // topL
+			 	buildQuadTree(pixels, x + w/2, y, w - w/2, h/2), // topR
+			 	buildQuadTree(pixels, x, y + h/2, w/2, h - h/2), // botL
+			 	buildQuadTree(pixels, x + w/2, y + h/2, w - w/2, h - h/2) // botR
+			};
+
+		return new QuadTreeNode(x, y, w, h, children );
 	}
 
 	/**
@@ -120,7 +130,16 @@ public class ImageCompression extends Application {
 	 *          the GraphicsContext for drawing
 	 */
 	public void draw ( QuadTreeNode root, GraphicsContext g ) {
-		// TODO implement this!
+		
+		if(root.isLeaf()) {
+			root.fillRegion(g);
+		}
+		else {
+			for( QuadTreeNode child : root.children_ ) {
+				draw(child, g);
+			}
+		}
+		
 	}
 
 	/**
