@@ -107,11 +107,31 @@ public class VotingPower {
 	 * @return the number of times the specified voting block swings the outcome
 	 *         of the election
 	 */
-	public static int countSwingScenarios ( int[] blockVotes, int block ) {
-		// TODO implement this!
-		return -1;
+	public static int countSwingScenarios ( int[] blockVotes, int block ) {		
+		return countSwingScenarios(blockVotes, block, new ElectionTally(), 0);
+
 	}
 
+	private static int countSwingScenarios(int[] blockVotes, int block, ElectionTally eTally, int currentBlock) {
+		
+		if(currentBlock == blockVotes.length) {
+			return eTally.swings(blockVotes[block]) ? 1 : 0;
+		}
+		
+		if (currentBlock == block) {
+			return countSwingScenarios(blockVotes, block, eTally, currentBlock + 1);
+		}
+		
+		int swings = 0;
+		for(int candidate = 0; candidate <= 1; candidate++) {
+			eTally.vote(candidate, blockVotes[currentBlock]);
+			swings += countSwingScenarios(blockVotes, block, eTally, currentBlock + 1);
+			eTally.unvote(candidate, blockVotes[currentBlock]);
+		}
+		
+		return swings;
+	}
+	
 	public static void main ( String[] args ) {
 
 		Scanner input = new Scanner(System.in);
