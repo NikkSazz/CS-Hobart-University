@@ -20,9 +20,16 @@ public class KeystreamGenerator {
 			
 			if(!Character.isLetter(c)) { continue; }
 			
+			System.out.println("Swap Joker A is called");
 			deck_.swapJokerA();
+			
+			System.out.println("Swap Joker B is called");
 			deck_.swapJokerB();
+			
+			System.out.println("tripleCut is called");
 			deck_.tripleCut();
+			
+			System.out.println("countCut is called");
 			deck_.countCut(deck_.getBottomCard().getValue());
 			
 			int number = Character.toUpperCase(c) - 'A' + 1; // Convert letter to number using ascii
@@ -30,6 +37,7 @@ public class KeystreamGenerator {
 			
 		}
 		
+		System.out.println("Finished Ceating keystreamGenerator");
 		// No reason to assert, as SolitaireDeck should assert everything
 		
 	}
