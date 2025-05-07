@@ -30,9 +30,14 @@ public class Player {
         return currentRoom_.getName();
     }
 
-    void look() {
+    public void look() {
+    	
     		currentRoom_.printName();
         currentRoom_.printDescription();
+        for(Item i : inventory_) {
+        	i.look();
+        }
+        
     }
     
     void moveNorth() {

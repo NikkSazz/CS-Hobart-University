@@ -15,9 +15,9 @@ public class Map {
      *  Constructor, reads txt file and creates a hashmap of rooms with Room name as key
      * 
      * @param roomsFilePath
-     *  File of rooms, with their description and neighbors
+     *  Path to File of rooms, with their description and neighbors
      * @param itemsFilePath
-     * 	File of items, with their description and location
+     * 	Path to File of items, with their description and location
      * @throws IOException File is not found
      * 
      */
@@ -29,16 +29,45 @@ public class Map {
     }
     
     private void initItems(String filePath) throws IOException {
-    	items_ = new HashMap<>();
+        items_ = new HashMap<>();
 
-        BufferedReader reader = new BufferedReader(
-        		new InputStreamReader(
-        				new FileInputStream(filePath), "UTF-8"));
-        
-        
-        
-        reader.close();
+        BufferedReader r = new BufferedReader(
+                new InputStreamReader(
+                        new FileInputStream(filePath), "UTF-8"));
+
+        String name, origin, destination;
+        ArrayList<String> descr;
+        String line = r.readLine();
+
+        while (line != null) {
+
+            name = line;
+            origin = r.readLine();
+            destination = r.readLine();
+            
+            // Make sure these rooms exists
+            if( !(map_.containsKey(origin) && map_.containsKey(destination)) ) {
+            	System.out.println("***ROOM WITH KEY DOES NOT EXISTS*** @ initItems()");
+            }
+            
+            descr = new ArrayList<>();
+            
+            line = r.readLine();
+            while (line != null && !"END".equals(line)) {
+                descr.add(line);
+                line = r.readLine();
+            }
+
+            items_.put(name, new Item(name, descr, origin, destination));
+            // System.out.println("Added " + name + "\nfrom " + origin + " to " + destination);
+            
+            line = r.readLine();
+        }
+
+        System.out.println("All Items initialized successfully");
+        r.close();
     }
+
     
     private void initMap(String filePath) throws IOException {
     	map_ = new HashMap<>();
