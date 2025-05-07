@@ -15,7 +15,7 @@ public enum Command {
         for(Command c : Command.values()) {
             System.out.print("\t" + c.name());
         }
-        System.out.println();
+        System.out.println("\n");
     }
     
     

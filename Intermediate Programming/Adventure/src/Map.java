@@ -14,24 +14,50 @@ public class Map {
     /**
      *  Constructor, reads txt file and creates a hashmap of rooms with Room name as key
      * 
-     * @param filePath
+     * @param roomsFilePath
      *  File of rooms, with their description and neighbors
+     * @param itemsFilePath
+     * 	File of items, with their description and location
      * @throws IOException File is not found
      * 
      */
-    public Map(String filePath) throws IOException {
+    public Map(String roomsFilePath, String itemsFilePath) throws IOException {
 
-        map_ = new HashMap<>();
+        initMap(roomsFilePath);
+        initItems(itemsFilePath);
+        
+    }
+    
+    private void initItems(String filePath) throws IOException {
+    	items_ = new HashMap<>();
 
         BufferedReader reader = new BufferedReader(
         		new InputStreamReader(
         				new FileInputStream(filePath), "UTF-8"));
-        String line = "";
+        
+        
+        
+        reader.close();
+    }
+    
+    private void initMap(String filePath) throws IOException {
+    	map_ = new HashMap<>();
+
+        BufferedReader reader = new BufferedReader(
+        		new InputStreamReader(
+        				new FileInputStream(filePath), "UTF-8"));
+        
         String roomName = "", neighbors = "";
         ArrayList<String> description = new ArrayList<>();
-
+        String line = "";
+        
         while(line != null) {
 
+        	if(roomName.isEmpty()) {
+        		roomName = reader.readLine();
+        		neighbors = reader.readLine();
+        	}
+            
             line = reader.readLine();
 
             if("END".equals(line)) {
@@ -43,16 +69,12 @@ public class Map {
                 roomName = "";
                 neighbors = "";
                 description = new ArrayList<>();
+                continue;
             }
-            else if(roomName.isEmpty()) {
-                roomName = line;
-            }
-            else if(neighbors.isEmpty()) {
-                neighbors = line;
-            }
-            else {
-                description.add(line);
-            }
+            
+            description.add(line);
+            
+            // line = reader.readLine();
             
         } // while read txt file
         reader.close();

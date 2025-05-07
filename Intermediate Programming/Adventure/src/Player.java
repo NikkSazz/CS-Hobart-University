@@ -7,11 +7,11 @@ public class Player {
     private ArrayList<Item> inventory_;
     private Map map_;
     
-    public Player(String roomsFilePath, String startingRoom) {
-    	System.out.println("PLAYER is created");
+    public Player(String roomsFilePath, String startingRoom, String itemsFilePath) {
+    	// System.out.println("PLAYER is created");
     	
     	try {
-			map_ = new Map(roomsFilePath);
+			map_ = new Map(roomsFilePath, itemsFilePath);
 		} 
     	catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -21,6 +21,9 @@ public class Player {
     	inventory_ = new ArrayList<Item>();
     	
     	currentRoom_ = map_.get(startingRoom);
+    	if(currentRoom_ == null) {
+    		System.out.println("currentRoom_ is null");
+    	}
     }
     
     String getLocation() {

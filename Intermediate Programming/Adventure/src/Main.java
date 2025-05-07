@@ -6,12 +6,16 @@ public class Main {
 	static Player player_;
 	
     public static void main(String[] args) {
-        System.out.println("Adventure Project Nikolai Sazonov\n");
+        System.out.println("Adventure Project Nikolai Sazonov");
         
         String roomsFilePath = "data/rooms.txt";
-        
         String startingRoom = "Red Square";
-        player_ = new Player(roomsFilePath, startingRoom);
+        String itemsFilePath = "data/items.txt";
+        
+        player_ = new Player(roomsFilePath, startingRoom, itemsFilePath);
+
+        Command.printCommands();
+        // Direction.printDirections();
         
         play();
     }
@@ -24,9 +28,6 @@ public class Main {
 
         
         Scanner scanner = new Scanner(System.in);
-
-        Command.printCommands();
-        Direction.printDirections();
 
         player_.look();
         
