@@ -8,8 +8,8 @@ import java.util.HashMap;
 
 public class Map {
 
-    HashMap<String, Room> map_;
-    HashMap<String, Item> items_;
+    private HashMap<String, Room> map_;
+    private HashMap<String, Item> items_;
 
     /**
      *  Constructor, reads txt file and creates a hashmap of rooms with Room name as key
@@ -46,10 +46,16 @@ public class Map {
             destination = r.readLine();
             
             // Make sure these rooms exists
-            if( !(map_.containsKey(origin) && map_.containsKey(destination)) ) {
-            	System.out.println("***ROOM WITH KEY DOES NOT EXISTS*** @ initItems()");
+            /*
+             * note: I have no idea why I thought this was required.
+            if(!map_.containsKey(origin)) {
+            	System.err.println("***origin does not exist*** @ initItems()");
             }
             
+            if(!map_.containsKey(destination)) {
+            	System.err.println("destination does not exist! destination = " + destination);
+            }
+            */
             descr = new ArrayList<>();
             
             line = r.readLine();
@@ -110,12 +116,26 @@ public class Map {
 
     }
     
+    public boolean hasItemInRoom(Room room) {
+    	String roomName = room.getName();
+    	
+    	return items_.containsKey(roomName);
+    }
+    
     public void printKeyValues() {
     	for(var e : map_.entrySet()) {
     		System.out.println(e.getKey());
     	}
     }
+    
+    public Item takeItem(String name) {
+    	return items_.get(name);
+    }
 
+    public boolean hasItem(String name) {
+    	return items_.containsKey(name);
+    }
+    
     public boolean hasRoom(String name) {
     	return map_.containsKey(name);
     }
@@ -124,4 +144,7 @@ public class Map {
         return map_.get(roomName);
     }
 
+    public HashMap<String, Room> getRoomHashMap() {
+    	return map_;
+    }
 }

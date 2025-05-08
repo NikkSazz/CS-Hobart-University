@@ -40,6 +40,23 @@ public class Player {
         
     }
     
+    public void pickUpItem(String name) {
+    	inventory_.add(map_.takeItem(name));
+    }
+    
+    public boolean mapHasItemWithName(String name) {
+    	return map_.hasItem(name);
+    }
+    
+    public void take() {
+    	
+    	if(!map_.hasItemInRoom(currentRoom_)) {
+    		
+    	}
+    	
+    	System.out.println("player has taken an item");
+    }
+    
     void moveNorth() {
         currentRoom_ = currentRoom_.move(0);
     }

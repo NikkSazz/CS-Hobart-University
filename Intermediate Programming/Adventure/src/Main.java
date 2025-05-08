@@ -51,14 +51,14 @@ public class Main {
             
                 case GO, MOVE -> goCommand(userInput);
                 
-                case TAKE, GET -> System.out.println("Take.");
+                case TAKE, GET -> takeCommand(userInput);
                 
-                case DROP -> System.out.println("You drop an item from your inventory.");
+                case DROP, USE -> System.out.println("You drop an item from your inventory.");
                 case LOOK -> player_.look();
                 case INVENTORY -> System.out.println("You check your inventory.");
                 case HELP -> System.out.println("You asked for help");
                 case COMMANDS -> System.out.println("Commands");
-                case SCORE -> System.out.println("Your current score is 69.");
+                case SCORE -> System.out.println("Your current score is 0."); // unfinished work
                 
                 case QUIT -> {
                     System.out.println("Goodbye! Thanks for playing.");
@@ -70,8 +70,32 @@ public class Main {
         }
     }
     
+    public static void takeCommand(String input) {
+    	System.out.println("Take.");
+    	
+    	String[] split = input.trim().split(" ");
+    	
+    	switch(split.length) { // for convinience, you can use take with only TAKE/GET
+	    	case 1 -> player_.take();
+	    	case 2 -> take(split[1]);
+	    	default -> System.out.println("Please enter with proper format");
+    	}
+    	
+    }
+    
+    private static void take(String itemName) {
+    	
+    	if(!player_.mapHasItemWithName(itemName)) {
+    		System.out.println("Such an item does not exist!");
+    		return;
+    	}
+    	
+    	player_.pickUpItem(itemName);
+    	
+    }
+    
     public static void goCommand(String input) {
-    	System.out.println("Go Command.");
+    	// System.out.println("Go Command.");
     	
     	String[] split = input.trim().split(" ");
     	
@@ -97,8 +121,8 @@ public class Main {
     			break;
     			
     		case EAST:
-				player_.moveEast();
-			break;
+					player_.moveEast();
+				break;
     			
     		case WEST:
     				player_.moveWest();

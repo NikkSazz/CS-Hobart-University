@@ -17,7 +17,8 @@ public class Room {
         name_ = name;
         
         // System.out.println("Neighbors of " + name + ": " + neighbors);
-        neighbors_ = neighbors.split(",");
+        neighbors_ = neighbors.split(", ");
+        // make sure there are no whitespaces use ", "
         neighborString_ = neighbors;
         
         /*
@@ -66,6 +67,7 @@ public class Room {
     }
     
     public void visit() {
+    	printName();
     	if(!visited_) {
     		printDescription();
     		visited_ = true;
@@ -102,6 +104,10 @@ public class Room {
         System.out.println("Moving from " + name_ + " to " + room.getName());
         room.visit();
         return room;
+    }
+    
+    public String[] getNeighbors() {
+    	return neighbors_;
     }
 
 }

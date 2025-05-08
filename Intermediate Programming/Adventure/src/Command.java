@@ -1,7 +1,7 @@
 public enum Command {
     GO, MOVE,
     TAKE, GET,
-    DROP,
+    DROP, USE,
     LOOK,
     INVENTORY,
     HELP,
