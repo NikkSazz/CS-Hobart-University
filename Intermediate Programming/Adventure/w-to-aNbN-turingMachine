@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36" version="26.3.0">
   <diagram name="Page-1" id="P7YlbLZkgg9kJp8gIX2s">
-    <mxGraphModel dx="858" dy="1530" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="1770" dy="1988" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -16,20 +16,20 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="0-zVDvt1DxYs1Rn6iuSz-3" value="q 0" style="ellipse;whiteSpace=wrap;html=1;fontFamily=Architects Daughter;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DArchitects%2BDaughter;" parent="1" vertex="1">
-          <mxGeometry x="130" y="330" width="50" height="50" as="geometry" />
+          <mxGeometry x="130" y="220" width="50" height="50" as="geometry" />
         </mxCell>
         <mxCell id="0-zVDvt1DxYs1Rn6iuSz-10" value="#, #, R" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=Architects Daughter;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DArchitects%2BDaughter;fontSize=16;startSize=14;endArrow=open;endSize=14;sourcePerimeterSpacing=8;targetPerimeterSpacing=8;" parent="1" source="0-zVDvt1DxYs1Rn6iuSz-4" target="0-zVDvt1DxYs1Rn6iuSz-9" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="0-zVDvt1DxYs1Rn6iuSz-4" value="q 1" style="ellipse;whiteSpace=wrap;html=1;fontFamily=Architects Daughter;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DArchitects%2BDaughter;" parent="1" vertex="1">
-          <mxGeometry x="320" y="330" width="50" height="50" as="geometry" />
+          <mxGeometry x="320" y="220" width="50" height="50" as="geometry" />
         </mxCell>
         <mxCell id="0-zVDvt1DxYs1Rn6iuSz-8" value="b, b, R&lt;div&gt;c, c, R&lt;/div&gt;" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=Architects Daughter;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DArchitects%2BDaughter;fontSize=16;startSize=14;endArrow=open;endSize=14;sourcePerimeterSpacing=8;targetPerimeterSpacing=8;entryX=0;entryY=1;entryDx=0;entryDy=0;exitX=0;exitY=0;exitDx=0;exitDy=0;" parent="1" source="0-zVDvt1DxYs1Rn6iuSz-3" target="0-zVDvt1DxYs1Rn6iuSz-3" edge="1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="120" y="350" as="sourcePoint" />
-            <mxPoint x="140" y="390" as="targetPoint" />
+            <mxPoint x="120" y="240" as="sourcePoint" />
+            <mxPoint x="140" y="280" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="60" y="360" />
+              <mxPoint x="60" y="250" />
             </Array>
           </mxGeometry>
         </mxCell>
@@ -39,23 +39,23 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="0-zVDvt1DxYs1Rn6iuSz-9" value="q 2" style="ellipse;whiteSpace=wrap;html=1;fontFamily=Architects Daughter;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DArchitects%2BDaughter;" parent="1" vertex="1">
-          <mxGeometry x="520" y="330" width="50" height="50" as="geometry" />
+          <mxGeometry x="520" y="220" width="50" height="50" as="geometry" />
         </mxCell>
         <mxCell id="0-zVDvt1DxYs1Rn6iuSz-11" value="a, a, R&lt;div&gt;b, b, R&lt;/div&gt;" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=Architects Daughter;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DArchitects%2BDaughter;fontSize=16;startSize=14;endArrow=open;endSize=14;sourcePerimeterSpacing=8;targetPerimeterSpacing=8;exitX=0;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=1;entryDx=0;entryDy=0;" parent="1" source="0-zVDvt1DxYs1Rn6iuSz-4" target="0-zVDvt1DxYs1Rn6iuSz-4" edge="1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="330" y="390" as="sourcePoint" />
-            <mxPoint x="360" y="390" as="targetPoint" />
+            <mxPoint x="330" y="280" as="sourcePoint" />
+            <mxPoint x="360" y="280" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="350" y="440" />
+              <mxPoint x="350" y="330" />
             </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="0-zVDvt1DxYs1Rn6iuSz-12" value="a, a, L&lt;div&gt;b, b, L&lt;/div&gt;" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=Architects Daughter;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DArchitects%2BDaughter;fontSize=16;startSize=14;endArrow=open;endSize=14;sourcePerimeterSpacing=8;targetPerimeterSpacing=8;exitX=0;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=1;entryDx=0;entryDy=0;" parent="1" edge="1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="537" y="540" as="sourcePoint" />
-            <mxPoint x="573" y="540" as="targetPoint" />
+            <mxPoint x="537" y="430" as="sourcePoint" />
+            <mxPoint x="573" y="430" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="560" y="607" />
+              <mxPoint x="560" y="497" />
             </Array>
           </mxGeometry>
         </mxCell>
@@ -63,7 +63,7 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="0-zVDvt1DxYs1Rn6iuSz-13" value="q 3" style="ellipse;whiteSpace=wrap;html=1;fontFamily=Architects Daughter;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DArchitects%2BDaughter;" parent="1" vertex="1">
-          <mxGeometry x="700" y="330" width="50" height="50" as="geometry" />
+          <mxGeometry x="700" y="220" width="50" height="50" as="geometry" />
         </mxCell>
         <mxCell id="0-zVDvt1DxYs1Rn6iuSz-19" value="#, #, L" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=Architects Daughter;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DArchitects%2BDaughter;fontSize=16;startSize=14;endArrow=open;endSize=14;sourcePerimeterSpacing=8;targetPerimeterSpacing=8;" parent="1" source="0-zVDvt1DxYs1Rn6iuSz-16" target="0-zVDvt1DxYs1Rn6iuSz-18" edge="1">
           <mxGeometry relative="1" as="geometry">
@@ -71,50 +71,50 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="0-zVDvt1DxYs1Rn6iuSz-16" value="q 4" style="ellipse;whiteSpace=wrap;html=1;fontFamily=Architects Daughter;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DArchitects%2BDaughter;" parent="1" vertex="1">
-          <mxGeometry x="700" y="500" width="50" height="50" as="geometry" />
+          <mxGeometry x="700" y="390" width="50" height="50" as="geometry" />
         </mxCell>
         <mxCell id="Brd0ez3--qhMqdzybVsT-4" value="#, #, L" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=Architects Daughter;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DArchitects%2BDaughter;fontSize=16;startSize=14;endArrow=open;endSize=14;sourcePerimeterSpacing=8;targetPerimeterSpacing=8;" edge="1" parent="1" source="0-zVDvt1DxYs1Rn6iuSz-18" target="Brd0ez3--qhMqdzybVsT-3">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="Brd0ez3--qhMqdzybVsT-10" value="c, c, R" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=Architects Daughter;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DArchitects%2BDaughter;fontSize=16;startSize=14;endArrow=open;endSize=14;sourcePerimeterSpacing=8;targetPerimeterSpacing=8;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="0-zVDvt1DxYs1Rn6iuSz-18" target="0-zVDvt1DxYs1Rn6iuSz-3">
           <mxGeometry x="0.0007" relative="1" as="geometry">
-            <mxPoint x="500.8360057640891" y="550.0998266221703" as="sourcePoint" />
-            <mxPoint x="149.16766952966304" y="409.99766952966326" as="targetPoint" />
+            <mxPoint x="500.8360057640891" y="440.0998266221703" as="sourcePoint" />
+            <mxPoint x="149.16766952966304" y="299.99766952966326" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="290" y="520" />
+              <mxPoint x="290" y="410" />
             </Array>
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="0-zVDvt1DxYs1Rn6iuSz-18" value="q 5" style="ellipse;whiteSpace=wrap;html=1;fontFamily=Architects Daughter;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DArchitects%2BDaughter;" parent="1" vertex="1">
-          <mxGeometry x="530" y="500" width="50" height="50" as="geometry" />
+          <mxGeometry x="530" y="390" width="50" height="50" as="geometry" />
         </mxCell>
         <mxCell id="0-zVDvt1DxYs1Rn6iuSz-20" value="a, a, R" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=Architects Daughter;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DArchitects%2BDaughter;fontSize=16;startSize=14;endArrow=open;endSize=14;sourcePerimeterSpacing=8;targetPerimeterSpacing=8;exitX=0;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=1;entryDx=0;entryDy=0;" parent="1" edge="1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="527" y="370" as="sourcePoint" />
-            <mxPoint x="563" y="370" as="targetPoint" />
+            <mxPoint x="527" y="260" as="sourcePoint" />
+            <mxPoint x="563" y="260" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="550" y="437" />
+              <mxPoint x="550" y="327" />
             </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="Brd0ez3--qhMqdzybVsT-1" value="a, a, L" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=Architects Daughter;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DArchitects%2BDaughter;fontSize=16;startSize=14;endArrow=open;endSize=14;sourcePerimeterSpacing=8;targetPerimeterSpacing=8;exitX=0;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="707" y="540" as="sourcePoint" />
-            <mxPoint x="743" y="540" as="targetPoint" />
+            <mxPoint x="707" y="430" as="sourcePoint" />
+            <mxPoint x="743" y="430" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="730" y="607" />
+              <mxPoint x="730" y="497" />
             </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="Brd0ez3--qhMqdzybVsT-3" value="q T" style="ellipse;whiteSpace=wrap;html=1;fontFamily=Architects Daughter;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DArchitects%2BDaughter;" vertex="1" parent="1">
-          <mxGeometry x="390" y="590" width="50" height="50" as="geometry" />
+          <mxGeometry x="390" y="480" width="50" height="50" as="geometry" />
         </mxCell>
         <mxCell id="Brd0ez3--qhMqdzybVsT-12" value="b, b, L&lt;div&gt;c, c, L&lt;/div&gt;" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=Architects Daughter;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DArchitects%2BDaughter;fontSize=16;startSize=14;endArrow=open;endSize=14;sourcePerimeterSpacing=8;targetPerimeterSpacing=8;entryX=0;entryY=1;entryDx=0;entryDy=0;exitX=0;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="Brd0ez3--qhMqdzybVsT-6" target="Brd0ez3--qhMqdzybVsT-6">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="70" y="530" as="targetPoint" />
+            <mxPoint x="70" y="420" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="60" y="525" />
+              <mxPoint x="60" y="415" />
             </Array>
             <mxPoint as="offset" />
           </mxGeometry>
@@ -123,7 +123,7 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="Brd0ez3--qhMqdzybVsT-6" value="q 7" style="ellipse;whiteSpace=wrap;html=1;fontFamily=Architects Daughter;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DArchitects%2BDaughter;" vertex="1" parent="1">
-          <mxGeometry x="130" y="500" width="50" height="50" as="geometry" />
+          <mxGeometry x="130" y="390" width="50" height="50" as="geometry" />
         </mxCell>
         <mxCell id="Brd0ez3--qhMqdzybVsT-17" value="b, d, R" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=Architects Daughter;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DArchitects%2BDaughter;fontSize=16;startSize=14;endArrow=open;endSize=14;sourcePerimeterSpacing=8;targetPerimeterSpacing=8;" edge="1" parent="1" source="Brd0ez3--qhMqdzybVsT-13" target="Brd0ez3--qhMqdzybVsT-16">
           <mxGeometry relative="1" as="geometry" />
@@ -132,23 +132,23 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="Brd0ez3--qhMqdzybVsT-13" value="q 8" style="ellipse;whiteSpace=wrap;html=1;fontFamily=Architects Daughter;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DArchitects%2BDaughter;" vertex="1" parent="1">
-          <mxGeometry x="130" y="670" width="50" height="50" as="geometry" />
+          <mxGeometry x="130" y="560" width="50" height="50" as="geometry" />
         </mxCell>
         <mxCell id="Brd0ez3--qhMqdzybVsT-15" value="c, c, R&lt;div&gt;d, d, R&lt;/div&gt;" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=Architects Daughter;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DArchitects%2BDaughter;fontSize=16;startSize=14;endArrow=open;endSize=14;sourcePerimeterSpacing=8;targetPerimeterSpacing=8;entryX=0;entryY=1;entryDx=0;entryDy=0;exitX=0;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="137" y="713" as="targetPoint" />
-            <mxPoint x="137" y="677" as="sourcePoint" />
+            <mxPoint x="137" y="603" as="targetPoint" />
+            <mxPoint x="137" y="567" as="sourcePoint" />
             <Array as="points">
-              <mxPoint x="60" y="695" />
+              <mxPoint x="60" y="585" />
             </Array>
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="Brd0ez3--qhMqdzybVsT-18" value="c, c, R&lt;div&gt;b, b, R&lt;/div&gt;" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=Architects Daughter;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DArchitects%2BDaughter;fontSize=16;startSize=14;endArrow=open;endSize=14;sourcePerimeterSpacing=8;targetPerimeterSpacing=8;exitX=0;exitY=0;exitDx=0;exitDy=0;entryX=1;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="Brd0ez3--qhMqdzybVsT-16" target="Brd0ez3--qhMqdzybVsT-16">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="350" y="670" as="targetPoint" />
+            <mxPoint x="350" y="560" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="320" y="610" />
+              <mxPoint x="320" y="500" />
             </Array>
           </mxGeometry>
         </mxCell>
@@ -156,7 +156,7 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="Brd0ez3--qhMqdzybVsT-16" value="q 9" style="ellipse;whiteSpace=wrap;html=1;fontFamily=Architects Daughter;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DArchitects%2BDaughter;" vertex="1" parent="1">
-          <mxGeometry x="300" y="670" width="50" height="50" as="geometry" />
+          <mxGeometry x="300" y="560" width="50" height="50" as="geometry" />
         </mxCell>
         <mxCell id="Brd0ez3--qhMqdzybVsT-23" value="#, b, L" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=Architects Daughter;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DArchitects%2BDaughter;fontSize=16;startSize=14;endArrow=open;endSize=14;sourcePerimeterSpacing=8;targetPerimeterSpacing=8;" edge="1" parent="1" source="Brd0ez3--qhMqdzybVsT-19" target="Brd0ez3--qhMqdzybVsT-22">
           <mxGeometry x="0.0043" relative="1" as="geometry">
@@ -164,53 +164,53 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="Brd0ez3--qhMqdzybVsT-19" value="q 10" style="ellipse;whiteSpace=wrap;html=1;fontFamily=Architects Daughter;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DArchitects%2BDaughter;" vertex="1" parent="1">
-          <mxGeometry x="470" y="670" width="50" height="50" as="geometry" />
+          <mxGeometry x="470" y="560" width="50" height="50" as="geometry" />
         </mxCell>
         <mxCell id="Brd0ez3--qhMqdzybVsT-21" value="a, a, R&lt;div&gt;b, b, R&lt;/div&gt;" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=Architects Daughter;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DArchitects%2BDaughter;fontSize=16;startSize=14;endArrow=open;endSize=14;sourcePerimeterSpacing=8;targetPerimeterSpacing=8;exitX=0;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="477" y="710" as="sourcePoint" />
-            <mxPoint x="513" y="710" as="targetPoint" />
+            <mxPoint x="477" y="600" as="sourcePoint" />
+            <mxPoint x="513" y="600" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="500" y="777" />
+              <mxPoint x="500" y="667" />
             </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="Brd0ez3--qhMqdzybVsT-26" value="#, #, L" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=Architects Daughter;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DArchitects%2BDaughter;fontSize=16;startSize=14;endArrow=open;endSize=14;sourcePerimeterSpacing=8;targetPerimeterSpacing=8;" edge="1" parent="1" source="Brd0ez3--qhMqdzybVsT-22" target="Brd0ez3--qhMqdzybVsT-25">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="750" y="695" />
-              <mxPoint x="750" y="840" />
+              <mxPoint x="750" y="585" />
+              <mxPoint x="750" y="730" />
             </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="Brd0ez3--qhMqdzybVsT-22" value="q 11" style="ellipse;whiteSpace=wrap;html=1;fontFamily=Architects Daughter;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DArchitects%2BDaughter;" vertex="1" parent="1">
-          <mxGeometry x="640" y="670" width="50" height="50" as="geometry" />
+          <mxGeometry x="640" y="560" width="50" height="50" as="geometry" />
         </mxCell>
         <mxCell id="Brd0ez3--qhMqdzybVsT-24" value="a, a, L&lt;div&gt;b, b, L&lt;/div&gt;" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=Architects Daughter;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DArchitects%2BDaughter;fontSize=16;startSize=14;endArrow=open;endSize=14;sourcePerimeterSpacing=8;targetPerimeterSpacing=8;exitX=0;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="647" y="710" as="sourcePoint" />
-            <mxPoint x="683" y="710" as="targetPoint" />
+            <mxPoint x="647" y="600" as="sourcePoint" />
+            <mxPoint x="683" y="600" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="670" y="777" />
+              <mxPoint x="670" y="667" />
             </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="Brd0ez3--qhMqdzybVsT-28" value="#, #, L" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;fontFamily=Architects Daughter;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DArchitects%2BDaughter;fontSize=16;startSize=14;endArrow=open;endSize=14;sourcePerimeterSpacing=8;targetPerimeterSpacing=8;" edge="1" parent="1" source="Brd0ez3--qhMqdzybVsT-25" target="Brd0ez3--qhMqdzybVsT-13">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="210" y="810" />
+              <mxPoint x="210" y="700" />
             </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="Brd0ez3--qhMqdzybVsT-25" value="q 12" style="ellipse;whiteSpace=wrap;html=1;fontFamily=Architects Daughter;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DArchitects%2BDaughter;" vertex="1" parent="1">
-          <mxGeometry x="650" y="810" width="50" height="50" as="geometry" />
+          <mxGeometry x="650" y="700" width="50" height="50" as="geometry" />
         </mxCell>
         <mxCell id="Brd0ez3--qhMqdzybVsT-27" value="c, c, L&lt;div&gt;b, b, L&lt;/div&gt;&lt;div&gt;d, d, L&lt;/div&gt;" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=Architects Daughter;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DArchitects%2BDaughter;fontSize=16;startSize=14;endArrow=open;endSize=14;sourcePerimeterSpacing=8;targetPerimeterSpacing=8;exitX=0;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="657" y="850" as="sourcePoint" />
-            <mxPoint x="693" y="850" as="targetPoint" />
+            <mxPoint x="657" y="740" as="sourcePoint" />
+            <mxPoint x="693" y="740" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="680" y="917" />
+              <mxPoint x="680" y="807" />
             </Array>
           </mxGeometry>
         </mxCell>
@@ -218,20 +218,20 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="Brd0ez3--qhMqdzybVsT-29" value="q 13" style="ellipse;whiteSpace=wrap;html=1;fontFamily=Architects Daughter;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DArchitects%2BDaughter;" vertex="1" parent="1">
-          <mxGeometry x="130" y="840" width="50" height="50" as="geometry" />
+          <mxGeometry x="130" y="730" width="50" height="50" as="geometry" />
         </mxCell>
         <mxCell id="Brd0ez3--qhMqdzybVsT-31" value="c, a, L&lt;div&gt;d, b, L&lt;/div&gt;" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=Architects Daughter;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DArchitects%2BDaughter;fontSize=16;startSize=14;endArrow=open;endSize=14;sourcePerimeterSpacing=8;targetPerimeterSpacing=8;entryX=0;entryY=1;entryDx=0;entryDy=0;exitX=0;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="137" y="883" as="targetPoint" />
-            <mxPoint x="137" y="847" as="sourcePoint" />
+            <mxPoint x="137" y="773" as="targetPoint" />
+            <mxPoint x="137" y="737" as="sourcePoint" />
             <Array as="points">
-              <mxPoint x="60" y="865" />
+              <mxPoint x="60" y="755" />
             </Array>
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="Brd0ez3--qhMqdzybVsT-32" value="h" style="ellipse;whiteSpace=wrap;html=1;fontFamily=Architects Daughter;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DArchitects%2BDaughter;" vertex="1" parent="1">
-          <mxGeometry x="280" y="840" width="50" height="50" as="geometry" />
+          <mxGeometry x="280" y="730" width="50" height="50" as="geometry" />
         </mxCell>
         <mxCell id="Brd0ez3--qhMqdzybVsT-38" value="a, c, R" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=Architects Daughter;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DArchitects%2BDaughter;fontSize=16;startSize=14;endArrow=open;endSize=14;sourcePerimeterSpacing=8;targetPerimeterSpacing=8;" edge="1" parent="1" source="Brd0ez3--qhMqdzybVsT-34" target="Brd0ez3--qhMqdzybVsT-37">
           <mxGeometry x="-0.0028" relative="1" as="geometry">
